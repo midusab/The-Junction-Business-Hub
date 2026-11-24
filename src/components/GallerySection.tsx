@@ -69,15 +69,15 @@ export function GallerySection() {
   return (
     <section
       id="gallery"
-      className="py-20 sm:py-24 border-t border-sky-200/80 bg-white"
+      className="py-14 sm:py-24 border-t border-sky-200/80 bg-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
           <div className="max-w-xl">
-            <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
+            <p className="text-xs font-semibold uppercase tracking-[0.08em] text-sky-700 mb-2">
               Visual Gallery
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.025em] text-slate-900 text-balance">
               Inside The Junction Hub
             </h2>
           </div>
@@ -166,7 +166,7 @@ export function GallerySection() {
                       fallbackTitle={photo.title}
                       className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
                     />
-                    <span className="absolute bottom-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-md bg-slate-900/90 border border-white/15 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                    <span className="absolute bottom-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-md bg-slate-900/90 border border-white/15 text-white opacity-85 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-150">
                       <Expand className="w-4 h-4" />
                     </span>
                   </button>
@@ -200,7 +200,7 @@ export function GallerySection() {
             animate={{opacity: 1}}
             exit={{opacity: 0}}
             transition={{duration: 0.2}}
-            className="fixed inset-0 z-50 bg-slate-950/90 flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-slate-950/90 flex items-center justify-center p-3 sm:p-6"
             onClick={() => setSelectedIndex(null)}
           >
             <motion.div
@@ -213,15 +213,15 @@ export function GallerySection() {
               className="relative max-w-4xl w-full bg-white rounded-lg overflow-hidden border border-slate-200 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200">
-                <div className="flex items-center gap-2 text-sm">
-                  <span className="font-semibold text-slate-900">
+              <div className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 sm:py-3.5 border-b border-slate-200">
+                <div className="flex items-center gap-2 text-xs sm:text-sm min-w-0">
+                  <span className="font-semibold text-slate-900 truncate">
                     {activePhoto.title}
                   </span>
-                  <span aria-hidden="true" className="text-slate-400">
+                  <span aria-hidden="true" className="text-slate-400 shrink-0">
                     ·
                   </span>
-                  <span className="text-sky-700 font-medium">
+                  <span className="text-sky-700 font-medium truncate">
                     {activePhoto.categoryLabel}
                   </span>
                 </div>
@@ -229,7 +229,7 @@ export function GallerySection() {
                   type="button"
                   onClick={() => setSelectedIndex(null)}
                   aria-label="Close image preview"
-                  className="w-9 h-9 inline-flex items-center justify-center rounded-md text-slate-600 hover:bg-sky-50 hover:text-slate-900 cursor-pointer"
+                  className="w-9 h-9 inline-flex items-center justify-center rounded-md text-slate-600 hover:bg-sky-50 hover:text-slate-900 cursor-pointer shrink-0"
                 >
                   <X className="w-5 h-5" />
                 </button>

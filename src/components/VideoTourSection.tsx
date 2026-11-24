@@ -25,7 +25,7 @@ export function VideoTourSection() {
     <section
       id="video-tour"
       ref={sectionRef}
-      className="py-16 sm:py-20 bg-white border-b border-sky-200/80"
+      className="py-12 sm:py-20 bg-black text-white border-b border-neutral-800"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Video Tour Header */}
@@ -37,11 +37,11 @@ export function VideoTourSection() {
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8"
         >
           <div className="max-w-2xl">
-            <p className="text-xs sm:text-sm font-semibold tracking-wide text-sky-700 mb-1.5">
-              Video Walkthrough · Junction-Kodoyo
+            <p className="text-xs font-semibold uppercase tracking-[0.08em] text-sky-400 mb-2">
+              Inside The Hub
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance leading-[1.1]">
-              Step inside The Junction Hub
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.025em] text-white text-balance leading-[1.1]">
+              See the space before you visit
             </h2>
           </div>
 
@@ -52,7 +52,7 @@ export function VideoTourSection() {
               rel="noopener noreferrer"
               whileHover={prefersReducedMotion ? undefined : {y: -2, scale: 1.02}}
               whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-colors duration-150 whitespace-nowrap shrink-0"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-md shadow-sm hover:shadow-md transition-colors duration-150 whitespace-nowrap shrink-0"
             >
               <MessageCircle className="w-4 h-4" />
               <span>WhatsApp</span>
@@ -61,7 +61,7 @@ export function VideoTourSection() {
               href="#services"
               whileHover={prefersReducedMotion ? undefined : {y: -2, scale: 1.02}}
               whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
-              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium text-sky-900 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-md shadow-xs hover:shadow-sm transition-colors duration-150 whitespace-nowrap shrink-0"
+              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 rounded-md shadow-xs hover:shadow-sm transition-colors duration-150 whitespace-nowrap shrink-0"
             >
               <span>Explore Services</span>
               <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
@@ -72,9 +72,9 @@ export function VideoTourSection() {
         {/* Prominent Centerpiece Video Theater */}
         <motion.div
           style={{scale: theaterScale}}
-          className="bg-white border border-slate-200 shadow-xl p-2.5 sm:p-4 rounded-lg will-change-transform"
+          className="bg-neutral-950 border border-neutral-800 shadow-2xl p-2.5 sm:p-4 rounded-lg will-change-transform"
         >
-          <div className="aspect-video w-full bg-slate-950 overflow-hidden border border-sky-200 rounded-md">
+          <div className="aspect-video w-full bg-black overflow-hidden border border-neutral-800 rounded-md">
             <iframe
               className="w-full h-full"
               src={BUSINESS_INFO.youtubeEmbedUrl}
@@ -87,23 +87,23 @@ export function VideoTourSection() {
           </div>
 
           {/* Concise Caption Strip beneath Video */}
-          <div className="mt-3 pt-3 border-t border-sky-200/70 flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-slate-700">
-              <span className="inline-flex items-center gap-1.5 font-medium text-slate-900">
-                <Play className="w-3.5 h-3.5 text-sky-700" />
+          <div className="mt-3 pt-3 border-t border-neutral-800 flex flex-wrap items-center justify-between gap-4 text-xs sm:text-sm">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-neutral-300">
+              <span className="inline-flex items-center gap-1.5 font-medium text-white">
+                <Play className="w-3.5 h-3.5 text-sky-400" />
                 <span>Premises Tour</span>
               </span>
-              <span aria-hidden="true" className="text-slate-300">
+              <span aria-hidden="true" className="text-neutral-700">
                 ·
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-sky-700" />
+                <MapPin className="w-3.5 h-3.5 text-sky-400" />
                 <span>Homa Bay–Rongo Road</span>
               </span>
             </div>
             <a
               href="#contact"
-              className="inline-flex items-center gap-1.5 font-semibold text-sky-700 hover:text-sky-800 hover:underline underline-offset-4"
+              className="inline-flex items-center gap-1.5 font-semibold text-sky-400 hover:text-sky-300 hover:underline underline-offset-4 whitespace-nowrap"
             >
               <span>Directions &amp; Map</span>
               <ArrowRight className="w-4 h-4" />

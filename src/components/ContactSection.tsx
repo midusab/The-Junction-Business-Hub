@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import {BUSINESS_INFO, OPERATING_HOURS} from '../data/hubData';
 import {LocationMap} from './LocationMap';
+import {CircularSocialLinks} from './SocialIcons';
 
 type ServiceDepartment =
   | 'Laundry Services'
@@ -86,22 +87,22 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-16 sm:py-20 border-t border-sky-200/80 bg-white"
+      className="py-14 sm:py-20 border-t border-sky-200/80 bg-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-xl mb-10">
-          <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
+        <div className="max-w-xl mb-8 sm:mb-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-sky-700 mb-2">
             Visit &amp; Contact Us
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.025em] text-slate-900 text-balance">
             Find us along the Homa Bay–Rongo Road
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
           {/* Left Column: Direct Contact & Enquiry Form */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="bg-sky-50/50 border border-sky-200 rounded-lg p-6 shadow-md space-y-5">
+            <div className="bg-sky-50/50 border border-sky-200 rounded-lg p-4 sm:p-6 shadow-md space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <span className="text-xs text-slate-500 block mb-1">
@@ -154,15 +155,27 @@ export function ContactSection() {
                   <span>Call {BUSINESS_INFO.phoneDisplay}</span>
                 </motion.a>
               </div>
+
+              <div className="pt-4 border-t border-sky-200/70 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <span className="text-xs font-semibold text-slate-800 block">
+                    Follow Us Online
+                  </span>
+                  <span className="text-[11px] text-slate-500">
+                    TikTok · Instagram · Facebook
+                  </span>
+                </div>
+                <CircularSocialLinks />
+              </div>
             </div>
 
             {/* Enquiry Form */}
-            <div className="bg-white border border-slate-200 rounded-lg p-6 shadow-md">
+            <div className="bg-white border border-slate-200 rounded-lg p-4 sm:p-6 shadow-md">
               <h3 className="text-lg font-semibold text-slate-900 mb-1">
                 Send a Service Enquiry
               </h3>
               <p className="text-sm text-slate-600 mb-5">
-                Choose a department below and share what you need.
+                Pick a department and send your question straight to WhatsApp.
               </p>
 
               <AnimatePresence mode="wait">
@@ -373,7 +386,7 @@ export function ContactSection() {
               <LocationMap />
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-lg p-6 shadow-md">
+            <div className="bg-white border border-slate-200 rounded-lg p-4 sm:p-6 shadow-md">
               <div className="flex items-center justify-between gap-4 mb-4">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-sky-700" />
@@ -407,12 +420,11 @@ export function ContactSection() {
               </dl>
 
               <p className="mt-4 pt-3 border-t border-sky-200/70 text-xs text-slate-600 leading-relaxed">
-                Schedule based on available listing details. Please call or
-                WhatsApp{' '}
+                Call or WhatsApp{' '}
                 <span className="font-mono tabular-nums text-slate-800">
                   {BUSINESS_INFO.phoneDisplay}
                 </span>{' '}
-                to confirm Saturday hours before travelling.
+                to confirm Saturday hours before visiting.
               </p>
             </div>
           </div>

@@ -9,7 +9,6 @@ import {
   useTransform,
 } from 'motion/react';
 import {
-  ArrowRight,
   ChevronLeft,
   ChevronRight,
   MessageCircle,
@@ -116,7 +115,7 @@ export function FullWidthParallaxHero({
       ref={heroRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="relative w-full min-h-[540px] lg:min-h-[620px] flex flex-col justify-end overflow-hidden bg-slate-950 border-b border-slate-200"
+      className="relative w-full min-h-[470px] sm:min-h-[560px] lg:min-h-[620px] flex flex-col justify-end overflow-hidden bg-slate-950 border-b border-slate-200"
     >
       {/* Full-Width Animated Parallax + Pointer-Reactive Background Layer */}
       <motion.div
@@ -179,14 +178,14 @@ export function FullWidthParallaxHero({
       {/* Simple, Clean Foreground Content with Interactive Motion */}
       <motion.div
         style={{y: foregroundY, opacity: foregroundOpacity}}
-        className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-20 pb-8 lg:pb-10 will-change-transform"
+        className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-14 sm:pt-20 pb-6 sm:pb-8 lg:pb-10 will-change-transform"
       >
         <div className="max-w-xl">
           <motion.p
             initial={prefersReducedMotion ? false : {opacity: 0, y: 10}}
             animate={{opacity: 1, y: 0}}
             transition={{duration: 0.4, ease: [0.16, 1, 0.3, 1]}}
-            className="text-xs sm:text-sm font-medium text-sky-300 mb-2.5 tracking-wide"
+            className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.08em] text-sky-300 mb-2.5 sm:mb-3"
           >
             Junction-Kodoyo · Homa Bay–Rongo Road
           </motion.p>
@@ -195,34 +194,34 @@ export function FullWidthParallaxHero({
             initial={prefersReducedMotion ? false : {opacity: 0, y: 14}}
             animate={{opacity: 1, y: 0}}
             transition={{duration: 0.48, delay: 0.05, ease: [0.16, 1, 0.3, 1]}}
-            className="text-[clamp(2.15rem,4.4vw,3.6rem)] font-bold tracking-tight text-white leading-[1.08] text-balance"
+            className="text-[clamp(1.9rem,5vw,3.75rem)] font-extrabold tracking-[-0.03em] text-white leading-[1.06] text-balance"
           >
-            Five everyday services in one stop.
+            One stop. Everything handled.
           </motion.h1>
 
           <motion.p
             initial={prefersReducedMotion ? false : {opacity: 0, y: 14}}
             animate={{opacity: 1, y: 0}}
             transition={{duration: 0.48, delay: 0.1, ease: [0.16, 1, 0.3, 1]}}
-            className="mt-3 text-base sm:text-lg text-slate-100 leading-relaxed"
+            className="mt-3 text-sm sm:text-lg font-light text-slate-100 leading-relaxed"
           >
-            Laundry, cyber café, barber, car wash &amp; highway hotel.
+            Laundry · Cyber Café · Barber · Car Wash · Highway Hotel
           </motion.p>
 
           <motion.div
             initial={prefersReducedMotion ? false : {opacity: 0, y: 14}}
             animate={{opacity: 1, y: 0}}
             transition={{duration: 0.48, delay: 0.15, ease: [0.16, 1, 0.3, 1]}}
-            className="mt-6 flex flex-wrap items-center gap-3"
+            className="mt-5 sm:mt-6 flex flex-wrap items-center gap-2.5 sm:gap-3"
           >
             <motion.a
               href="#video-tour"
               whileHover={prefersReducedMotion ? undefined : {y: -2, scale: 1.02}}
               whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-500 rounded-md shadow-lg hover:shadow-xl transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-500 rounded-md shadow-lg hover:shadow-xl transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300"
             >
               <Play className="w-4 h-4" />
-              <span>Watch Video</span>
+              <span>Watch Tour</span>
             </motion.a>
 
             <motion.a
@@ -231,7 +230,7 @@ export function FullWidthParallaxHero({
               rel="noopener noreferrer"
               whileHover={prefersReducedMotion ? undefined : {y: -2, scale: 1.02}}
               whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
-              className="inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-slate-900 bg-white hover:bg-sky-50 rounded-md shadow-lg hover:shadow-xl transition-colors duration-150 whitespace-nowrap shrink-0"
+              className="inline-flex items-center justify-center gap-2 px-3.5 py-2.5 sm:px-4 sm:py-3 text-sm font-medium text-slate-900 bg-white hover:bg-sky-50 rounded-md shadow-lg hover:shadow-xl transition-colors duration-150 whitespace-nowrap shrink-0"
             >
               <MessageCircle className="w-4 h-4 text-emerald-600" />
               <span>WhatsApp</span>
@@ -241,7 +240,7 @@ export function FullWidthParallaxHero({
               href={BUSINESS_INFO.phoneHref}
               whileHover={prefersReducedMotion ? undefined : {y: -1}}
               whileTap={prefersReducedMotion ? undefined : {scale: 0.97}}
-              className="inline-flex items-center justify-center gap-2 px-3 py-3 text-sm font-medium text-sky-200 hover:text-white transition-colors whitespace-nowrap shrink-0"
+              className="inline-flex items-center justify-center gap-2 px-2.5 py-2.5 sm:px-3 sm:py-3 text-sm font-medium text-sky-200 hover:text-white transition-colors whitespace-nowrap shrink-0"
             >
               <Phone className="w-4 h-4" />
               <span className="font-mono tabular-nums">
@@ -251,38 +250,9 @@ export function FullWidthParallaxHero({
           </motion.div>
         </div>
 
-        {/* Animated Bottom Scene Caption & Carousel Switcher */}
-        <div className="mt-10 pt-4 border-t border-white/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide.id}
-              initial={prefersReducedMotion ? false : {opacity: 0, y: 6}}
-              animate={{opacity: 1, y: 0}}
-              exit={prefersReducedMotion ? {opacity: 0} : {opacity: 0, y: -6}}
-              transition={{duration: 0.28, ease: [0.16, 1, 0.3, 1]}}
-              className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs sm:text-sm"
-            >
-              <span className="font-semibold text-sky-300">
-                {currentSlide.label}
-              </span>
-              <span aria-hidden="true" className="text-white/40">
-                ·
-              </span>
-              <span className="text-slate-100">{currentSlide.caption}</span>
-              {currentSlide.targetPage !== 'home' && (
-                <button
-                  type="button"
-                  onClick={() => onNavigate(currentSlide.targetPage)}
-                  className="group/link inline-flex items-center gap-1 font-semibold text-sky-300 hover:text-white underline underline-offset-4 cursor-pointer ml-1"
-                >
-                  <span>Open Page</span>
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
-                </button>
-              )}
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="inline-flex items-center gap-1.5 p-1 bg-slate-900/95 border border-white/20 rounded-md shadow-lg self-start sm:self-auto shrink-0">
+        {/* Clean Carousel Switcher */}
+        <div className="mt-7 sm:mt-10 pt-4 border-t border-white/20 flex items-center justify-start sm:justify-end">
+          <div className="inline-flex items-center gap-1 sm:gap-1.5 p-1 bg-slate-900/95 border border-white/20 rounded-md shadow-lg max-w-full shrink-0">
             <motion.button
               type="button"
               onClick={goPrev}

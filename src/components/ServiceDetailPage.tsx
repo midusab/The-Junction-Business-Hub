@@ -106,7 +106,7 @@ export function ServiceDetailPage({
       {/* 1. Full-Width Parallax Hero Banner */}
       <section
         ref={heroRef}
-        className="relative min-h-[480px] sm:min-h-[540px] flex items-end overflow-hidden bg-slate-950"
+        className="relative min-h-[420px] sm:min-h-[540px] flex items-end overflow-hidden bg-slate-950"
       >
         <motion.div
           style={{y: heroImageY, scale: heroImageScale}}
@@ -146,13 +146,13 @@ export function ServiceDetailPage({
             transition={{duration: 0.5, ease: [0.16, 1, 0.3, 1]}}
             className="max-w-2xl"
           >
-            <p className="text-xs sm:text-sm font-medium tracking-wide mb-2 text-sky-300">
+            <p className="text-xs font-semibold uppercase tracking-[0.08em] mb-2.5 text-sky-300">
               {config.departmentNumber} · Junction-Kodoyo · Homa Bay–Rongo Road
             </p>
-            <h1 className="text-[clamp(2.25rem,4.2vw,3.5rem)] font-bold tracking-tight text-white leading-[1.08] text-balance">
+            <h1 className="text-[clamp(1.9rem,5vw,3.65rem)] font-extrabold tracking-[-0.03em] text-white leading-[1.06] text-balance">
               {config.title}
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-100 leading-relaxed max-w-2xl">
+            <p className="mt-3.5 sm:mt-4 text-sm sm:text-lg font-light text-slate-100 leading-relaxed max-w-2xl">
               {config.description}
             </p>
 
@@ -187,64 +187,51 @@ export function ServiceDetailPage({
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left: Interactive Visual Frame with Scroll Parallax */}
+            {/* Left: Interactive Visual Frame with Inner Scroll Parallax */}
             <div className="lg:col-span-7">
-              <motion.div
-                style={{y: visualParallaxY}}
-                className="relative aspect-[16/10] w-full overflow-hidden border border-slate-200 bg-slate-900 shadow-xl group rounded-lg"
-              >
-                <AnimatePresence mode="sync" initial={false}>
-                  <motion.div
-                    key={activeVisual.id}
-                    initial={
-                      prefersReducedMotion
-                        ? {opacity: 1}
-                        : {opacity: 0, scale: 1.05}
-                    }
-                    animate={{
-                      opacity: 1,
-                      scale: 1,
-                      transition: {duration: 0.45, ease: [0.16, 1, 0.3, 1]},
-                    }}
-                    exit={{
-                      opacity: 0,
-                      transition: {duration: 0.3},
-                    }}
-                    className="absolute inset-0 w-full h-full"
-                  >
-                    <ResilientImage
-                      src={activeVisual.src}
-                      alt={activeVisual.alt}
-                      fallbackTitle={activeVisual.label}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    />
-                  </motion.div>
-                </AnimatePresence>
+              <div className="relative aspect-[16/10] w-full overflow-hidden border border-slate-200 bg-slate-900 shadow-xl group rounded-lg">
+                <motion.div
+                  style={{y: visualParallaxY}}
+                  className="w-full h-[112%] -mt-[6%] will-change-transform relative"
+                >
+                  <AnimatePresence mode="sync" initial={false}>
+                    <motion.div
+                      key={activeVisual.id}
+                      initial={
+                        prefersReducedMotion
+                          ? {opacity: 1}
+                          : {opacity: 0, scale: 1.05}
+                      }
+                      animate={{
+                        opacity: 1,
+                        scale: 1,
+                        transition: {duration: 0.45, ease: [0.16, 1, 0.3, 1]},
+                      }}
+                      exit={{
+                        opacity: 0,
+                        transition: {duration: 0.3},
+                      }}
+                      className="absolute inset-0 w-full h-full"
+                    >
+                      <ResilientImage
+                        src={activeVisual.src}
+                        alt={activeVisual.alt}
+                        fallbackTitle={activeVisual.label}
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      />
+                    </motion.div>
+                  </AnimatePresence>
+                </motion.div>
 
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-slate-950/85 via-slate-950/35 to-transparent pointer-events-none"
-                />
-
-                <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 flex items-end justify-between gap-4">
-                  <div>
-                    <p className="text-xs font-medium text-sky-300">
-                      {activeVisual.label}
-                    </p>
-                    <p className="text-sm text-white/95 font-medium">
-                      {activeVisual.caption}
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setLightboxOpen(true)}
-                    aria-label={`Inspect ${activeVisual.label} full screen`}
-                    className="w-10 h-10 rounded-md bg-slate-900/90 border border-white/15 hover:bg-sky-600 text-white inline-flex items-center justify-center shrink-0 cursor-pointer transition-transform active:scale-95"
-                  >
-                    <Expand className="w-4 h-4" />
-                  </button>
-                </div>
-              </motion.div>
+                <button
+                  type="button"
+                  onClick={() => setLightboxOpen(true)}
+                  aria-label={`Inspect ${activeVisual.label} full screen`}
+                  className="absolute bottom-3 right-3 w-10 h-10 rounded-md bg-slate-900/90 border border-white/15 hover:bg-sky-600 text-white inline-flex items-center justify-center shrink-0 cursor-pointer transition-all opacity-90 hover:opacity-100 active:scale-95 z-10"
+                >
+                  <Expand className="w-4 h-4" />
+                </button>
+              </div>
 
               {/* Interactive Thumbnail Strip (On-Click Switcher) */}
               <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -304,14 +291,14 @@ export function ServiceDetailPage({
               className="lg:col-span-5"
             >
               <p
-                className={`text-xs font-semibold tracking-wide mb-2 ${
+                className={`text-xs font-semibold uppercase tracking-[0.08em] mb-2 ${
                   isDarkSection ? 'text-sky-300' : 'text-sky-700'
                 }`}
               >
                 {config.processTitle}
               </p>
               <h2
-                className={`text-2xl sm:text-3xl font-bold tracking-tight text-balance ${
+                className={`text-2xl sm:text-3xl font-bold tracking-[-0.025em] text-balance ${
                   isDarkSection ? 'text-white' : 'text-slate-900'
                 }`}
               >
@@ -395,9 +382,7 @@ export function ServiceDetailPage({
                 isDarkSection ? 'text-slate-300' : 'text-slate-600'
               }`}
             >
-              Select any service below to inspect what is included and send a
-              direct enquiry. Pricing is confirmed transparently at the counter
-              or via WhatsApp.
+              Tap any service for details or message us on WhatsApp for rates.
             </p>
           </div>
 
@@ -607,7 +592,7 @@ export function ServiceDetailPage({
             initial={prefersReducedMotion ? false : {opacity: 0}}
             animate={{opacity: 1}}
             exit={{opacity: 0}}
-            className="fixed inset-0 z-50 bg-slate-950/90 flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-slate-950/90 flex items-center justify-center p-3 sm:p-6"
             onClick={() => setLightboxOpen(false)}
           >
             <motion.div
@@ -617,15 +602,15 @@ export function ServiceDetailPage({
               className="max-w-4xl w-full bg-white rounded-lg overflow-hidden border border-slate-200 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200">
-                <span className="font-semibold text-sm text-slate-900">
+              <div className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 sm:py-3.5 border-b border-slate-200">
+                <span className="font-semibold text-xs sm:text-sm text-slate-900 truncate min-w-0">
                   {activeVisual.label} · {config.title}
                 </span>
                 <button
                   type="button"
                   onClick={() => setLightboxOpen(false)}
                   aria-label="Close image preview"
-                  className="w-9 h-9 inline-flex items-center justify-center rounded-md text-slate-600 hover:bg-sky-50 cursor-pointer"
+                  className="w-9 h-9 inline-flex items-center justify-center rounded-md text-slate-600 hover:bg-sky-50 cursor-pointer shrink-0"
                 >
                   <X className="w-5 h-5" />
                 </button>

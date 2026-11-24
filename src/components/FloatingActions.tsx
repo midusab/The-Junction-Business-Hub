@@ -51,7 +51,7 @@ export function FloatingActions() {
   return (
     <div
       aria-label="Quick Contact and Navigation Actions"
-      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-center gap-2.5"
+      className="fixed bottom-3 right-3 sm:bottom-6 sm:right-6 z-40 flex flex-col items-center gap-2 sm:gap-2.5"
     >
       {/* Dynamic Back-to-Top with Live Scroll Progress Ring */}
       <AnimatePresence>
@@ -75,7 +75,7 @@ export function FloatingActions() {
             whileHover={prefersReducedMotion ? undefined : {y: -3, scale: 1.05}}
             whileTap={prefersReducedMotion ? undefined : {scale: 0.94}}
             transition={{duration: 0.22, ease: [0.16, 1, 0.3, 1]}}
-            className="relative w-11 h-11 rounded-md bg-white border border-sky-200 text-sky-700 hover:text-sky-900 hover:bg-sky-50 inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+            className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-md bg-white border border-sky-200 text-sky-700 hover:text-sky-900 hover:bg-sky-50 inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
           >
             <svg
               aria-hidden="true"
@@ -116,7 +116,7 @@ export function FloatingActions() {
         title={`Call ${BUSINESS_INFO.phoneDisplay}`}
         whileHover={prefersReducedMotion ? undefined : {y: -2, scale: 1.05}}
         whileTap={prefersReducedMotion ? undefined : {scale: 0.95}}
-        className="w-11 h-11 rounded-md bg-sky-600 hover:bg-sky-700 text-white inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+        className="w-10 h-10 sm:w-11 sm:h-11 rounded-md bg-sky-600 hover:bg-sky-700 text-white inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
       >
         <Phone className="w-4 h-4" />
       </motion.a>
@@ -130,9 +130,9 @@ export function FloatingActions() {
         title="Chat on WhatsApp"
         whileHover={prefersReducedMotion ? undefined : {y: -2, scale: 1.05}}
         whileTap={prefersReducedMotion ? undefined : {scale: 0.95}}
-        className="w-11 h-11 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
+        className="w-10 h-10 sm:w-11 sm:h-11 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white inline-flex items-center justify-center shadow-lg hover:shadow-xl transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
       >
-        <WhatsAppIcon className="w-5 h-5" />
+        <WhatsAppIcon className="w-4 h-4 sm:w-5 sm:h-5" />
       </motion.a>
     </div>
   );

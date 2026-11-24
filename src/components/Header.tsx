@@ -1,14 +1,9 @@
 import {useEffect, useRef, useState} from 'react';
 import {
-  Car,
   ChevronDown,
   Menu,
   MessageCircle,
   Phone,
-  Printer,
-  Scissors,
-  Shirt,
-  UtensilsCrossed,
   X,
 } from 'lucide-react';
 import {
@@ -33,37 +28,31 @@ const SERVICE_DROPDOWN_ITEMS: Array<{
   id: ServicePageId;
   label: string;
   caption: string;
-  Icon: typeof Shirt;
 }> = [
   {
     id: 'laundry',
     label: 'Laundry Services',
     caption: 'Wash, press, fold & duvets',
-    Icon: Shirt,
   },
   {
     id: 'cyber',
     label: 'Cyber Café',
     caption: 'Print, scan, typing & portals',
-    Icon: Printer,
   },
   {
     id: 'barber',
     label: 'Barber Studio',
     caption: 'Fades, trims & hot towel',
-    Icon: Scissors,
   },
   {
     id: 'carwash',
     label: 'Car Wash Bay',
     caption: 'Foam wash, vacuum & bikes',
-    Icon: Car,
   },
   {
     id: 'hotel',
     label: 'Highway Hotel',
     caption: 'Kenyan meals, chai & rooms',
-    Icon: UtensilsCrossed,
   },
 ];
 
@@ -131,12 +120,12 @@ export function Header({activePage, onNavigate}: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-40 bg-white border-b border-slate-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2 sm:gap-6 lg:gap-8">
         {/* Zone 1: Single-element Brand Wordmark */}
         <button
           type="button"
           onClick={() => handleNavClick('home')}
-          className="font-display text-lg font-bold tracking-tight text-slate-900 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 rounded-sm"
+          className="font-display text-base sm:text-lg font-bold tracking-tight text-slate-900 whitespace-nowrap truncate min-w-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-600 rounded-sm"
         >
           {BUSINESS_INFO.shortName}
         </button>
@@ -205,7 +194,6 @@ export function Header({activePage, onNavigate}: HeaderProps) {
                 >
                   <div className="bg-white border border-slate-200 rounded-lg shadow-xl p-2 space-y-1">
                     {SERVICE_DROPDOWN_ITEMS.map((item) => {
-                      const Icon = item.Icon;
                       const active = activePage === item.id;
                       return (
                         <button
@@ -213,28 +201,17 @@ export function Header({activePage, onNavigate}: HeaderProps) {
                           type="button"
                           role="menuitem"
                           onClick={() => handleNavClick(item.id)}
-                          className={`w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-md transition-colors cursor-pointer ${
+                          className={`w-full text-left block px-3.5 py-2.5 rounded-md transition-colors cursor-pointer ${
                             active
                               ? 'bg-sky-50 text-sky-800'
                               : 'hover:bg-sky-50/75 text-slate-800'
                           }`}
                         >
-                          <span
-                            className={`w-8 h-8 rounded-md flex items-center justify-center shrink-0 ${
-                              active
-                                ? 'bg-sky-600 text-white'
-                                : 'bg-sky-100 text-sky-700'
-                            }`}
-                          >
-                            <Icon className="w-4 h-4" />
+                          <span className="block text-sm font-semibold leading-tight">
+                            {item.label}
                           </span>
-                          <span className="min-w-0">
-                            <span className="block text-sm font-semibold leading-tight">
-                              {item.label}
-                            </span>
-                            <span className="block text-xs text-slate-500 mt-0.5 truncate">
-                              {item.caption}
-                            </span>
+                          <span className="block text-xs text-slate-500 mt-0.5 truncate">
+                            {item.caption}
                           </span>
                         </button>
                       );
@@ -268,7 +245,7 @@ export function Header({activePage, onNavigate}: HeaderProps) {
         </nav>
 
         {/* Zone 3: Call & WhatsApp Icons + Primary Contact CTA */}
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           <motion.a
             href={BUSINESS_INFO.phoneHref}
             aria-label={`Call ${BUSINESS_INFO.phoneDisplay}`}
@@ -319,7 +296,7 @@ export function Header({activePage, onNavigate}: HeaderProps) {
       {mobileOpen && (
         <nav
           aria-label="Mobile Navigation"
-          className="md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-1.5"
+          className="md:hidden border-t border-slate-200 bg-white px-4 py-4 space-y-1.5 max-h-[calc(100dvh-4rem)] overflow-y-auto shadow-lg"
         >
           <button
             type="button"
@@ -350,21 +327,19 @@ export function Header({activePage, onNavigate}: HeaderProps) {
             {mobileServicesOpen && (
               <div className="mt-1 ml-3 pl-3 border-l border-sky-200 space-y-1">
                 {SERVICE_DROPDOWN_ITEMS.map((item) => {
-                  const Icon = item.Icon;
                   const active = activePage === item.id;
                   return (
                     <button
                       key={item.id}
                       type="button"
                       onClick={() => handleNavClick(item.id)}
-                      className={`flex items-center gap-2.5 w-full text-left px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
+                      className={`block w-full text-left px-3 py-2 text-sm font-medium rounded-md cursor-pointer ${
                         active
                           ? 'bg-sky-50 text-sky-800 font-semibold'
                           : 'text-slate-700 hover:bg-sky-50/50'
                       }`}
                     >
-                      <Icon className="w-4 h-4 text-sky-600 shrink-0" />
-                      <span>{item.label}</span>
+                      {item.label}
                     </button>
                   );
                 })}

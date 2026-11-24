@@ -65,9 +65,6 @@ function TeamDepartmentShowcase({
   const serviceConfig = SERVICE_PAGES[member.targetPage];
   const activeSrc = showWorkspace ? serviceConfig.heroImage.src : member.image;
   const activeAlt = showWorkspace ? serviceConfig.heroImage.alt : member.alt;
-  const activeLabel = showWorkspace
-    ? `${member.department} Workspace`
-    : `${member.name} · ${member.role}`;
   const isReversed = index % 2 === 1;
 
   return (
@@ -106,22 +103,6 @@ function TeamDepartmentShowcase({
                 />
               </motion.div>
             </AnimatePresence>
-
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-slate-950/80 via-slate-950/25 to-transparent pointer-events-none"
-            />
-
-            <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-3">
-              <div className="bg-slate-900/90 border border-white/15 px-3.5 py-2 rounded-md">
-                <p className="text-[11px] font-medium text-sky-300">
-                  {member.department}
-                </p>
-                <p className="text-xs sm:text-sm font-semibold text-white">
-                  {activeLabel}
-                </p>
-              </div>
-            </div>
           </div>
 
           {/* Toggle between Specialist Portrait & Department Workspace */}
@@ -156,12 +137,12 @@ function TeamDepartmentShowcase({
 
       {/* Right / Left Narrative Column: What They Do + Why They Are The Best */}
       <div className={`lg:col-span-6 ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}>
-        <div className="bg-white border border-slate-200 rounded-lg p-6 sm:p-8 shadow-md hover:shadow-xl space-y-6 transition-all hover:border-sky-400">
+        <div className="bg-white border border-slate-200 rounded-lg p-5 sm:p-8 shadow-md hover:shadow-xl space-y-5 sm:space-y-6 transition-all hover:border-sky-400">
           <div>
             <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
               {member.department} · {member.serviceHighlight}
             </p>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+            <h2 className="text-xl sm:text-3xl font-bold tracking-tight text-slate-900">
               {member.name} — {member.role}
             </h2>
             <p className="mt-2.5 text-sm sm:text-base text-slate-700 leading-relaxed">
@@ -258,7 +239,7 @@ export function TeamPage({onNavigate}: TeamPageProps) {
       {/* 1. Full-Width Parallax Team Hero */}
       <section
         ref={heroRef}
-        className="relative min-h-[440px] sm:min-h-[500px] flex items-end overflow-hidden bg-slate-950"
+        className="relative min-h-[400px] sm:min-h-[500px] flex items-end overflow-hidden bg-slate-950"
       >
         <motion.div
           style={{y: heroImageY}}
@@ -297,16 +278,14 @@ export function TeamPage({onNavigate}: TeamPageProps) {
             transition={{duration: 0.45, ease: [0.16, 1, 0.3, 1]}}
             className="max-w-2xl"
           >
-            <p className="text-xs sm:text-sm font-medium tracking-wide text-sky-300 mb-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.08em] text-sky-300 mb-2.5">
               Our People · Junction-Kodoyo, Homa Bay–Rongo Road
             </p>
-            <h1 className="text-[clamp(2.15rem,4.1vw,3.4rem)] font-bold tracking-tight text-white leading-[1.08] text-balance">
+            <h1 className="text-[clamp(1.85rem,5vw,3.55rem)] font-extrabold tracking-[-0.03em] text-white leading-[1.06] text-balance">
               Meet the team behind every service at The Junction Hub
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-100 leading-relaxed">
-              See what each department specialist does daily and why residents,
-              students, and highway travellers trust their care across laundry,
-              cyber, barbering, car wash, and hospitality.
+            <p className="mt-3.5 sm:mt-4 text-sm sm:text-lg font-light text-slate-100 leading-relaxed">
+              Skilled local leads across laundry, cyber, barbering, car wash, and hospitality.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -338,16 +317,12 @@ export function TeamPage({onNavigate}: TeamPageProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-sky-200/80">
             <div className="max-w-2xl">
-              <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.08em] text-sky-700 mb-2">
                 Service Teams · Representative Staff Roles
               </p>
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900 text-balance">
+              <h2 className="text-3xl font-bold tracking-[-0.025em] text-slate-900 text-balance">
                 Why our specialists excel in every department
               </h2>
-              <p className="mt-2 text-sm sm:text-base text-slate-600">
-                Filter by service section below or scroll through all five teams
-                to inspect their daily work and quality standards.
-              </p>
             </div>
 
             <div
@@ -408,10 +383,7 @@ export function TeamPage({onNavigate}: TeamPageProps) {
                 Five teams working together so one stop handles your entire day
               </h2>
               <p className="mt-3 text-sm sm:text-base text-slate-700 leading-relaxed">
-                Leave your laundry with Wanjiku, hand your car keys to Dennis,
-                print forms with Kevin, freshen up with Samuel, and enjoy hot
-                Kenyan tea served by Joseph—all within steps along the Homa
-                Bay–Rongo Road.
+                Drop off laundry, print forms, get a fresh cut, wash your car, and grab hot Kenyan tea—all in one stop on the Homa Bay–Rongo Road.
               </p>
             </div>
 

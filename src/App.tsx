@@ -48,24 +48,24 @@ const CHAPTER_NARRATIVES: Record<
   {kicker: string; storyLead: string}
 > = {
   laundry: {
-    kicker: 'Garment & Duvet Care',
-    storyLead: 'Colour-sorted washing, steam ironing, and duvet wrapping.',
+    kicker: 'Fresh Garments',
+    storyLead: 'Drop off in the morning, collect clean & pressed.',
   },
   cyber: {
-    kicker: 'Digital & Print Desk',
-    storyLead: 'Laser printing, PDF scanning, typing, and online portals.',
+    kicker: 'Print & Digital',
+    storyLead: 'Fast printing, scanning & online portal help.',
   },
   barber: {
-    kicker: 'Modern Grooming Studio',
-    storyLead: 'Clean fades, executive cuts, beard trims, and hot towels.',
+    kicker: 'Sharp Grooming',
+    storyLead: 'Clean fades, beard trims & hot towel shaves.',
   },
   hotel: {
-    kicker: 'Roadside Dining & Stays',
-    storyLead: 'Fresh Kenyan meals, spiced chai, and clean guest rooms.',
+    kicker: 'Hot Meals & Stays',
+    storyLead: 'Fresh Kenyan chai, meals & quiet roadside rooms.',
   },
   carwash: {
-    kicker: 'Drive-In Wash Bay',
-    storyLead: 'Snow foam exterior wash, cabin vacuum, and motorcycle care.',
+    kicker: 'Spotless Ride',
+    storyLead: 'Snow foam wash & vacuum while you relax.',
   },
 };
 
@@ -147,13 +147,6 @@ function StoryChapter({
                 </motion.div>
               </AnimatePresence>
             </motion.div>
-
-            <div className="absolute bottom-3 left-3 right-3 sm:right-auto sm:max-w-md bg-slate-900/90 border border-white/15 px-4 py-2 rounded-md shadow-md flex items-center justify-between gap-4">
-              <p className="text-xs sm:text-sm text-white font-medium line-clamp-1">
-                {activeVisual.label}
-              </p>
-              <ArrowRight className="w-4 h-4 text-sky-300 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
-            </div>
           </button>
 
           {/* Interactive visual switcher thumbnails */}
@@ -209,18 +202,18 @@ function StoryChapter({
           transition={{duration: 0.22}}
           className="bg-white border border-slate-200 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 hover:border-sky-300"
         >
-          <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
+          <p className="text-xs font-semibold uppercase tracking-[0.08em] text-sky-700 mb-1.5">
             {narrative.kicker}
           </p>
-          <h3 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h3 className="text-2xl font-bold tracking-[-0.02em] text-slate-900">
             {servicePage.title}
           </h3>
-          <p className="mt-2 text-sm text-slate-700 leading-relaxed">
+          <p className="mt-2 text-sm font-normal text-slate-600 leading-relaxed">
             {narrative.storyLead}
           </p>
 
           <div className="mt-4 pt-4 border-t border-sky-200/80 grid grid-cols-1 gap-1.5 text-xs sm:text-sm text-slate-800">
-            {servicePage.services.slice(0, 4).map((item) => (
+            {servicePage.services.slice(0, 3).map((item) => (
               <motion.button
                 key={item.id}
                 type="button"
@@ -296,7 +289,7 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
       {/* Visual-First Service Showcase */}
       <section
         id="services"
-        className="py-16 sm:py-20 bg-white border-b border-sky-200/80"
+        className="py-12 sm:py-20 bg-white border-b border-sky-200/80"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -306,10 +299,10 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
             transition={{duration: 0.45, ease: [0.16, 1, 0.3, 1]}}
             className="max-w-2xl mb-4"
           >
-            <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
+            <p className="text-xs font-semibold uppercase tracking-[0.08em] text-sky-700 mb-2">
               Our Services · Junction-Kodoyo
             </p>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.025em] text-slate-900 text-balance">
               Five departments under one roof
             </h2>
           </motion.div>
@@ -333,7 +326,7 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
       {/* About The Hub & Community */}
       <section
         id="about"
-        className="py-16 sm:py-20 bg-white border-b border-sky-200/80"
+        className="py-12 sm:py-20 bg-white border-b border-sky-200/80"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -345,17 +338,25 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
               className="lg:col-span-5"
             >
               <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
-                  About The Hub
+                <p className="text-xs font-semibold uppercase tracking-[0.08em] text-sky-700 mb-2">
+                  Why Visit Us
                 </p>
-                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
-                  Everyday convenience along Homa Bay–Rongo Road
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-[-0.025em] text-slate-900 text-balance leading-[1.12]">
+                  Save the extra trip into town
                 </h2>
-                <p className="mt-4 text-sm sm:text-base text-slate-700 leading-relaxed">
-                  Serving local residents, students, businesses, and travellers
-                  with laundry, cyber access, barbering, car wash care, and
-                  highway hospitality in one stop.
+                <p className="mt-4 text-sm sm:text-base font-normal text-slate-600 leading-relaxed">
+                  Laundry, cyber access, grooming, car wash, and hot meals—all
+                  steps apart in Junction-Kodoyo.
                 </p>
+                <div className="mt-5">
+                  <a
+                    href="#contact"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-800 hover:underline underline-offset-4"
+                  >
+                    <span>Get Directions &amp; Hours</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
             </motion.div>
 
@@ -372,11 +373,6 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   />
                 </motion.div>
-                <div className="absolute bottom-3 left-3 bg-slate-900/90 border border-white/15 px-4 py-2 rounded-md">
-                  <p className="text-xs sm:text-sm text-white font-medium">
-                    Junction-Kodoyo Roadside Frontage
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -448,7 +444,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-white text-slate-900">
+    <div className="min-h-screen flex flex-col bg-white text-slate-900 overflow-x-clip">
       {mapsQuotaExceeded && (
         <div className="bg-amber-50 border-b border-amber-200 text-amber-900 px-4 py-2.5 text-xs md:text-sm text-center sticky top-0 z-50 shadow-sm">
           <span>
@@ -513,7 +509,7 @@ export default function App() {
       <FloatingActions />
 
       {/* Quiet Footer */}
-      <footer className="bg-white border-t border-sky-200/80 py-12">
+      <footer className="bg-white border-t border-sky-200/80 pt-12 pb-24 sm:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-sky-200/80">
             <div className="md:col-span-5">

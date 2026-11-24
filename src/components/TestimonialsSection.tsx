@@ -160,7 +160,7 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
       </div>
 
       {/* Directional Horizontal Animated Featured Testimonial Spotlight (Swipeable) */}
-      <div className="mb-8 bg-sky-50/60 border border-sky-200 rounded-lg p-6 sm:p-8 shadow-md overflow-hidden relative">
+      <div className="mb-8 bg-sky-50/60 border border-sky-200 rounded-lg p-4 sm:p-8 shadow-md overflow-hidden relative">
         <AnimatePresence mode="wait" custom={direction} initial={false}>
           <motion.div
             key={activeItem.id}
@@ -171,6 +171,7 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
             exit={prefersReducedMotion ? {opacity: 0} : 'exit'}
             transition={{duration: 0.38, ease: [0.16, 1, 0.3, 1]}}
             drag={prefersReducedMotion ? false : 'x'}
+            dragDirectionLock
             dragConstraints={{left: 0, right: 0}}
             dragElastic={0.25}
             onDragEnd={(_, info) => {
@@ -180,14 +181,14 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
                 handlePrev();
               }
             }}
-            className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 cursor-grab active:cursor-grabbing"
+            className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6 cursor-grab active:cursor-grabbing"
           >
             <div className="max-w-3xl">
-              <div className="flex items-center gap-2 text-xs font-semibold text-sky-700 mb-3">
+              <div className="flex items-center gap-2 text-xs font-semibold text-sky-700 mb-2.5 sm:mb-3">
                 <Quote className="w-4 h-4 shrink-0" />
                 <span>{activeItem.serviceUsed}</span>
               </div>
-              <blockquote className="text-lg sm:text-xl font-medium text-slate-900 leading-relaxed">
+              <blockquote className="text-base sm:text-xl font-medium text-slate-900 leading-relaxed">
                 &ldquo;{activeItem.quote}&rdquo;
               </blockquote>
               <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
@@ -229,7 +230,7 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
 
       {/* Continuous Horizontal Marquee Track (Pauses smoothly on hover/focus) */}
       <div
-        className="relative overflow-hidden py-2 -mx-2 px-2"
+        className="relative overflow-hidden touch-pan-y py-2 -mx-2 px-2"
         onMouseEnter={() => setIsTrackHovered(true)}
         onMouseLeave={() => setIsTrackHovered(false)}
         onFocusCapture={() => setIsTrackHovered(true)}
@@ -264,7 +265,7 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
                   whileHover={prefersReducedMotion ? undefined : {y: -5}}
                   whileTap={prefersReducedMotion ? undefined : {scale: 0.97}}
                   onClick={() => handleSelectCard(originalIdx)}
-                  className={`group w-[290px] sm:w-[340px] shrink-0 rounded-lg border p-5 flex flex-col justify-between transition-all duration-200 cursor-pointer bg-white ${
+                  className={`group w-[264px] sm:w-[340px] shrink-0 rounded-lg border p-4 sm:p-5 flex flex-col justify-between transition-all duration-200 cursor-pointer bg-white ${
                     isActive
                       ? 'border-sky-600 ring-2 ring-sky-600/20 shadow-lg'
                       : 'border-slate-200 hover:border-sky-400 shadow-sm hover:shadow-lg'

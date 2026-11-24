@@ -50,7 +50,7 @@ function isQuotaError(err: unknown): boolean {
 
 function MapFallbackCard({message}: {message: string}) {
   return (
-    <div className="h-[380px] sm:h-[440px] w-full rounded-lg border border-sky-200 bg-sky-50/70 flex flex-col items-center justify-center p-8 text-center">
+    <div className="h-[300px] sm:h-[420px] w-full rounded-lg border border-sky-200 bg-sky-50/70 flex flex-col items-center justify-center p-6 sm:p-8 text-center">
       <div className="w-12 h-12 rounded-md bg-white border border-sky-200 flex items-center justify-center mb-4 text-sky-700">
         <MapPin className="w-6 h-6" strokeWidth={1.75} />
       </div>
@@ -172,7 +172,7 @@ function HubMapCanvas() {
 
   if (isSearching || !resolvedPlace) {
     return (
-      <div className="h-[380px] sm:h-[440px] w-full rounded-lg border border-sky-200 bg-sky-50/70 flex flex-col items-center justify-center p-6 text-center">
+      <div className="h-[300px] sm:h-[420px] w-full rounded-lg border border-sky-200 bg-sky-50/70 flex flex-col items-center justify-center p-6 text-center">
         <div className="w-8 h-8 rounded-full border-2 border-sky-200 border-t-sky-600 animate-spin mb-3" />
         <p className="text-sm text-slate-600">
           Locating Junction-Kodoyo on Homa Bay–Rongo Road...
@@ -183,7 +183,7 @@ function HubMapCanvas() {
 
   return (
     <div className="space-y-2">
-      <div className="h-[380px] sm:h-[440px] w-full rounded-lg overflow-hidden border border-sky-200 bg-sky-50">
+      <div className="h-[300px] sm:h-[420px] w-full rounded-lg overflow-hidden border border-sky-200 bg-sky-50">
         <GoogleMap
           mapId="DEMO_MAP_ID"
           defaultCenter={{lat: resolvedPlace.lat, lng: resolvedPlace.lng}}
