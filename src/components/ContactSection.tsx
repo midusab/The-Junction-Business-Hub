@@ -84,27 +84,22 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-20 sm:py-24 border-t border-sky-200/80 bg-[#F8F9FA]"
+      className="py-16 sm:py-20 border-t border-sky-200/80 bg-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mb-12">
-          <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
+        <div className="max-w-xl mb-10">
+          <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
             Visit &amp; Contact Us
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
             Find us along the Homa Bay–Rongo Road
           </h2>
-          <p className="mt-3 text-base text-slate-600 leading-relaxed">
-            Call directly, message us on WhatsApp, or send a quick enquiry below
-            for laundry, cyber services, barber bookings, car wash bays, or
-            dining and rooms at Junction Highway Hotel.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Direct Contact & Enquiry Form */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="liquid-glass rounded-lg p-6 space-y-5">
+            <div className="bg-sky-50/50 border border-sky-200 rounded-lg p-6 shadow-md space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <span className="text-xs text-slate-500 block mb-1">
@@ -156,7 +151,7 @@ export function ContactSection() {
             </div>
 
             {/* Enquiry Form */}
-            <div className="bg-white border border-sky-200/80 rounded-lg p-6">
+            <div className="bg-white border border-slate-200 rounded-lg p-6 shadow-md">
               <h3 className="text-lg font-semibold text-slate-900 mb-1">
                 Send a Service Enquiry
               </h3>
@@ -259,7 +254,7 @@ export function ContactSection() {
                     <div
                       role="group"
                       aria-label="Choose service department"
-                      className="flex flex-wrap gap-1.5 p-1.5 bg-[#F8F9FA] border border-sky-200/80 rounded-md"
+                      className="flex flex-wrap gap-1.5 p-1.5 bg-slate-50 border border-sky-200/80 rounded-md"
                     >
                       {DEPARTMENTS.map((option) => (
                         <button
@@ -314,7 +309,7 @@ export function ContactSection() {
 
           {/* Right Column: Interactive Map + Operating Hours */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="bg-white border border-sky-200/80 rounded-lg p-4 sm:p-5">
+            <div className="bg-white border border-slate-200 rounded-lg p-4 sm:p-5 shadow-md">
               <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <div>
                   <h3 className="text-base font-semibold text-slate-900">
@@ -338,7 +333,7 @@ export function ContactSection() {
               <LocationMap />
             </div>
 
-            <div className="liquid-glass rounded-lg p-6">
+            <div className="bg-white border border-slate-200 rounded-lg p-6 shadow-md">
               <div className="flex items-center justify-between gap-4 mb-4">
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-sky-700" />

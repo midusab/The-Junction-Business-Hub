@@ -134,7 +134,7 @@ export function ServiceDetailPage({
           <button
             type="button"
             onClick={() => onNavigate('home')}
-            className="inline-flex items-center gap-2 text-sm font-medium text-white liquid-glass-dark px-3.5 py-2 mb-6 hover:bg-sky-700/70 transition-colors cursor-pointer rounded-md"
+            className="inline-flex items-center gap-2 text-sm font-medium text-white bg-slate-900/90 border border-white/20 px-3.5 py-2 mb-6 hover:bg-sky-700 transition-colors cursor-pointer rounded-md"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Hub Story</span>
@@ -144,7 +144,7 @@ export function ServiceDetailPage({
             initial={prefersReducedMotion ? false : {opacity: 0, y: 18}}
             animate={{opacity: 1, y: 0}}
             transition={{duration: 0.5, ease: [0.16, 1, 0.3, 1]}}
-            className="max-w-2xl liquid-glass-dark p-6 sm:p-8 rounded-lg"
+            className="max-w-2xl"
           >
             <p className="text-xs sm:text-sm font-medium tracking-wide mb-2 text-sky-300">
               {config.departmentNumber} · Junction-Kodoyo · Homa Bay–Rongo Road
@@ -161,16 +161,16 @@ export function ServiceDetailPage({
                 href={`${BUSINESS_INFO.whatsappHref}?text=${encodeURIComponent(config.whatsappPrefill)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-md transition-colors duration-150 whitespace-nowrap shrink-0"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-md shadow-lg hover:shadow-xl transition-all duration-150 whitespace-nowrap shrink-0"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Enquire on WhatsApp</span>
               </a>
               <a
                 href={BUSINESS_INFO.phoneHref}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white bg-white/15 hover:bg-white/25 border border-white/30 backdrop-blur-md rounded-md transition-colors duration-150 whitespace-nowrap shrink-0"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-slate-900 bg-white hover:bg-sky-50 rounded-md shadow-lg hover:shadow-xl transition-all duration-150 whitespace-nowrap shrink-0"
               >
-                <Phone className="w-4 h-4 text-sky-300" />
+                <Phone className="w-4 h-4 text-sky-600" />
                 <span className="font-mono tabular-nums">
                   {BUSINESS_INFO.phoneDisplay}
                 </span>
@@ -191,7 +191,7 @@ export function ServiceDetailPage({
             <div className="lg:col-span-7">
               <motion.div
                 style={{y: visualParallaxY}}
-                className="relative aspect-[16/10] w-full overflow-hidden border border-sky-200 bg-slate-900 shadow-sm group rounded-lg"
+                className="relative aspect-[16/10] w-full overflow-hidden border border-slate-200 bg-slate-900 shadow-xl group rounded-lg"
               >
                 <AnimatePresence mode="sync" initial={false}>
                   <motion.div
@@ -239,7 +239,7 @@ export function ServiceDetailPage({
                     type="button"
                     onClick={() => setLightboxOpen(true)}
                     aria-label={`Inspect ${activeVisual.label} full screen`}
-                    className="w-10 h-10 rounded-md liquid-glass-dark hover:bg-sky-600/80 text-white inline-flex items-center justify-center shrink-0 cursor-pointer transition-transform active:scale-95"
+                    className="w-10 h-10 rounded-md bg-slate-900/90 border border-white/15 hover:bg-sky-600 text-white inline-flex items-center justify-center shrink-0 cursor-pointer transition-transform active:scale-95"
                   >
                     <Expand className="w-4 h-4" />
                   </button>
@@ -330,10 +330,10 @@ export function ServiceDetailPage({
                       delay: prefersReducedMotion ? 0 : idx * 0.06,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className={`border rounded-lg p-4 transition-colors ${
+                    className={`border rounded-lg p-4 shadow-sm hover:shadow-md transition-all ${
                       isDarkSection
-                        ? 'liquid-glass-dark'
-                        : 'liquid-glass hover:bg-white'
+                        ? 'bg-slate-900 border-slate-800 hover:border-slate-700'
+                        : 'bg-white border-slate-200 hover:border-sky-300'
                     }`}
                   >
                     <h3
@@ -408,14 +408,14 @@ export function ServiceDetailPage({
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   whileHover={prefersReducedMotion ? undefined : {y: -3}}
-                  className={`border rounded-lg overflow-hidden transition-colors ${
+                  className={`border rounded-lg overflow-hidden transition-all ${
                     isDarkSection
                       ? isExpanded
-                        ? 'bg-slate-900 border-sky-400'
-                        : 'bg-slate-900/75 border-slate-800 hover:border-sky-500/60'
+                        ? 'bg-slate-900 border-sky-400 shadow-lg'
+                        : 'bg-slate-900/75 border-slate-800 hover:border-sky-500/60 shadow-md hover:shadow-lg'
                       : isExpanded
-                        ? 'bg-sky-50/70 border-sky-600'
-                        : 'bg-white border-slate-200 hover:border-sky-400'
+                        ? 'bg-sky-50/70 border-sky-600 shadow-lg'
+                        : 'bg-white border-slate-200 hover:border-sky-400 shadow-sm hover:shadow-lg'
                   }`}
                 >
                   <button
@@ -527,7 +527,7 @@ export function ServiceDetailPage({
       </section>
 
       {/* 4. Explore Other Hub Service Pages */}
-      <section className="py-14 bg-[#F8F9FA] border-b border-sky-200">
+      <section className="py-14 bg-white border-b border-sky-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
@@ -555,7 +555,7 @@ export function ServiceDetailPage({
                 whileHover={prefersReducedMotion ? undefined : {y: -4}}
                 whileTap={prefersReducedMotion ? undefined : {scale: 0.99}}
                 onClick={() => onNavigate(servicePage.id)}
-                className="group text-left bg-white border border-sky-200 rounded-lg overflow-hidden hover:border-sky-500 transition-colors cursor-pointer flex flex-col"
+                className="group text-left bg-white border border-slate-200 rounded-lg overflow-hidden shadow-md hover:shadow-xl hover:border-sky-400 transition-all cursor-pointer flex flex-col"
               >
                 <div className="aspect-[16/9] w-full overflow-hidden bg-slate-100">
                   <ResilientImage
@@ -598,14 +598,14 @@ export function ServiceDetailPage({
             initial={prefersReducedMotion ? false : {opacity: 0}}
             animate={{opacity: 1}}
             exit={{opacity: 0}}
-            className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-slate-950/90 flex items-center justify-center p-4 sm:p-6"
             onClick={() => setLightboxOpen(false)}
           >
             <motion.div
               initial={prefersReducedMotion ? false : {opacity: 0, scale: 0.96}}
               animate={{opacity: 1, scale: 1}}
               exit={{opacity: 0, scale: 0.97}}
-              className="max-w-4xl w-full bg-white rounded-lg overflow-hidden border border-sky-200"
+              className="max-w-4xl w-full bg-white rounded-lg overflow-hidden border border-slate-200 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200">

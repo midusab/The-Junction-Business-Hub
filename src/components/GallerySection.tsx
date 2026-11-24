@@ -73,22 +73,19 @@ export function GallerySection() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
-              Visual Archive · Inside Our Hub
+          <div className="max-w-xl">
+            <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
+              Visual Gallery
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
-              Inside our laundry, cyber, barber, car wash, and hotel spaces
+              Inside The Junction Hub
             </h2>
-            <p className="mt-3 text-base text-slate-600 leading-relaxed">
-              Filter by department or click any scene to inspect full-screen.
-            </p>
           </div>
 
           <div
             role="group"
             aria-label="Filter gallery images by department"
-            className="inline-flex flex-wrap items-center gap-1 p-1 bg-[#F8F9FA] border border-sky-200/80 rounded-lg self-start lg:self-auto"
+            className="inline-flex flex-wrap items-center gap-1 p-1 bg-[#F8F9FA] border border-slate-200 rounded-lg shadow-xs self-start lg:self-auto"
           >
             {FILTERS.map((filter) => {
               const isActive = activeFilter === filter.id;
@@ -147,7 +144,7 @@ export function GallerySection() {
                     delay: prefersReducedMotion ? 0 : Math.min(index * 0.03, 0.21),
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className={`${spanClass} group border border-sky-200/80 hover:border-sky-500 rounded-lg overflow-hidden bg-white flex flex-col transition-colors`}
+                  className={`${spanClass} group border border-slate-200 hover:border-sky-400 rounded-lg overflow-hidden bg-white shadow-md hover:shadow-xl flex flex-col transition-all duration-200`}
                 >
                   <button
                     type="button"
@@ -161,23 +158,20 @@ export function GallerySection() {
                       fallbackTitle={photo.title}
                       className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
                     />
-                    <span className="absolute bottom-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-md liquid-glass-dark text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                    <span className="absolute bottom-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-md bg-slate-900/90 border border-white/15 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150">
                       <Expand className="w-4 h-4" />
                     </span>
                   </button>
-                  <figcaption className="p-5 flex-1 flex flex-col justify-between bg-white">
+                  <figcaption className="p-4 flex-1 flex flex-col justify-between bg-white">
                     <div>
-                      <div
-                        className={`text-xs font-semibold mb-1.5 ${CATEGORY_TINTS[photo.category]}`}
+                      <span
+                        className={`text-xs font-semibold ${CATEGORY_TINTS[photo.category]}`}
                       >
-                        <span>{photo.categoryLabel}</span>
-                      </div>
-                      <h3 className="text-base font-semibold text-slate-900 group-hover:text-sky-700 transition-colors">
+                        {photo.categoryLabel}
+                      </span>
+                      <h3 className="mt-1 text-sm sm:text-base font-semibold text-slate-900 group-hover:text-sky-700 transition-colors">
                         {photo.title}
                       </h3>
-                      <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                        {photo.caption}
-                      </p>
                     </div>
                   </figcaption>
                 </motion.figure>
@@ -198,7 +192,7 @@ export function GallerySection() {
             animate={{opacity: 1}}
             exit={{opacity: 0}}
             transition={{duration: 0.2}}
-            className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-slate-950/90 flex items-center justify-center p-4 sm:p-6"
             onClick={() => setSelectedIndex(null)}
           >
             <motion.div
@@ -208,7 +202,7 @@ export function GallerySection() {
               animate={{opacity: 1, scale: 1, y: 0}}
               exit={prefersReducedMotion ? {opacity: 0} : {opacity: 0, scale: 0.97}}
               transition={{duration: 0.22, ease: [0.16, 1, 0.3, 1]}}
-              className="relative max-w-4xl w-full bg-white rounded-lg overflow-hidden border border-sky-200"
+              className="relative max-w-4xl w-full bg-white rounded-lg overflow-hidden border border-slate-200 shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200">
@@ -251,7 +245,7 @@ export function GallerySection() {
                         )
                       }
                       aria-label="Previous photo"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-md liquid-glass text-slate-900 hover:bg-white inline-flex items-center justify-center shadow-sm cursor-pointer"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-md bg-white/95 border border-slate-200 text-slate-900 hover:bg-white inline-flex items-center justify-center shadow-sm cursor-pointer"
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
@@ -263,7 +257,7 @@ export function GallerySection() {
                         )
                       }
                       aria-label="Next photo"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-md liquid-glass text-slate-900 hover:bg-white inline-flex items-center justify-center shadow-sm cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-md bg-white/95 border border-slate-200 text-slate-900 hover:bg-white inline-flex items-center justify-center shadow-sm cursor-pointer"
                     >
                       <ChevronRight className="w-5 h-5" />
                     </button>
@@ -271,7 +265,7 @@ export function GallerySection() {
                 )}
               </div>
 
-              <div className="px-5 py-3.5 bg-[#F8F9FA] border-t border-sky-200 flex items-center justify-between gap-4">
+              <div className="px-5 py-3.5 bg-white border-t border-sky-200 flex items-center justify-between gap-4">
                 <p className="text-sm text-slate-700">{activePhoto.caption}</p>
               </div>
             </motion.div>

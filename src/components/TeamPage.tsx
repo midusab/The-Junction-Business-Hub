@@ -81,7 +81,7 @@ function TeamDepartmentShowcase({
     >
       {/* Left / Right Visual Column with Scroll Parallax & Portrait/Workspace Switcher */}
       <div className={`lg:col-span-6 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}>
-        <div className="group border border-sky-200/80 bg-white rounded-lg overflow-hidden shadow-sm">
+        <div className="group border border-slate-200 bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
           <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
             <AnimatePresence mode="sync" initial={false}>
               <motion.div
@@ -113,7 +113,7 @@ function TeamDepartmentShowcase({
             />
 
             <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-3">
-              <div className="liquid-glass-dark px-3.5 py-2 rounded-md">
+              <div className="bg-slate-900/90 border border-white/15 px-3.5 py-2 rounded-md">
                 <p className="text-[11px] font-medium text-sky-300">
                   {member.department}
                 </p>
@@ -156,7 +156,7 @@ function TeamDepartmentShowcase({
 
       {/* Right / Left Narrative Column: What They Do + Why They Are The Best */}
       <div className={`lg:col-span-6 ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}>
-        <div className="liquid-glass rounded-lg p-6 sm:p-8 space-y-6 transition-colors hover:border-sky-400">
+        <div className="bg-white border border-slate-200 rounded-lg p-6 sm:p-8 shadow-md hover:shadow-xl space-y-6 transition-all hover:border-sky-400">
           <div>
             <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
               {member.department} · {member.serviceHighlight}
@@ -281,7 +281,7 @@ export function TeamPage({onNavigate}: TeamPageProps) {
           <button
             type="button"
             onClick={() => onNavigate('home')}
-            className="inline-flex items-center gap-2 text-sm font-medium text-white liquid-glass-dark px-3.5 py-2 mb-6 hover:bg-sky-700/70 transition-colors cursor-pointer rounded-md"
+            className="inline-flex items-center gap-2 text-sm font-medium text-white bg-slate-900/90 border border-white/20 px-3.5 py-2 mb-6 hover:bg-sky-700 transition-colors cursor-pointer rounded-md"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Hub Home</span>
@@ -291,7 +291,7 @@ export function TeamPage({onNavigate}: TeamPageProps) {
             initial={prefersReducedMotion ? false : {opacity: 0, y: 16}}
             animate={{opacity: 1, y: 0}}
             transition={{duration: 0.45, ease: [0.16, 1, 0.3, 1]}}
-            className="max-w-2xl liquid-glass-dark p-6 sm:p-8 rounded-lg"
+            className="max-w-2xl"
           >
             <p className="text-xs sm:text-sm font-medium tracking-wide text-sky-300 mb-2">
               Our People · Junction-Kodoyo, Homa Bay–Rongo Road
@@ -310,16 +310,16 @@ export function TeamPage({onNavigate}: TeamPageProps) {
                 href={BUSINESS_INFO.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-md transition-colors whitespace-nowrap shrink-0"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-md shadow-lg hover:shadow-xl transition-all whitespace-nowrap shrink-0"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Chat With Our Team</span>
               </a>
               <a
                 href={BUSINESS_INFO.phoneHref}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white bg-white/15 hover:bg-white/25 border border-white/30 backdrop-blur-md rounded-md transition-colors whitespace-nowrap shrink-0"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-slate-900 bg-white hover:bg-sky-50 rounded-md shadow-lg hover:shadow-xl transition-all whitespace-nowrap shrink-0"
               >
-                <Phone className="w-4 h-4 text-sky-300" />
+                <Phone className="w-4 h-4 text-sky-600" />
                 <span className="font-mono tabular-nums">
                   {BUSINESS_INFO.phoneDisplay}
                 </span>
@@ -330,7 +330,7 @@ export function TeamPage({onNavigate}: TeamPageProps) {
       </section>
 
       {/* 2. Department Filter Bar + Per-Service Team Breakdown */}
-      <section className="py-16 sm:py-20 bg-[#F8F9FA] border-b border-sky-200/80">
+      <section className="py-16 sm:py-20 bg-white border-b border-sky-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-sky-200/80">
             <div className="max-w-2xl">
@@ -387,7 +387,7 @@ export function TeamPage({onNavigate}: TeamPageProps) {
       {/* 3. Coordinated One-Stop Team Promise */}
       <section className="py-16 bg-white border-b border-sky-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="liquid-glass rounded-lg p-6 sm:p-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div className="bg-sky-50/70 border border-sky-200 rounded-lg p-6 sm:p-10 shadow-md flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
                 Coordinated Under One Roof

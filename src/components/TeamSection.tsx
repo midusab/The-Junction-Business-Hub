@@ -6,7 +6,7 @@ import {
   useScroll,
   useTransform,
 } from 'motion/react';
-import {ArrowRight, Check, MessageCircle} from 'lucide-react';
+import {ArrowRight, MessageCircle} from 'lucide-react';
 import {
   BUSINESS_INFO,
   HUB_TEAM,
@@ -57,10 +57,10 @@ function TeamMemberCard({
       }}
       whileHover={prefersReducedMotion ? undefined : {y: -6}}
       onClick={onSelect}
-      className={`group rounded-lg border overflow-hidden flex flex-col justify-between transition-colors duration-200 cursor-pointer bg-white ${
+      className={`group rounded-lg border overflow-hidden flex flex-col justify-between transition-all duration-200 cursor-pointer bg-white ${
         isSelected
-          ? 'border-sky-600 ring-2 ring-sky-600/25 shadow-md'
-          : 'border-sky-200/80 hover:border-sky-500 shadow-sm'
+          ? 'border-sky-600 ring-2 ring-sky-600/25 shadow-xl'
+          : 'border-slate-200 hover:border-sky-400 shadow-md hover:shadow-xl'
       }`}
     >
       <div>
@@ -86,7 +86,7 @@ function TeamMemberCard({
 
           {/* Department caption on visual + Hover quick CTA */}
           <div className="absolute inset-x-3 bottom-3 flex items-end justify-between gap-2">
-            <div className="liquid-glass-dark px-3 py-1.5 rounded-md">
+            <div className="bg-slate-900/90 border border-white/15 px-3 py-1.5 rounded-md">
               <p className="text-[11px] font-medium text-sky-300">
                 {member.department}
               </p>
@@ -107,28 +107,19 @@ function TeamMemberCard({
           </div>
         </div>
 
-        {/* What They Do Summary */}
-        <div className="p-5">
+        {/* Visual-First Summary */}
+        <div className="p-4 sm:p-5">
           <div className="flex items-center justify-between gap-2">
-            <h3 className="text-lg font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
+            <h3 className="text-base font-bold text-slate-900 group-hover:text-sky-700 transition-colors">
               {member.name}
             </h3>
             <span className="text-xs font-medium text-sky-700">
-              {isSelected ? 'Selected' : 'View duties'}
+              {member.serviceHighlight.split('&')[0].trim()}
             </span>
           </div>
-          <p className="mt-2 text-sm text-slate-600 leading-relaxed">
+          <p className="mt-1.5 text-xs sm:text-sm text-slate-600 line-clamp-2 leading-relaxed">
             {member.whatTheyDo}
           </p>
-
-          <ul className="mt-4 pt-3 border-t border-sky-100 space-y-1.5 text-xs text-slate-700">
-            {member.duties.map((duty, dIdx) => (
-              <li key={dIdx} className="flex items-start gap-2">
-                <Check className="w-3.5 h-3.5 text-sky-600 shrink-0 mt-0.5" />
-                <span>{duty}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
 
@@ -182,25 +173,20 @@ export function TeamSection({onNavigate}: TeamSectionProps) {
           transition={{duration: 0.45, ease: [0.16, 1, 0.3, 1]}}
           className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10"
         >
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
-              Hub Specialists · People Behind Every Service
+          <div className="max-w-xl">
+            <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
+              Our Specialists · Representative Roles
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
-              Meet the specialists keeping the hub moving
+              People behind every service
             </h2>
-            <p className="mt-3 text-base text-slate-600 leading-relaxed">
-              Every department is staffed by dedicated specialists ready to help
-              with garment care, documents, grooming, car detailing, and hot
-              Kenyan hospitality. Representative staff roles shown.
-            </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0 self-start lg:self-auto">
             <button
               type="button"
               onClick={() => onNavigate('team')}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-all whitespace-nowrap shrink-0 cursor-pointer"
             >
               <span>View Full Team Page</span>
               <ArrowRight className="w-4 h-4" />
@@ -209,7 +195,7 @@ export function TeamSection({onNavigate}: TeamSectionProps) {
               href={BUSINESS_INFO.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-sky-900 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-md transition-colors whitespace-nowrap shrink-0"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-sky-900 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-md shadow-xs hover:shadow-sm transition-all whitespace-nowrap shrink-0"
             >
               <MessageCircle className="w-4 h-4 text-sky-700" />
               <span>WhatsApp Desk</span>
@@ -225,7 +211,7 @@ export function TeamSection({onNavigate}: TeamSectionProps) {
             animate={{opacity: 1, y: 0}}
             exit={prefersReducedMotion ? {opacity: 0} : {opacity: 0, y: -8}}
             transition={{duration: 0.28, ease: [0.16, 1, 0.3, 1]}}
-            className="mb-10 liquid-glass rounded-lg p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-6"
+            className="mb-10 bg-sky-50/70 border border-sky-200 rounded-lg p-5 sm:p-6 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-6"
           >
             <div className="flex items-start sm:items-center gap-4">
               <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-md overflow-hidden border border-sky-200 shrink-0 bg-slate-100">

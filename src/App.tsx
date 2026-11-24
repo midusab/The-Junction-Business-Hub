@@ -8,6 +8,7 @@ import {
 } from 'motion/react';
 import {ArrowRight} from 'lucide-react';
 import {ContactSection} from './components/ContactSection';
+import {FloatingActions} from './components/FloatingActions';
 import {FullWidthParallaxHero} from './components/FullWidthParallaxHero';
 import {GallerySection} from './components/GallerySection';
 import {Header} from './components/Header';
@@ -47,29 +48,24 @@ const CHAPTER_NARRATIVES: Record<
   {kicker: string; storyLead: string}
 > = {
   laundry: {
-    kicker: 'Morning Drop-Off',
-    storyLead:
-      'Start the day by handing over work shirts, bright kitenge, or heavy family duvets at the laundry counter—sorted by fabric and care-pressed while you handle your errands.',
+    kicker: 'Garment & Duvet Care',
+    storyLead: 'Colour-sorted washing, steam ironing, and duvet wrapping.',
   },
   cyber: {
-    kicker: 'Midday Productivity',
-    storyLead:
-      'Step across to the digital workstations to print assignments, scan official paperwork, format business proposals, or get friendly hands-on help with online portals.',
+    kicker: 'Digital & Print Desk',
+    storyLead: 'Laser printing, PDF scanning, typing, and online portals.',
   },
   barber: {
-    kicker: 'Afternoon Refresh',
-    storyLead:
-      'Take a seat in the barber studio for a sharp fade, classic executive trim, or soothing hot towel shave—sanitized tools and relaxed care right beside the highway.',
+    kicker: 'Modern Grooming Studio',
+    storyLead: 'Clean fades, executive cuts, beard trims, and hot towels.',
   },
   hotel: {
-    kicker: 'Meal & Rest',
-    storyLead:
-      'Unwind at Junction Highway Hotel with steaming Kenyan chai, freshly cooked local meals, or a quiet, spotless guest room stocked with crisp hub-laundered linens.',
+    kicker: 'Roadside Dining & Stays',
+    storyLead: 'Fresh Kenyan meals, spiced chai, and clean guest rooms.',
   },
   carwash: {
-    kicker: 'Drive-In Wash & Shine',
-    storyLead:
-      'Pull straight into our roadside car wash bay for snow foam pressure washing, thorough cabin vacuuming, or quick motorcycle care while you enjoy lunch or run errands inside.',
+    kicker: 'Drive-In Wash Bay',
+    storyLead: 'Snow foam exterior wash, cabin vacuum, and motorcycle care.',
   },
 };
 
@@ -103,17 +99,17 @@ function StoryChapter({
   return (
     <article
       ref={containerRef}
-      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center py-12 lg:py-16 border-b border-sky-200/70 last:border-b-0"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center py-10 lg:py-14 border-b border-sky-200/70 last:border-b-0"
     >
-      {/* Crisp Visual Stage with Parallax + Hover Zoom */}
+      {/* Visual-First Stage (8 cols) with Parallax + Hover Zoom */}
       <motion.div
         initial={prefersReducedMotion ? false : {opacity: 0, y: 24}}
         whileInView={{opacity: 1, y: 0}}
         viewport={{once: true, amount: 0.2}}
         transition={{duration: 0.5, ease: [0.16, 1, 0.3, 1]}}
-        className={`lg:col-span-7 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}
+        className={`lg:col-span-8 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}
       >
-        <div className="group relative border border-sky-200/80 bg-white rounded-lg overflow-hidden shadow-sm">
+        <div className="group relative border border-slate-200 bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
           <button
             type="button"
             onClick={() => onNavigate(servicePage.id)}
@@ -132,15 +128,10 @@ function StoryChapter({
               />
             </motion.div>
 
-            <div className="absolute bottom-3 left-3 right-3 sm:right-auto sm:max-w-md liquid-glass-dark px-4 py-2.5 rounded-md flex items-center justify-between gap-4">
-              <div>
-                <p className="text-[11px] font-medium text-sky-300 tracking-wide">
-                  {activeVisual.label}
-                </p>
-                <p className="text-xs sm:text-sm text-white font-medium line-clamp-1">
-                  {activeVisual.caption}
-                </p>
-              </div>
+            <div className="absolute bottom-3 left-3 right-3 sm:right-auto sm:max-w-md bg-slate-900/90 border border-white/15 px-4 py-2 rounded-md shadow-md flex items-center justify-between gap-4">
+              <p className="text-xs sm:text-sm text-white font-medium line-clamp-1">
+                {activeVisual.label}
+              </p>
               <ArrowRight className="w-4 h-4 text-sky-300 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
             </div>
           </button>
@@ -177,43 +168,43 @@ function StoryChapter({
         </div>
       </motion.div>
 
-      {/* Narrative Liquid-Glass Content Panel */}
+      {/* Clean Service Summary Card (4 cols) */}
       <motion.div
         initial={prefersReducedMotion ? false : {opacity: 0, y: 20}}
         whileInView={{opacity: 1, y: 0}}
         viewport={{once: true, amount: 0.2}}
         transition={{duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1]}}
-        className={`lg:col-span-5 ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}
+        className={`lg:col-span-4 ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}
       >
-        <div className="liquid-glass p-6 sm:p-8 rounded-lg transition-all duration-300 hover:border-sky-400">
-          <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
+        <div className="bg-white border border-slate-200 p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:border-sky-300">
+          <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
             {narrative.kicker}
           </p>
-          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
+          <h3 className="text-2xl font-bold tracking-tight text-slate-900">
             {servicePage.title}
           </h3>
-          <p className="mt-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+          <p className="mt-2 text-sm text-slate-700 leading-relaxed">
             {narrative.storyLead}
           </p>
 
-          <div className="mt-5 pt-5 border-t border-sky-200/80 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-slate-800">
-            {servicePage.services.slice(0, 6).map((item) => (
+          <div className="mt-4 pt-4 border-t border-sky-200/80 grid grid-cols-1 gap-1.5 text-xs sm:text-sm text-slate-800">
+            {servicePage.services.slice(0, 4).map((item) => (
               <div
                 key={item.id}
-                className="bg-white/80 border border-sky-200/70 px-3 py-2 rounded-md font-medium truncate"
+                className="bg-white/85 border border-sky-200/70 px-3 py-1.5 rounded-md font-medium truncate"
               >
                 {item.title}
               </div>
             ))}
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-5 flex flex-wrap items-center gap-2.5">
             <button
               type="button"
               onClick={() => onNavigate(servicePage.id)}
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-all duration-150 whitespace-nowrap shrink-0 cursor-pointer"
             >
-              <span>Open {servicePage.navLabel} Page</span>
+              <span>Explore {servicePage.navLabel}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
@@ -221,9 +212,9 @@ function StoryChapter({
               href={`${BUSINESS_INFO.whatsappHref}?text=${encodeURIComponent(servicePage.whatsappPrefill)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-3 text-sm font-medium text-sky-900 bg-white/85 hover:bg-white border border-sky-200 rounded-md transition-colors whitespace-nowrap shrink-0"
+              className="px-3.5 py-2.5 text-sm font-medium text-sky-900 bg-white hover:bg-sky-50 border border-sky-200 rounded-md shadow-xs hover:shadow-sm transition-all whitespace-nowrap shrink-0"
             >
-              WhatsApp Desk
+              WhatsApp
             </a>
           </div>
         </div>
@@ -262,10 +253,10 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
       {/* Prominent Full-Width Hub Video Walkthrough */}
       <VideoTourSection />
 
-      {/* Sequential Storytelling Service Showcase */}
+      {/* Visual-First Service Showcase */}
       <section
         id="services"
-        className="py-20 sm:py-24 bg-[#F8F9FA] border-b border-sky-200/80"
+        className="py-16 sm:py-20 bg-white border-b border-sky-200/80"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -273,19 +264,14 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
             whileInView={{opacity: 1, y: 0}}
             viewport={{once: true, amount: 0.2}}
             transition={{duration: 0.45, ease: [0.16, 1, 0.3, 1]}}
-            className="max-w-3xl mb-6"
+            className="max-w-2xl mb-4"
           >
-            <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
-              Our Services · One Stop Along Homa Bay–Rongo Road
+            <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
+              Our Services · Junction-Kodoyo
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
-              A day at The Junction Hub across five connected departments
+              Five departments under one roof
             </h2>
-            <p className="mt-3 text-base text-slate-700 leading-relaxed">
-              Scroll through each section below to preview real hub visuals, or
-              step inside any department page for full service menus,
-              turnaround workflows, and direct WhatsApp enquiries.
-            </p>
           </motion.div>
 
           <div>
@@ -301,51 +287,40 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
         </div>
       </section>
 
-      {/* Meet Our Specialists (Employee Section) */}
+      {/* Meet Our Specialists */}
       <TeamSection onNavigate={onNavigate} />
 
-      {/* About The Hub & Who We Serve */}
+      {/* About The Hub & Community */}
       <section
         id="about"
-        className="py-20 sm:py-24 bg-[#F8F9FA] border-b border-sky-200/80"
+        className="py-16 sm:py-20 bg-white border-b border-sky-200/80"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             <motion.div
               initial={prefersReducedMotion ? false : {opacity: 0, y: 16}}
               whileInView={{opacity: 1, y: 0}}
               viewport={{once: true, amount: 0.2}}
               transition={{duration: 0.45, ease: [0.16, 1, 0.3, 1]}}
-              className="lg:col-span-6"
+              className="lg:col-span-5"
             >
-              <div className="liquid-glass p-6 sm:p-8 rounded-lg">
+              <div className="bg-white border border-slate-200 p-6 sm:p-8 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                 <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
-                  About The Hub · Junction-Kodoyo
+                  About The Hub
                 </p>
                 <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
-                  Built for everyday convenience along the Homa Bay–Rongo Road
+                  Everyday convenience along Homa Bay–Rongo Road
                 </h2>
-                <div className="mt-5 space-y-4 text-base text-slate-700 leading-relaxed">
-                  <p>
-                    <strong className="font-semibold text-slate-900">
-                      {BUSINESS_INFO.name}
-                    </strong>{' '}
-                    brings together five everyday essentials under one accessible
-                    roadside destination: garment and duvet laundry, a digital
-                    cyber café, a modern barber studio, a roadside car wash bay,
-                    and Junction Highway Hotel.
-                  </p>
-                  <p>
-                    Whether you live in Junction-Kodoyo, study nearby, run a
-                    local business, or are travelling between Homa Bay and
-                    Rongo, every stop saves time without sacrificing quality.
-                  </p>
-                </div>
+                <p className="mt-4 text-sm sm:text-base text-slate-700 leading-relaxed">
+                  Serving local residents, students, businesses, and travellers
+                  with laundry, cyber access, barbering, car wash care, and
+                  highway hospitality in one stop.
+                </p>
               </div>
             </motion.div>
 
-            <div ref={aboutVisualRef} className="lg:col-span-6">
-              <div className="group relative h-80 sm:h-96 lg:h-[420px] rounded-lg overflow-hidden border border-sky-200 bg-white">
+            <div ref={aboutVisualRef} className="lg:col-span-7">
+              <div className="group relative h-80 sm:h-96 lg:h-[440px] rounded-lg overflow-hidden border border-slate-200 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <motion.div
                   style={{y: aboutParallaxY}}
                   className="w-full h-[112%] -mt-[6%] will-change-transform"
@@ -357,12 +332,9 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   />
                 </motion.div>
-                <div className="absolute bottom-3 left-3 right-3 sm:right-auto liquid-glass-dark px-4 py-2.5 rounded-md">
-                  <p className="text-[11px] font-medium text-sky-300 tracking-wide">
-                    Junction-Kodoyo Frontage
-                  </p>
+                <div className="absolute bottom-3 left-3 bg-slate-900/90 border border-white/15 px-4 py-2 rounded-md">
                   <p className="text-xs sm:text-sm text-white font-medium">
-                    Direct roadside pull-in along the Homa Bay–Rongo corridor
+                    Junction-Kodoyo Roadside Frontage
                   </p>
                 </div>
               </div>
@@ -370,7 +342,7 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
           </div>
 
           {/* Who We Serve */}
-          <div className="mt-14 pt-12 border-t border-sky-200/80 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mt-12 pt-10 border-t border-sky-200/80 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {TARGET_GROUPS.map((group, idx) => (
               <motion.div
                 key={group.title}
@@ -382,12 +354,12 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
                   delay: prefersReducedMotion ? 0 : idx * 0.06,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="liquid-glass rounded-lg p-6 transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-400"
+                className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300"
               >
                 <h3 className="text-base font-semibold text-slate-900">
                   {group.title}
                 </h3>
-                <p className="mt-2 text-sm text-slate-700 leading-relaxed">
+                <p className="mt-1.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
                   {group.detail}
                 </p>
               </motion.div>
@@ -435,7 +407,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8F9FA] text-slate-900">
+    <div className="min-h-screen flex flex-col bg-white text-slate-900">
       {mapsQuotaExceeded && (
         <div className="bg-amber-50 border-b border-amber-200 text-amber-900 px-4 py-2.5 text-xs md:text-sm text-center sticky top-0 z-50 shadow-sm">
           <span>
@@ -495,6 +467,9 @@ export default function App() {
 
         <ContactSection />
       </main>
+
+      {/* Persistent Call, WhatsApp & Dynamic Back-to-Top Actions */}
+      <FloatingActions />
 
       {/* Quiet Footer */}
       <footer className="bg-white border-t border-sky-200/80 py-12">

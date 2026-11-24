@@ -45,15 +45,11 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
 
   return (
     <div className="mt-16 pt-12 border-t border-sky-200/80">
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
         <div>
           <h3 className="text-2xl font-bold tracking-tight text-slate-900">
-            Community Use Cases &amp; Sample Stories
+            Community Stories
           </h3>
-          <p className="mt-1 text-sm text-slate-600">
-            Illustrative local scenarios showing how residents, students, and
-            travellers combine all five hub services.
-          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
@@ -102,7 +98,7 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
       </div>
 
       {/* Animated Featured Testimonial Spotlight */}
-      <div className="mb-8 liquid-glass rounded-lg p-6 sm:p-8 overflow-hidden relative">
+      <div className="mb-8 bg-sky-50/60 border border-sky-200 rounded-lg p-6 sm:p-8 shadow-md overflow-hidden relative">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeItem.id}
@@ -176,8 +172,8 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
               onClick={() => setActiveIndex(idx)}
               className={`group rounded-lg border p-5 flex flex-col justify-between transition-all duration-200 cursor-pointer bg-white ${
                 isActive
-                  ? 'border-sky-600 ring-2 ring-sky-600/20 shadow-sm'
-                  : 'border-sky-200/80 hover:border-sky-400'
+                  ? 'border-sky-600 ring-2 ring-sky-600/20 shadow-lg'
+                  : 'border-slate-200 hover:border-sky-400 shadow-sm hover:shadow-lg'
               }`}
             >
               <div>
