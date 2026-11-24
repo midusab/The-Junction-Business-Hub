@@ -141,6 +141,7 @@ export function FullWidthParallaxHero({onNavigate}) {
               src={currentSlide.src}
               alt={currentSlide.alt}
               fallbackTitle={currentSlide.label}
+              loading={currentIndex === 0 ? 'eager' : 'lazy'}
               className="w-full h-full object-cover"
             />
           </motion.div>

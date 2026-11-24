@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useRef, useState} from 'react';
+import {lazy, Suspense, useCallback, useEffect, useRef, useState} from 'react';
 import {
   AnimatePresence,
   motion,
@@ -7,24 +7,68 @@ import {
   useTransform,
 } from 'motion/react';
 import {ArrowRight} from 'lucide-react';
-import {ContactSection} from './components/ContactSection';
 import {CustomCursor} from './components/CustomCursor';
 import {FloatingActions} from './components/FloatingActions';
 import {FullWidthParallaxHero} from './components/FullWidthParallaxHero';
-import {GallerySection} from './components/GallerySection';
 import {Header} from './components/Header';
 import {ResilientImage} from './components/ResilientImage';
-import {ServiceDetailPage} from './components/ServiceDetailPage';
-import {TeamPage} from './components/TeamPage';
-import {TeamSection} from './components/TeamSection';
-import {TestimonialsSection} from './components/TestimonialsSection';
-import {VideoTourSection} from './components/VideoTourSection';
 import {
   BUSINESS_INFO,
   EXTERIOR_IMAGE,
   SERVICE_PAGES,
   TARGET_GROUPS,
 } from './data/hubData';
+
+// Code-split dynamic lazy loading for subpages & below-the-fold heavy sections
+const ServiceDetailPage = lazy(() =>
+  import('./components/ServiceDetailPage').then((m) => ({
+    default: m.ServiceDetailPage,
+  }))
+);
+const TeamPage = lazy(() =>
+  import('./components/TeamPage').then((m) => ({default: m.TeamPage}))
+);
+const ContactSection = lazy(() =>
+  import('./components/ContactSection').then((m) => ({
+    default: m.ContactSection,
+  }))
+);
+const VideoTourSection = lazy(() =>
+  import('./components/VideoTourSection').then((m) => ({
+    default: m.VideoTourSection,
+  }))
+);
+const TeamSection = lazy(() =>
+  import('./components/TeamSection').then((m) => ({
+    default: m.TeamSection,
+  }))
+);
+const TestimonialsSection = lazy(() =>
+  import('./components/TestimonialsSection').then((m) => ({
+    default: m.TestimonialsSection,
+  }))
+);
+const GallerySection = lazy(() =>
+  import('./components/GallerySection').then((m) => ({
+    default: m.GallerySection,
+  }))
+);
+
+function SectionFallback({minHeight = 'min-h-[260px]'}) {
+  return (
+    <div
+      className={`w-full ${minHeight} flex items-center justify-center p-8 bg-sky-50/30 rounded-lg animate-pulse`}
+      aria-label="Loading section"
+    >
+      <div className="flex flex-col items-center gap-2.5">
+        <div className="w-7 h-7 rounded-full border-2 border-sky-500 border-t-transparent animate-spin" />
+        <span className="text-xs font-medium text-sky-700 tracking-wide uppercase">
+          Loading content...
+        </span>
+      </div>
+    </div>
+  );
+}
 
 function getInitialPageFromHash() {
   const hash = window.location.hash.replace('#', '').replace(/^\//, '');
@@ -275,7 +319,9 @@ function HomePageContent({onNavigate}) {
       <FullWidthParallaxHero onNavigate={onNavigate} />
 
       {/* Prominent Full-Width Hub Video Walkthrough */}
-      <VideoTourSection />
+      <Suspense fallback={<SectionFallback minHeight="min-h-[400px]" />}>
+        <VideoTourSection />
+      </Suspense>
 
       {/* Visual-First Service Showcase */}
       <section
@@ -312,7 +358,9 @@ function HomePageContent({onNavigate}) {
       </section>
 
       {/* Meet Our Specialists */}
-      <TeamSection onNavigate={onNavigate} />
+      <Suspense fallback={<SectionFallback minHeight="min-h-[350px]" />}>
+        <TeamSection onNavigate={onNavigate} />
+      </Suspense>
 
       {/* About The Hub & Community */}
       <section
@@ -395,11 +443,15 @@ function HomePageContent({onNavigate}) {
           </div>
 
           {/* Animated Community Testimonials */}
-          <TestimonialsSection onNavigate={onNavigate} />
+          <Suspense fallback={<SectionFallback minHeight="min-h-[300px]" />}>
+            <TestimonialsSection onNavigate={onNavigate} />
+          </Suspense>
         </div>
       </section>
 
-      <GallerySection />
+      <Suspense fallback={<SectionFallback minHeight="min-h-[450px]" />}>
+        <GallerySection />
+      </Suspense>
     </div>
   );
 }
@@ -476,7 +528,9 @@ export default function App() {
               exit={{opacity: 0}}
               transition={{duration: 0.25, ease: [0.16, 1, 0.3, 1]}}
             >
-              <TeamPage onNavigate={navigateToPage} />
+              <Suspense fallback={<SectionFallback minHeight="min-h-[500px]" />}>
+                <TeamPage onNavigate={navigateToPage} />
+              </Suspense>
             </motion.div>
           ) : (
             <motion.div
@@ -486,15 +540,19 @@ export default function App() {
               exit={{opacity: 0}}
               transition={{duration: 0.25, ease: [0.16, 1, 0.3, 1]}}
             >
-              <ServiceDetailPage
-                config={SERVICE_PAGES[activePage]}
-                onNavigate={navigateToPage}
-              />
+              <Suspense fallback={<SectionFallback minHeight="min-h-[500px]" />}>
+                <ServiceDetailPage
+                  config={SERVICE_PAGES[activePage]}
+                  onNavigate={navigateToPage}
+                />
+              </Suspense>
             </motion.div>
           )}
         </AnimatePresence>
 
-        <ContactSection />
+        <Suspense fallback={<SectionFallback minHeight="min-h-[400px]" />}>
+          <ContactSection />
+        </Suspense>
       </main>
 
       {/* Persistent Call, WhatsApp & Dynamic Back-to-Top Actions */}

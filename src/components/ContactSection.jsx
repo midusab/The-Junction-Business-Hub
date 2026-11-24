@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {lazy, Suspense, useState} from 'react';
 import {AnimatePresence, motion, useReducedMotion} from 'motion/react';
 import {
   CheckCircle2,
@@ -9,8 +9,11 @@ import {
   Phone,
 } from 'lucide-react';
 import {BUSINESS_INFO, OPERATING_HOURS} from '../data/hubData';
-import {LocationMap} from './LocationMap';
 import {CircularSocialLinks} from './SocialIcons';
+
+const LocationMap = lazy(() =>
+  import('./LocationMap').then((m) => ({default: m.LocationMap}))
+);
 
 const DEPARTMENTS = [
   'Laundry Services',
@@ -369,7 +372,18 @@ export function ContactSection() {
                 </a>
               </div>
 
-              <LocationMap />
+              <Suspense
+                fallback={
+                  <div className="h-[300px] sm:h-[420px] w-full rounded-lg border border-sky-200 bg-sky-50/70 flex flex-col items-center justify-center p-6 text-center animate-pulse">
+                    <div className="w-8 h-8 rounded-full border-2 border-sky-500 border-t-transparent animate-spin mb-3" />
+                    <span className="text-xs font-medium text-sky-700">
+                      Loading interactive map...
+                    </span>
+                  </div>
+                }
+              >
+                <LocationMap />
+              </Suspense>
             </div>
 
             <div className="bg-white border border-slate-200 rounded-lg p-4 sm:p-6 shadow-md">

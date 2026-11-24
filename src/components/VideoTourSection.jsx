@@ -79,6 +79,7 @@ export function VideoTourSection() {
               className="w-full h-full"
               src={BUSINESS_INFO.youtubeEmbedUrl}
               title={BUSINESS_INFO.youtubeTitle}
+              loading="lazy"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               referrerPolicy="strict-origin-when-cross-origin"

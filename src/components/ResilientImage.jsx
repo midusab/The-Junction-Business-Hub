@@ -6,6 +6,8 @@ export function ResilientImage({
   alt,
   className = '',
   fallbackTitle,
+  loading = 'lazy',
+  decoding = 'async',
 }) {
   const [hasError, setHasError] = useState(false);
 
@@ -28,6 +30,8 @@ export function ResilientImage({
     <img
       src={src}
       alt={alt}
+      loading={loading}
+      decoding={decoding}
       referrerPolicy="no-referrer"
       onError={() => setHasError(true)}
       className={className}
