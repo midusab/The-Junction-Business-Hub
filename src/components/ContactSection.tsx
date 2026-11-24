@@ -14,6 +14,7 @@ type ServiceDepartment =
   | 'Laundry Services'
   | 'Cyber Services'
   | 'Barber Services'
+  | 'Car Wash Services'
   | 'Junction Highway Hotel'
   | 'Multiple Services';
 
@@ -27,6 +28,7 @@ const DEPARTMENTS: ServiceDepartment[] = [
   'Laundry Services',
   'Cyber Services',
   'Barber Services',
+  'Car Wash Services',
   'Junction Highway Hotel',
   'Multiple Services',
 ];
@@ -82,11 +84,11 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="py-20 sm:py-24 border-t border-slate-200 bg-[#F4F3EE]"
+      className="py-20 sm:py-24 border-t border-sky-200/80 bg-[#F8F9FA]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mb-12">
-          <p className="text-xs font-medium tracking-wide text-teal-700 mb-2">
+          <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
             Visit &amp; Contact Us
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
@@ -94,15 +96,15 @@ export function ContactSection() {
           </h2>
           <p className="mt-3 text-base text-slate-600 leading-relaxed">
             Call directly, message us on WhatsApp, or send a quick enquiry below
-            for laundry turnaround, cyber services, barber bookings, or dining
-            and room availability at Junction Highway Hotel.
+            for laundry, cyber services, barber bookings, car wash bays, or
+            dining and rooms at Junction Highway Hotel.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Direct Contact & Enquiry Form */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="bg-white border border-slate-200 rounded-xl p-6 space-y-5">
+            <div className="liquid-glass rounded-lg p-6 space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <span className="text-xs text-slate-500 block mb-1">
@@ -110,9 +112,9 @@ export function ContactSection() {
                   </span>
                   <a
                     href={BUSINESS_INFO.phoneHref}
-                    className="inline-flex items-center gap-2 font-mono text-base font-medium tabular-nums text-slate-900 hover:text-blue-700 transition-colors"
+                    className="inline-flex items-center gap-2 font-mono text-base font-medium tabular-nums text-slate-900 hover:text-sky-700 transition-colors"
                   >
-                    <Phone className="w-4 h-4 text-blue-700 shrink-0" />
+                    <Phone className="w-4 h-4 text-sky-700 shrink-0" />
                     <span>{BUSINESS_INFO.phoneDisplay}</span>
                   </a>
                 </div>
@@ -122,7 +124,7 @@ export function ContactSection() {
                     Physical Location
                   </span>
                   <p className="inline-flex items-start gap-2 text-sm font-medium text-slate-900">
-                    <MapPin className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+                    <MapPin className="w-4 h-4 text-sky-700 shrink-0 mt-0.5" />
                     <span>
                       {BUSINESS_INFO.locationShort}
                       <span className="block text-xs font-normal text-slate-600">
@@ -133,28 +135,28 @@ export function ContactSection() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-100 flex flex-wrap gap-3">
+              <div className="pt-4 border-t border-sky-200/70 flex flex-wrap gap-3">
                 <a
                   href={BUSINESS_INFO.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-teal-700 hover:bg-teal-800 rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md transition-colors duration-150 whitespace-nowrap shrink-0"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Message on WhatsApp</span>
                 </a>
                 <a
                   href={BUSINESS_INFO.phoneHref}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-800 bg-white border border-sky-300 hover:bg-sky-50 rounded-md transition-colors duration-150 whitespace-nowrap shrink-0"
                 >
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4 text-sky-700" />
                   <span>Call {BUSINESS_INFO.phoneDisplay}</span>
                 </a>
               </div>
             </div>
 
             {/* Enquiry Form */}
-            <div className="bg-white border border-slate-200 rounded-xl p-6">
+            <div className="bg-white border border-sky-200/80 rounded-lg p-6">
               <h3 className="text-lg font-semibold text-slate-900 mb-1">
                 Send a Service Enquiry
               </h3>
@@ -163,9 +165,9 @@ export function ContactSection() {
               </p>
 
               {submitted ? (
-                <div className="rounded-lg border border-slate-200 bg-slate-50 p-5 space-y-4">
+                <div className="rounded-md border border-sky-200 bg-sky-50/70 p-5 space-y-4">
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-5 h-5 text-sky-700 shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-semibold text-slate-900">
                         Enquiry prepared for {department}
@@ -185,7 +187,7 @@ export function ContactSection() {
                       href={buildWhatsAppSummaryUrl()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-teal-700 hover:bg-teal-800 rounded-lg transition-colors whitespace-nowrap shrink-0"
+                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md transition-colors whitespace-nowrap shrink-0"
                     >
                       <MessageCircle className="w-4 h-4" />
                       <span>Send via WhatsApp</span>
@@ -194,7 +196,7 @@ export function ContactSection() {
                     <button
                       type="button"
                       onClick={handleReset}
-                      className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                      className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer"
                     >
                       New Enquiry
                     </button>
@@ -217,7 +219,7 @@ export function ContactSection() {
                         onChange={(e) => setName(e.target.value)}
                         placeholder="e.g. Samuel Otieno"
                         aria-invalid={Boolean(errors.name)}
-                        className="w-full px-3.5 py-2.5 text-sm text-slate-900 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-700"
+                        className="w-full px-3.5 py-2.5 text-sm text-slate-900 bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-sky-600"
                       />
                       {errors.name && (
                         <p role="alert" className="mt-1 text-xs text-red-700">
@@ -240,7 +242,7 @@ export function ContactSection() {
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="e.g. 0712 345678"
                         aria-invalid={Boolean(errors.phone)}
-                        className="w-full px-3.5 py-2.5 text-sm font-mono tabular-nums text-slate-900 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-700"
+                        className="w-full px-3.5 py-2.5 text-sm font-mono tabular-nums text-slate-900 bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-sky-600"
                       />
                       {errors.phone && (
                         <p role="alert" className="mt-1 text-xs text-red-700">
@@ -257,17 +259,17 @@ export function ContactSection() {
                     <div
                       role="group"
                       aria-label="Choose service department"
-                      className="flex flex-wrap gap-1.5 p-1.5 bg-slate-100 rounded-lg"
+                      className="flex flex-wrap gap-1.5 p-1.5 bg-[#F8F9FA] border border-sky-200/80 rounded-md"
                     >
                       {DEPARTMENTS.map((option) => (
                         <button
                           key={option}
                           type="button"
                           onClick={() => setDepartment(option)}
-                          className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                          className={`px-3 py-1.5 text-xs font-medium rounded-sm transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                             department === option
-                              ? 'bg-white text-slate-900 shadow-sm'
-                              : 'text-slate-600 hover:text-slate-900'
+                              ? 'bg-sky-600 text-white'
+                              : 'text-slate-700 hover:text-sky-800 hover:bg-sky-100/70'
                           }`}
                         >
                           {option}
@@ -288,9 +290,9 @@ export function ContactSection() {
                       rows={3}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Ask about laundry rates, printing, barber chair availability, or Junction Highway Hotel rooms & meals..."
+                      placeholder="Ask about laundry rates, printing, barber chairs, car wash packages, or Junction Highway Hotel rooms & meals..."
                       aria-invalid={Boolean(errors.message)}
-                      className="w-full px-3.5 py-2.5 text-sm text-slate-900 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 focus:border-blue-700"
+                      className="w-full px-3.5 py-2.5 text-sm text-slate-900 bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-600 focus:border-sky-600"
                     />
                     {errors.message && (
                       <p role="alert" className="mt-1 text-xs text-red-700">
@@ -301,7 +303,7 @@ export function ContactSection() {
 
                   <button
                     type="submit"
-                    className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+                    className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
                   >
                     Prepare Enquiry
                   </button>
@@ -312,7 +314,7 @@ export function ContactSection() {
 
           {/* Right Column: Interactive Map + Operating Hours */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5">
+            <div className="bg-white border border-sky-200/80 rounded-lg p-4 sm:p-5">
               <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <div>
                   <h3 className="text-base font-semibold text-slate-900">
@@ -326,7 +328,7 @@ export function ContactSection() {
                   href={BUSINESS_INFO.mapsExternalUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-medium text-blue-700 hover:underline whitespace-nowrap shrink-0"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-700 hover:underline whitespace-nowrap shrink-0"
                 >
                   <span>Open in Maps</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -336,10 +338,10 @@ export function ContactSection() {
               <LocationMap />
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-xl p-6">
+            <div className="liquid-glass rounded-lg p-6">
               <div className="flex items-center justify-between gap-4 mb-4">
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-blue-700" />
+                  <Clock className="w-4 h-4 text-sky-700" />
                   <h3 className="text-base font-semibold text-slate-900">
                     Operating Hours
                   </h3>
@@ -349,7 +351,7 @@ export function ContactSection() {
                 </span>
               </div>
 
-              <dl className="divide-y divide-slate-100 text-sm">
+              <dl className="divide-y divide-sky-200/60 text-sm">
                 {OPERATING_HOURS.map((item) => (
                   <div
                     key={item.day}
@@ -369,10 +371,10 @@ export function ContactSection() {
                 ))}
               </dl>
 
-              <p className="mt-4 pt-3 border-t border-slate-100 text-xs text-slate-500 leading-relaxed">
+              <p className="mt-4 pt-3 border-t border-sky-200/70 text-xs text-slate-600 leading-relaxed">
                 Schedule based on available listing details. Please call or
                 WhatsApp{' '}
-                <span className="font-mono tabular-nums text-slate-700">
+                <span className="font-mono tabular-nums text-slate-800">
                   {BUSINESS_INFO.phoneDisplay}
                 </span>{' '}
                 to confirm Saturday hours before travelling.

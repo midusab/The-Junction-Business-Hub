@@ -4,7 +4,7 @@ import {ChevronLeft, ChevronRight, Expand, X} from 'lucide-react';
 import {GALLERY_PHOTOS, type GalleryPhoto} from '../data/hubData';
 import {ResilientImage} from './ResilientImage';
 
-type FilterCategory = 'all' | 'hub' | 'laundry' | 'cyber' | 'barber' | 'hotel';
+type FilterCategory = 'all' | 'hub' | 'laundry' | 'cyber' | 'barber' | 'hotel' | 'carwash';
 
 const FILTERS: Array<{id: FilterCategory; label: string}> = [
   {id: 'all', label: 'All Spaces'},
@@ -13,14 +13,16 @@ const FILTERS: Array<{id: FilterCategory; label: string}> = [
   {id: 'cyber', label: 'Cyber Café'},
   {id: 'barber', label: 'Barber'},
   {id: 'hotel', label: 'Highway Hotel'},
+  {id: 'carwash', label: 'Car Wash'},
 ];
 
 const CATEGORY_TINTS: Record<GalleryPhoto['category'], string> = {
-  hub: 'text-amber-700',
-  laundry: 'text-teal-700',
+  hub: 'text-sky-700',
+  laundry: 'text-sky-700',
   cyber: 'text-blue-700',
   barber: 'text-amber-800',
   hotel: 'text-emerald-700',
+  carwash: 'text-sky-700',
 };
 
 export function GallerySection() {
@@ -67,16 +69,16 @@ export function GallerySection() {
   return (
     <section
       id="gallery"
-      className="py-20 sm:py-24 border-t border-slate-200 bg-white"
+      className="py-20 sm:py-24 border-t border-sky-200/80 bg-white"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
           <div className="max-w-2xl">
-            <p className="text-xs font-medium tracking-wide text-teal-700 mb-2">
-              Visual Gallery · {GALLERY_PHOTOS.length} Scenes Across All Departments
+            <p className="text-xs font-semibold tracking-wide text-sky-700 mb-2">
+              Visual Archive · Inside Our Hub
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 text-balance">
-              Inside our laundry, cyber, barber, and hotel spaces
+              Inside our laundry, cyber, barber, car wash, and hotel spaces
             </h2>
             <p className="mt-3 text-base text-slate-600 leading-relaxed">
               Filter by department or click any scene to inspect full-screen.
@@ -86,7 +88,7 @@ export function GallerySection() {
           <div
             role="group"
             aria-label="Filter gallery images by department"
-            className="inline-flex flex-wrap items-center gap-1 p-1 bg-slate-100 rounded-lg self-start lg:self-auto"
+            className="inline-flex flex-wrap items-center gap-1 p-1 bg-[#F8F9FA] border border-sky-200/80 rounded-lg self-start lg:self-auto"
           >
             {FILTERS.map((filter) => {
               const isActive = activeFilter === filter.id;
@@ -95,10 +97,10 @@ export function GallerySection() {
                   key={filter.id}
                   type="button"
                   onClick={() => handleFilterChange(filter.id)}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-blue-700 ${
+                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-600 ${
                     isActive
-                      ? 'bg-white text-slate-900 shadow-sm'
-                      : 'text-slate-600 hover:text-slate-900'
+                      ? 'bg-sky-600 text-white shadow-sm'
+                      : 'text-slate-700 hover:text-sky-800 hover:bg-sky-100/70'
                   }`}
                 >
                   {filter.label}
@@ -139,37 +141,38 @@ export function GallerySection() {
                       ? {opacity: 0}
                       : {opacity: 0, scale: 0.97}
                   }
+                  whileHover={prefersReducedMotion ? undefined : {y: -4}}
                   transition={{
                     duration: 0.35,
                     delay: prefersReducedMotion ? 0 : Math.min(index * 0.03, 0.21),
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className={`${spanClass} group border border-slate-200 rounded-xl overflow-hidden bg-slate-50 flex flex-col`}
+                  className={`${spanClass} group border border-sky-200/80 hover:border-sky-500 rounded-lg overflow-hidden bg-white flex flex-col transition-colors`}
                 >
                   <button
                     type="button"
                     onClick={() => setSelectedIndex(index)}
-                    className={`relative w-full ${aspectClass} overflow-hidden bg-slate-100 text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-blue-700`}
+                    className={`relative w-full ${aspectClass} overflow-hidden bg-slate-100 text-left cursor-pointer focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-sky-600`}
                     aria-label={`View larger image of ${photo.title}`}
                   >
                     <ResilientImage
                       src={photo.src}
                       alt={photo.alt}
                       fallbackTitle={photo.title}
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
                     />
-                    <span className="absolute bottom-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-lg bg-slate-900/75 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                    <span className="absolute bottom-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-md liquid-glass-dark text-white opacity-0 group-hover:opacity-100 transition-opacity duration-150">
                       <Expand className="w-4 h-4" />
                     </span>
                   </button>
                   <figcaption className="p-5 flex-1 flex flex-col justify-between bg-white">
                     <div>
                       <div
-                        className={`text-xs font-medium mb-1.5 ${CATEGORY_TINTS[photo.category]}`}
+                        className={`text-xs font-semibold mb-1.5 ${CATEGORY_TINTS[photo.category]}`}
                       >
                         <span>{photo.categoryLabel}</span>
                       </div>
-                      <h3 className="text-base font-semibold text-slate-900">
+                      <h3 className="text-base font-semibold text-slate-900 group-hover:text-sky-700 transition-colors">
                         {photo.title}
                       </h3>
                       <p className="mt-1 text-sm text-slate-600 leading-relaxed">
@@ -205,7 +208,7 @@ export function GallerySection() {
               animate={{opacity: 1, scale: 1, y: 0}}
               exit={prefersReducedMotion ? {opacity: 0} : {opacity: 0, scale: 0.97}}
               transition={{duration: 0.22, ease: [0.16, 1, 0.3, 1]}}
-              className="relative max-w-4xl w-full bg-white rounded-xl overflow-hidden border border-slate-200"
+              className="relative max-w-4xl w-full bg-white rounded-lg overflow-hidden border border-sky-200"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200">
@@ -216,7 +219,7 @@ export function GallerySection() {
                   <span aria-hidden="true" className="text-slate-400">
                     ·
                   </span>
-                  <span className="text-slate-500">
+                  <span className="text-sky-700 font-medium">
                     {activePhoto.categoryLabel}
                   </span>
                 </div>
@@ -224,7 +227,7 @@ export function GallerySection() {
                   type="button"
                   onClick={() => setSelectedIndex(null)}
                   aria-label="Close image preview"
-                  className="w-9 h-9 inline-flex items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100 hover:text-slate-900 cursor-pointer"
+                  className="w-9 h-9 inline-flex items-center justify-center rounded-md text-slate-600 hover:bg-sky-50 hover:text-slate-900 cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -248,7 +251,7 @@ export function GallerySection() {
                         )
                       }
                       aria-label="Previous photo"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-white/90 text-slate-900 hover:bg-white inline-flex items-center justify-center shadow-sm cursor-pointer"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-md liquid-glass text-slate-900 hover:bg-white inline-flex items-center justify-center shadow-sm cursor-pointer"
                     >
                       <ChevronLeft className="w-5 h-5" />
                     </button>
@@ -260,7 +263,7 @@ export function GallerySection() {
                         )
                       }
                       aria-label="Next photo"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-lg bg-white/90 text-slate-900 hover:bg-white inline-flex items-center justify-center shadow-sm cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-md liquid-glass text-slate-900 hover:bg-white inline-flex items-center justify-center shadow-sm cursor-pointer"
                     >
                       <ChevronRight className="w-5 h-5" />
                     </button>
@@ -268,11 +271,8 @@ export function GallerySection() {
                 )}
               </div>
 
-              <div className="px-5 py-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-4">
-                <p className="text-sm text-slate-600">{activePhoto.caption}</p>
-                <span className="font-mono text-xs tabular-nums text-slate-500 shrink-0">
-                  {selectedIndex + 1} / {visiblePhotos.length}
-                </span>
+              <div className="px-5 py-3.5 bg-[#F8F9FA] border-t border-sky-200 flex items-center justify-between gap-4">
+                <p className="text-sm text-slate-700">{activePhoto.caption}</p>
               </div>
             </motion.div>
           </motion.div>

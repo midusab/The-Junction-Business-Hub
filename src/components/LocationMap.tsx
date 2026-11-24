@@ -50,8 +50,8 @@ function isQuotaError(err: unknown): boolean {
 
 function MapFallbackCard({message}: {message: string}) {
   return (
-    <div className="h-[380px] sm:h-[440px] w-full rounded-xl border border-slate-200 bg-slate-100/80 flex flex-col items-center justify-center p-8 text-center">
-      <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center mb-4 text-blue-700">
+    <div className="h-[380px] sm:h-[440px] w-full rounded-lg border border-sky-200 bg-sky-50/70 flex flex-col items-center justify-center p-8 text-center">
+      <div className="w-12 h-12 rounded-md bg-white border border-sky-200 flex items-center justify-center mb-4 text-sky-700">
         <MapPin className="w-6 h-6" strokeWidth={1.75} />
       </div>
       <h4 className="font-display text-lg font-semibold text-slate-900 mb-2">
@@ -64,7 +64,7 @@ function MapFallbackCard({message}: {message: string}) {
         href={BUSINESS_INFO.mapsExternalUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0"
+        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md transition-colors duration-150 whitespace-nowrap shrink-0"
       >
         <span>Open in Google Maps</span>
         <ExternalLink className="w-4 h-4" />
@@ -172,8 +172,8 @@ function HubMapCanvas() {
 
   if (isSearching || !resolvedPlace) {
     return (
-      <div className="h-[380px] sm:h-[440px] w-full rounded-xl border border-slate-200 bg-slate-100 flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-8 h-8 rounded-full border-2 border-slate-300 border-t-blue-700 animate-spin mb-3" />
+      <div className="h-[380px] sm:h-[440px] w-full rounded-lg border border-sky-200 bg-sky-50/70 flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-8 h-8 rounded-full border-2 border-sky-200 border-t-sky-600 animate-spin mb-3" />
         <p className="text-sm text-slate-600">
           Locating Junction-Kodoyo on Homa Bay–Rongo Road...
         </p>
@@ -183,7 +183,7 @@ function HubMapCanvas() {
 
   return (
     <div className="space-y-2">
-      <div className="h-[380px] sm:h-[440px] w-full rounded-xl overflow-hidden border border-slate-200 bg-slate-100">
+      <div className="h-[380px] sm:h-[440px] w-full rounded-lg overflow-hidden border border-sky-200 bg-sky-50">
         <GoogleMap
           mapId="DEMO_MAP_ID"
           defaultCenter={{lat: resolvedPlace.lat, lng: resolvedPlace.lng}}
@@ -201,8 +201,8 @@ function HubMapCanvas() {
             onClick={() => setInfoOpen((prev) => !prev)}
           >
             <Pin
-              background="#1d4ed8"
-              borderColor="#1e3a8a"
+              background="#0284c7"
+              borderColor="#0369a1"
               glyphColor="#ffffff"
               scale={1.15}
             />
@@ -225,7 +225,7 @@ function HubMapCanvas() {
                   href={BUSINESS_INFO.mapsExternalUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-medium text-blue-700 hover:underline"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-sky-700 hover:underline"
                 >
                   <span>Get Directions</span>
                   <ExternalLink className="w-3 h-3" />

@@ -1,4 +1,4 @@
-export type PageId = 'home' | 'laundry' | 'cyber' | 'barber' | 'hotel';
+export type PageId = 'home' | 'laundry' | 'cyber' | 'barber' | 'hotel' | 'carwash';
 
 export interface ServiceItem {
   id: string;
@@ -59,7 +59,7 @@ export interface GalleryPhoto {
   id: string;
   src: string;
   alt: string;
-  category: 'hub' | 'laundry' | 'cyber' | 'barber' | 'hotel';
+  category: 'hub' | 'laundry' | 'cyber' | 'barber' | 'hotel' | 'carwash';
   categoryLabel: string;
   title: string;
   caption: string;
@@ -91,7 +91,7 @@ export const BUSINESS_INFO = {
   phoneDisplay: '+254 766 768617',
   phoneHref: 'tel:+254766768617',
   whatsappHref: 'https://wa.me/254766768617',
-  category: 'Laundry, Cyber Café, Barber & Highway Hotel Hub',
+  category: 'Laundry, Cyber Café, Barber, Car Wash & Highway Hotel Hub',
   mapsExternalUrl:
     'https://www.google.com/maps/search/?api=1&query=Junction-Kodoyo+Homa+Bay+Rongo+Road+Kenya',
   youtubeEmbedUrl: 'https://www.youtube.com/embed/MWBQt7tEaFI',
@@ -105,7 +105,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     src: '/src/assets/images/junction_roadside_exterior_1795528067474.jpg',
     alt: 'Daytime exterior view of the hub along the Homa Bay–Rongo Road in Homa Bay County',
     label: 'The Junction Hub · Roadside Access',
-    caption: 'Laundry, Cyber Café, Barber & Highway Hotel in Junction-Kodoyo',
+    caption: 'Laundry, Cyber Café, Barber, Car Wash & Highway Hotel in Junction-Kodoyo',
     targetPage: 'home',
   },
   {
@@ -140,6 +140,14 @@ export const HERO_SLIDES: HeroSlide[] = [
     caption: 'Fresh Kenyan meals, hot tea & clean roadside guest rooms',
     targetPage: 'hotel',
   },
+  {
+    id: 'slide-carwash',
+    src: '/src/assets/images/car_wash_exterior_foam_1795529395014.jpg',
+    alt: 'Roadside car wash bay in Homa Bay with snow foam SUV pressure washing in natural daylight',
+    label: 'Car Wash Services',
+    caption: 'Snow foam wash, interior vacuuming, engine rinse & bodaboda care',
+    targetPage: 'carwash',
+  },
 ];
 
 export const EXTERIOR_IMAGE = {
@@ -151,7 +159,7 @@ export const SERVICE_PAGES: Record<Exclude<PageId, 'home'>, ServicePageConfig> =
   laundry: {
     id: 'laundry',
     navLabel: 'Laundry',
-    departmentNumber: 'Department 01',
+    departmentNumber: 'Laundry Department',
     title: 'Laundry Services',
     subtitle: 'Spotless wash, steam press, duvet cleaning, and express turnaround',
     description:
@@ -194,12 +202,12 @@ export const SERVICE_PAGES: Record<Exclude<PageId, 'home'>, ServicePageConfig> =
       },
     ],
     theme: {
-      badgeText: 'text-teal-300',
-      sectionBg: 'bg-sky-50/55',
-      sectionBorder: 'border-sky-200/80',
-      accentButton: 'bg-teal-700 hover:bg-teal-800 text-white',
-      accentText: 'text-teal-700',
-      cardTint: 'bg-white border-sky-200/80',
+      badgeText: 'text-sky-300',
+      sectionBg: 'bg-sky-50/75',
+      sectionBorder: 'border-sky-200',
+      accentButton: 'bg-sky-600 hover:bg-sky-700 text-white',
+      accentText: 'text-sky-700',
+      cardTint: 'bg-white/80 border-sky-200',
     },
     services: [
       {
@@ -324,7 +332,7 @@ export const SERVICE_PAGES: Record<Exclude<PageId, 'home'>, ServicePageConfig> =
   cyber: {
     id: 'cyber',
     navLabel: 'Cyber Café',
-    departmentNumber: 'Department 02',
+    departmentNumber: 'Cyber & Digital Desk',
     title: 'Cyber Services',
     subtitle: 'Printing, scanning, typing, internet access, and online portal help',
     description:
@@ -497,7 +505,7 @@ export const SERVICE_PAGES: Record<Exclude<PageId, 'home'>, ServicePageConfig> =
   barber: {
     id: 'barber',
     navLabel: 'Barber',
-    departmentNumber: 'Department 03',
+    departmentNumber: 'Barber Studio',
     title: 'Barber Services',
     subtitle: 'Sharp fades, classic trims, beard grooming, and clean hygiene',
     description:
@@ -656,7 +664,7 @@ export const SERVICE_PAGES: Record<Exclude<PageId, 'home'>, ServicePageConfig> =
   hotel: {
     id: 'hotel',
     navLabel: 'Highway Hotel',
-    departmentNumber: 'Department 04',
+    departmentNumber: 'Hospitality & Dining',
     title: 'Junction Highway Hotel',
     subtitle: 'Fresh Kenyan meals, hot tea, roadside dining, and restful guest rooms',
     description:
@@ -811,6 +819,172 @@ export const SERVICE_PAGES: Record<Exclude<PageId, 'home'>, ServicePageConfig> =
     whatsappPrefill:
       'Hello The Junction Hub, I would like to enquire about meals or room availability at Junction Highway Hotel.',
   },
+
+  carwash: {
+    id: 'carwash',
+    navLabel: 'Car Wash',
+    departmentNumber: 'Car Wash Bay',
+    title: 'Car Wash Services',
+    subtitle: 'Snow foam exterior wash, interior vacuuming, engine rinse & detailing',
+    description:
+      'Keep your vehicle spotless right along the Homa Bay–Rongo Road. Our car wash bay serves personal saloon cars, SUVs, vans, and motorcycles with high-pressure foam washes, thorough interior vacuuming, and convenient wait-and-dine comfort.',
+    heroImage: {
+      id: 'carwash-hero',
+      src: '/src/assets/images/car_wash_exterior_foam_1795529395014.jpg',
+      alt: 'Roadside car wash bay pressure washing a silver SUV covered in snow foam in bright morning sun',
+      label: 'High-Pressure Foam Wash Bay',
+      caption: 'Gentle snow foam, spotless wheel arches, and roadside drive-in access',
+    },
+    galleryImages: [
+      {
+        id: 'cw-1',
+        src: '/src/assets/images/car_wash_exterior_foam_1795529395014.jpg',
+        alt: 'Attendant pressure washing a silver SUV covered in white foam along the highway bay',
+        label: 'Exterior Snow Foam',
+        caption: 'High-pressure pre-rinse and rich snow foam safe for modern paintwork.',
+      },
+      {
+        id: 'cw-2',
+        src: '/src/assets/images/car_wash_interior_detail_1795529395602.jpg',
+        alt: 'Car wash specialist wiping dashboard and leather seats with microfiber cloth',
+        label: 'Interior & Dashboard Detail',
+        caption: 'Thorough cabin vacuuming, floor mats wash, and non-greasy dashboard care.',
+      },
+      {
+        id: 'cw-3',
+        src: '/src/assets/images/junction_roadside_exterior_1795528067474.jpg',
+        alt: 'Wide paved pull-in apron along the Homa Bay–Rongo Road',
+        label: 'Easy Roadside Pull-In',
+        caption: 'Step inside for hot tea, laundry pickup, or a haircut while your car is washed.',
+      },
+    ],
+    theme: {
+      badgeText: 'text-sky-300',
+      sectionBg: 'bg-sky-50/75',
+      sectionBorder: 'border-sky-200',
+      accentButton: 'bg-sky-600 hover:bg-sky-700 text-white',
+      accentText: 'text-sky-700',
+      cardTint: 'bg-white border-sky-200',
+    },
+    services: [
+      {
+        id: 'exterior-foam',
+        number: '01',
+        title: 'Exterior Foam & Pressure Wash',
+        description:
+          'High-pressure mud and dust removal followed by snow foam wash, microfiber hand mitt scrub, and streak-free chamois dry.',
+        turnaround: '25–35 min service',
+        rateNote: 'By vehicle size',
+        details: [
+          'Safe under-wheel arch and mud-flap pressure rinsing after wet highway drives',
+          'Scratch-free two-bucket microfiber wash and clean chamois drying',
+          'Crystal-clear windscreen and side mirror wipe-down',
+        ],
+        accentTone: 'sky',
+      },
+      {
+        id: 'interior-vacuum',
+        number: '02',
+        title: 'Interior Vacuum & Cabin Clean',
+        description:
+          'Deep cabin vacuuming of carpets, seats, and boot space plus mat washing and dust-free dashboard conditioning.',
+        turnaround: '20–30 min service',
+        rateNote: 'Full wash or interior only',
+        details: [
+          'Seat crevices, door pockets, and boot vacuumed thoroughly',
+          'Rubber and fabric floor mats scrubbed, rinsed, and air-dried',
+          'Air vents, console, and door panels wiped with fresh microfiber cloths',
+        ],
+        accentTone: 'teal',
+      },
+      {
+        id: 'engine-undercarriage',
+        number: '03',
+        title: 'Engine Bay & Undercarriage Rinse',
+        description:
+          'Careful degreasing and controlled pressure cleaning to keep chassis rails and engine bays free of red road dust.',
+        turnaround: '30–40 min service',
+        rateNote: 'Enquire at wash bay',
+        details: [
+          'Protected rinse avoiding sensitive electrical connectors',
+          'Removes caked highway mud from underbody and suspension areas',
+          'Clean matte finish on engine plastics and hoses',
+        ],
+        accentTone: 'blue',
+      },
+      {
+        id: 'wax-tyre',
+        number: '04',
+        title: 'Body Wax & Tyre Shine',
+        description:
+          'Protective hand wax polish for UV sun protection alongside deep black rim and tyre dressing.',
+        turnaround: '35–45 min add-on',
+        rateNote: 'Quoted per vehicle',
+        details: [
+          'Alloy rim brake-dust clean and long-lasting satin tyre shine',
+          'Hand-buffed paint wax for glossy water-beading protection',
+          'Ideal preparation before weddings, events, or road trips',
+        ],
+        accentTone: 'amber',
+      },
+      {
+        id: 'bodaboda-wash',
+        number: '05',
+        title: 'Bodaboda & Motorcycle Wash',
+        description:
+          'Fast, thorough pressure wash and chain-safe rinse for commuter motorcycles, scooters, and tuktuks.',
+        turnaround: '15 min quick wash',
+        rateNote: 'Walk-in rider rates',
+        details: [
+          'Quick mud and dust removal from spokes, fenders, and engine fins',
+          'Seat wipe-down and bright headlamp clean',
+          'Fast turnaround so riders get right back on the road',
+        ],
+        accentTone: 'emerald',
+      },
+      {
+        id: 'wash-and-wait',
+        number: '06',
+        title: 'Wash While You Dine or Wait',
+        description:
+          'Relax at Junction Highway Hotel for Kenyan chai or lunch—or visit our barber or cyber desk—while your vehicle shines.',
+        turnaround: 'Seamless one-stop visit',
+        rateNote: 'Ask bay attendant',
+        details: [
+          'Bay team notifies you inside the hotel or hub once keys are ready',
+          'Shaded drop-off area right off the Homa Bay–Rongo Road',
+          'Combine weekly car wash with garment laundry pickup',
+        ],
+        accentTone: 'indigo',
+      },
+    ],
+    processTitle: 'Car Wash Care Flow',
+    processSubtitle: 'Drive in off the Homa Bay–Rongo Road with zero hassle.',
+    processSteps: [
+      {
+        step: '01',
+        title: 'Drive In & Select Package',
+        detail: 'Pull straight into our Junction-Kodoyo wash bay for exterior, full valet, or bike wash.',
+      },
+      {
+        step: '02',
+        title: 'Pressure Rinse & Snow Foam',
+        detail: 'Road dust and mud are loosened cleanly before gentle microfiber hand washing.',
+      },
+      {
+        step: '03',
+        title: 'Interior Vacuum & Detailing',
+        detail: 'Cabin carpets, seats, mats, and glass are detailed while you relax at the hub.',
+      },
+      {
+        step: '04',
+        title: 'Final Inspection & Keys',
+        detail: 'Walk around the finished vehicle with our attendant before heading back onto the highway.',
+      },
+    ],
+    whatsappPrefill:
+      'Hello The Junction Hub, I would like to enquire about Car Wash Services and pricing.',
+  },
 };
 
 export const TARGET_GROUPS = [
@@ -855,6 +1029,26 @@ export const OPERATING_HOURS: OperatingHour[] = [
 ];
 
 export const GALLERY_PHOTOS: GalleryPhoto[] = [
+  {
+    id: 'car-wash-bay',
+    src: '/src/assets/images/car_wash_exterior_foam_1795529395014.jpg',
+    alt: 'Snow foam exterior car wash of a silver SUV at the roadside bay',
+    category: 'carwash',
+    categoryLabel: 'Car Wash',
+    title: 'Roadside Car Wash & Foam Bay',
+    caption:
+      'High-pressure snow foam washes for saloon cars, SUVs, vans, and motorcycles along Homa Bay–Rongo Road.',
+  },
+  {
+    id: 'car-interior-detail',
+    src: '/src/assets/images/car_wash_interior_detail_1795529395602.jpg',
+    alt: 'Car wash specialist detailing a dark leather cabin and dashboard',
+    category: 'carwash',
+    categoryLabel: 'Car Wash',
+    title: 'Cabin Vacuum & Interior Care',
+    caption:
+      'Deep interior vacuuming, dashboard wiping, and spotless floor mat finishing.',
+  },
   {
     id: 'roadside-exterior',
     src: '/src/assets/images/junction_roadside_exterior_1795528067474.jpg',

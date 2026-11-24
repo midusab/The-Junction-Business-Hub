@@ -34,7 +34,7 @@ const LIGHT_TONE_CLASSES: Record<ServiceItem['accentTone'], string> = {
   sky: 'text-sky-700',
   amber: 'text-amber-700',
   emerald: 'text-emerald-700',
-  blue: 'text-blue-700',
+  blue: 'text-sky-800',
   indigo: 'text-indigo-700',
 };
 
@@ -43,7 +43,7 @@ const DARK_TONE_CLASSES: Record<ServiceItem['accentTone'], string> = {
   sky: 'text-sky-300',
   amber: 'text-amber-300',
   emerald: 'text-emerald-300',
-  blue: 'text-blue-300',
+  blue: 'text-sky-300',
   indigo: 'text-indigo-300',
 };
 
@@ -63,12 +63,12 @@ export function ServiceDetailPage({
   const heroImageY = useTransform(
     heroProgress,
     [0, 1],
-    prefersReducedMotion ? ['0%', '0%'] : ['0%', '22%']
+    prefersReducedMotion ? ['0%', '0%'] : ['0%', '24%']
   );
   const heroImageScale = useTransform(
     heroProgress,
     [0, 1],
-    prefersReducedMotion ? [1, 1] : [1.02, 1.12]
+    prefersReducedMotion ? [1, 1] : [1.02, 1.14]
   );
 
   // Mid-page Parallax Showcase Tracking
@@ -103,10 +103,10 @@ export function ServiceDetailPage({
 
   return (
     <div>
-      {/* 1. Parallax Hero Banner */}
+      {/* 1. Full-Width Parallax Hero Banner */}
       <section
         ref={heroRef}
-        className="relative min-h-[460px] sm:min-h-[520px] flex items-end overflow-hidden bg-slate-950"
+        className="relative min-h-[480px] sm:min-h-[540px] flex items-end overflow-hidden bg-slate-950"
       >
         <motion.div
           style={{y: heroImageY, scale: heroImageScale}}
@@ -120,37 +120,39 @@ export function ServiceDetailPage({
           />
         </motion.div>
 
-        {/* Measured Contrast Scrim */}
+        {/* Balanced Contrast Scrim keeping background photography visible */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/60 to-slate-950/25 pointer-events-none"
+          className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/45 to-transparent pointer-events-none"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent pointer-events-none"
         />
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
           <button
             type="button"
             onClick={() => onNavigate('home')}
-            className="inline-flex items-center gap-2 text-sm font-medium text-white/85 hover:text-white mb-6 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 text-sm font-medium text-white liquid-glass-dark px-3.5 py-2 mb-6 hover:bg-sky-700/70 transition-colors cursor-pointer rounded-md"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to All Hub Services</span>
+            <span>Back to Hub Story</span>
           </button>
 
           <motion.div
             initial={prefersReducedMotion ? false : {opacity: 0, y: 18}}
             animate={{opacity: 1, y: 0}}
             transition={{duration: 0.5, ease: [0.16, 1, 0.3, 1]}}
-            className="max-w-3xl"
+            className="max-w-2xl liquid-glass-dark p-6 sm:p-8 rounded-lg"
           >
-            <p
-              className={`text-xs sm:text-sm font-medium tracking-wide mb-2 ${config.theme.badgeText}`}
-            >
+            <p className="text-xs sm:text-sm font-medium tracking-wide mb-2 text-sky-300">
               {config.departmentNumber} · Junction-Kodoyo · Homa Bay–Rongo Road
             </p>
             <h1 className="text-[clamp(2.25rem,4.2vw,3.5rem)] font-bold tracking-tight text-white leading-[1.08] text-balance">
               {config.title}
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-slate-200 leading-relaxed max-w-2xl">
+            <p className="mt-4 text-base sm:text-lg text-slate-100 leading-relaxed max-w-2xl">
               {config.description}
             </p>
 
@@ -159,16 +161,16 @@ export function ServiceDetailPage({
                 href={`${BUSINESS_INFO.whatsappHref}?text=${encodeURIComponent(config.whatsappPrefill)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 ${config.theme.accentButton}`}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-md transition-colors duration-150 whitespace-nowrap shrink-0"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>Enquire on WhatsApp</span>
               </a>
               <a
                 href={BUSINESS_INFO.phoneHref}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white bg-white/10 hover:bg-white/20 border border-white/25 backdrop-blur-sm rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium text-white bg-white/15 hover:bg-white/25 border border-white/30 backdrop-blur-md rounded-md transition-colors duration-150 whitespace-nowrap shrink-0"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-4 h-4 text-sky-300" />
                 <span className="font-mono tabular-nums">
                   {BUSINESS_INFO.phoneDisplay}
                 </span>
@@ -189,7 +191,7 @@ export function ServiceDetailPage({
             <div className="lg:col-span-7">
               <motion.div
                 style={{y: visualParallaxY}}
-                className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-slate-200/80 bg-slate-900 shadow-sm group"
+                className="relative aspect-[16/10] w-full overflow-hidden border border-sky-200 bg-slate-900 shadow-sm group rounded-lg"
               >
                 <AnimatePresence mode="sync" initial={false}>
                   <motion.div
@@ -197,7 +199,7 @@ export function ServiceDetailPage({
                     initial={
                       prefersReducedMotion
                         ? {opacity: 1}
-                        : {opacity: 0, scale: 1.04}
+                        : {opacity: 0, scale: 1.05}
                     }
                     animate={{
                       opacity: 1,
@@ -214,7 +216,7 @@ export function ServiceDetailPage({
                       src={activeVisual.src}
                       alt={activeVisual.alt}
                       fallbackTitle={activeVisual.label}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     />
                   </motion.div>
                 </AnimatePresence>
@@ -226,7 +228,7 @@ export function ServiceDetailPage({
 
                 <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 flex items-end justify-between gap-4">
                   <div>
-                    <p className="text-xs font-medium text-amber-300">
+                    <p className="text-xs font-medium text-sky-300">
                       {activeVisual.label}
                     </p>
                     <p className="text-sm text-white/95 font-medium">
@@ -237,7 +239,7 @@ export function ServiceDetailPage({
                     type="button"
                     onClick={() => setLightboxOpen(true)}
                     aria-label={`Inspect ${activeVisual.label} full screen`}
-                    className="w-10 h-10 rounded-lg bg-slate-900/75 hover:bg-slate-900 text-white border border-white/25 inline-flex items-center justify-center shrink-0 cursor-pointer transition-transform active:scale-95"
+                    className="w-10 h-10 rounded-md liquid-glass-dark hover:bg-sky-600/80 text-white inline-flex items-center justify-center shrink-0 cursor-pointer transition-transform active:scale-95"
                   >
                     <Expand className="w-4 h-4" />
                   </button>
@@ -252,22 +254,23 @@ export function ServiceDetailPage({
                     <motion.button
                       key={img.id}
                       type="button"
+                      whileHover={prefersReducedMotion ? undefined : {y: -2}}
                       whileTap={prefersReducedMotion ? undefined : {scale: 0.97}}
                       onClick={() => setSelectedVisualIdx(idx)}
-                      className={`text-left rounded-lg overflow-hidden border transition-all cursor-pointer ${
+                      className={`group text-left overflow-hidden border transition-all cursor-pointer rounded-md ${
                         isSelected
-                          ? 'ring-2 ring-blue-600 border-blue-600'
+                          ? 'ring-2 ring-sky-600 border-sky-600'
                           : isDarkSection
-                            ? 'border-slate-700 opacity-75 hover:opacity-100'
-                            : 'border-slate-200 opacity-80 hover:opacity-100'
+                            ? 'border-slate-700 opacity-80 hover:opacity-100'
+                            : 'border-sky-200 opacity-85 hover:opacity-100 hover:border-sky-400'
                       }`}
                     >
-                      <div className="aspect-[16/10] w-full bg-slate-200">
+                      <div className="aspect-[16/10] w-full bg-slate-200 overflow-hidden">
                         <ResilientImage
                           src={img.src}
                           alt={img.alt}
                           fallbackTitle={img.label}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                       </div>
                       <p
@@ -294,7 +297,9 @@ export function ServiceDetailPage({
               className="lg:col-span-5"
             >
               <p
-                className={`text-xs font-medium tracking-wide mb-2 ${config.theme.accentText}`}
+                className={`text-xs font-semibold tracking-wide mb-2 ${
+                  isDarkSection ? 'text-sky-300' : 'text-sky-700'
+                }`}
               >
                 {config.processTitle}
               </p>
@@ -325,29 +330,26 @@ export function ServiceDetailPage({
                       delay: prefersReducedMotion ? 0 : idx * 0.06,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className={`border rounded-xl p-4 flex items-start gap-3.5 ${config.theme.cardTint}`}
+                    className={`border rounded-lg p-4 transition-colors ${
+                      isDarkSection
+                        ? 'liquid-glass-dark'
+                        : 'liquid-glass hover:bg-white'
+                    }`}
                   >
-                    <span
-                      className={`font-mono text-xs font-semibold tabular-nums mt-0.5 shrink-0 ${config.theme.accentText}`}
+                    <h3
+                      className={`text-sm font-semibold ${
+                        isDarkSection ? 'text-white' : 'text-slate-900'
+                      }`}
                     >
-                      {step.step}
-                    </span>
-                    <div>
-                      <h3
-                        className={`text-sm font-semibold ${
-                          isDarkSection ? 'text-white' : 'text-slate-900'
-                        }`}
-                      >
-                        {step.title}
-                      </h3>
-                      <p
-                        className={`mt-1 text-xs sm:text-sm leading-relaxed ${
-                          isDarkSection ? 'text-slate-300' : 'text-slate-600'
-                        }`}
-                      >
-                        {step.detail}
-                      </p>
-                    </div>
+                      {step.title}
+                    </h3>
+                    <p
+                      className={`mt-1 text-xs sm:text-sm leading-relaxed ${
+                        isDarkSection ? 'text-slate-300' : 'text-slate-700'
+                      }`}
+                    >
+                      {step.detail}
+                    </p>
                   </motion.div>
                 ))}
               </div>
@@ -361,13 +363,15 @@ export function ServiceDetailPage({
         className={`py-16 sm:py-20 border-b ${
           isDarkSection
             ? 'bg-slate-950 text-slate-100 border-slate-800'
-            : 'bg-white text-slate-900 border-slate-200'
+            : 'bg-white text-slate-900 border-sky-200'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl mb-10">
             <p
-              className={`text-xs font-medium tracking-wide mb-2 ${config.theme.accentText}`}
+              className={`text-xs font-semibold tracking-wide mb-2 ${
+                isDarkSection ? 'text-sky-300' : 'text-sky-700'
+              }`}
             >
               Available Services · Click any card for details
             </p>
@@ -403,46 +407,39 @@ export function ServiceDetailPage({
                     delay: prefersReducedMotion ? 0 : Math.min(idx * 0.05, 0.2),
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className={`border rounded-xl overflow-hidden transition-colors ${
+                  whileHover={prefersReducedMotion ? undefined : {y: -3}}
+                  className={`border rounded-lg overflow-hidden transition-colors ${
                     isDarkSection
                       ? isExpanded
-                        ? 'bg-slate-900 border-sky-500/70'
-                        : 'bg-slate-900/70 border-slate-800 hover:border-slate-700'
+                        ? 'bg-slate-900 border-sky-400'
+                        : 'bg-slate-900/75 border-slate-800 hover:border-sky-500/60'
                       : isExpanded
-                        ? 'bg-slate-50 border-blue-600/60'
-                        : 'bg-white border-slate-200 hover:border-slate-300'
+                        ? 'bg-sky-50/70 border-sky-600'
+                        : 'bg-white border-slate-200 hover:border-sky-400'
                   }`}
                 >
                   <button
                     type="button"
                     onClick={() => toggleServiceCard(service.id)}
                     aria-expanded={isExpanded}
-                    className="w-full text-left p-6 cursor-pointer focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-blue-600"
+                    className="w-full text-left p-6 cursor-pointer focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-sky-600"
                   >
-                    <div className="flex items-center justify-between gap-3 mb-3">
-                      <div
-                        className={`flex items-center gap-2 text-xs ${
-                          isDarkSection ? 'text-slate-400' : 'text-slate-500'
+                    <div className="flex items-center justify-between gap-3 mb-2">
+                      <span
+                        className={`text-xs font-medium ${
+                          isDarkSection
+                            ? DARK_TONE_CLASSES[service.accentTone]
+                            : LIGHT_TONE_CLASSES[service.accentTone]
                         }`}
                       >
-                        <span
-                          className={`font-mono tabular-nums font-medium ${
-                            isDarkSection
-                              ? DARK_TONE_CLASSES[service.accentTone]
-                              : LIGHT_TONE_CLASSES[service.accentTone]
-                          }`}
-                        >
-                          {service.number}
-                        </span>
-                        <span aria-hidden="true">·</span>
-                        <span>{service.turnaround}</span>
-                      </div>
+                        {service.turnaround}
+                      </span>
 
                       <motion.span
                         animate={{rotate: isExpanded ? 180 : 0}}
                         transition={{duration: 0.2}}
                         className={
-                          isDarkSection ? 'text-slate-400' : 'text-slate-500'
+                          isDarkSection ? 'text-sky-300' : 'text-sky-700'
                         }
                       >
                         <ChevronDown className="w-4 h-4" />
@@ -485,7 +482,7 @@ export function ServiceDetailPage({
                         className={`px-6 pb-6 pt-3 border-t ${
                           isDarkSection
                             ? 'border-slate-800 text-slate-300'
-                            : 'border-slate-200/80 text-slate-600'
+                            : 'border-sky-200/80 text-slate-700'
                         }`}
                       >
                         <ul className="space-y-2 text-xs sm:text-sm mb-4">
@@ -495,8 +492,8 @@ export function ServiceDetailPage({
                                 aria-hidden="true"
                                 className={`font-mono ${
                                   isDarkSection
-                                    ? 'text-sky-400'
-                                    : 'text-blue-700'
+                                    ? 'text-sky-300'
+                                    : 'text-sky-700'
                                 }`}
                               >
                                 &bull;
@@ -513,7 +510,7 @@ export function ServiceDetailPage({
                             href={`${BUSINESS_INFO.whatsappHref}?text=${encodeURIComponent(`Hello The Junction Hub, I would like to enquire about ${service.title} (${config.title}).`)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 ${config.theme.accentButton}`}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 bg-sky-600 hover:bg-sky-700 text-white"
                           >
                             <MessageCircle className="w-3.5 h-3.5" />
                             <span>Enquire</span>
@@ -530,57 +527,57 @@ export function ServiceDetailPage({
       </section>
 
       {/* 4. Explore Other Hub Service Pages */}
-      <section className="py-14 bg-[#FAF8F4] border-b border-slate-200">
+      <section className="py-14 bg-[#F8F9FA] border-b border-sky-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
-              <p className="text-xs font-medium text-amber-800 mb-1">
+              <p className="text-xs font-semibold text-sky-700 mb-1">
                 More at The Junction Hub
               </p>
               <h2 className="text-2xl font-bold tracking-tight text-slate-900">
-                Explore our other service pages
+                Continue exploring our services
               </h2>
             </div>
             <button
               type="button"
               onClick={() => onNavigate('home')}
-              className="text-sm font-medium text-blue-700 hover:underline whitespace-nowrap shrink-0 self-start sm:self-auto cursor-pointer"
+              className="text-sm font-medium text-sky-700 hover:underline whitespace-nowrap shrink-0 self-start sm:self-auto cursor-pointer"
             >
-              View Full Hub Overview
+              Return to Full Hub Story
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {otherServices.map((servicePage) => (
               <motion.button
                 key={servicePage.id}
                 type="button"
-                whileHover={prefersReducedMotion ? undefined : {y: -3}}
+                whileHover={prefersReducedMotion ? undefined : {y: -4}}
                 whileTap={prefersReducedMotion ? undefined : {scale: 0.99}}
                 onClick={() => onNavigate(servicePage.id)}
-                className="group text-left bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-slate-300 transition-colors cursor-pointer flex flex-col"
+                className="group text-left bg-white border border-sky-200 rounded-lg overflow-hidden hover:border-sky-500 transition-colors cursor-pointer flex flex-col"
               >
                 <div className="aspect-[16/9] w-full overflow-hidden bg-slate-100">
                   <ResilientImage
                     src={servicePage.heroImage.src}
                     alt={servicePage.heroImage.alt}
                     fallbackTitle={servicePage.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                   />
                 </div>
                 <div className="p-5 flex-1 flex flex-col justify-between">
                   <div>
-                    <span className="text-xs font-medium text-slate-500">
+                    <span className="text-xs font-medium text-sky-700">
                       {servicePage.departmentNumber}
                     </span>
-                    <h3 className="mt-1 text-base font-semibold text-slate-900 group-hover:text-blue-700 transition-colors">
+                    <h3 className="mt-1 text-base font-semibold text-slate-900 group-hover:text-sky-700 transition-colors">
                       {servicePage.title}
                     </h3>
                     <p className="mt-1 text-xs sm:text-sm text-slate-600 line-clamp-2">
                       {servicePage.subtitle}
                     </p>
                   </div>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700">
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-sky-700">
                     <span>Open Page</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                   </span>
@@ -608,7 +605,7 @@ export function ServiceDetailPage({
               initial={prefersReducedMotion ? false : {opacity: 0, scale: 0.96}}
               animate={{opacity: 1, scale: 1}}
               exit={{opacity: 0, scale: 0.97}}
-              className="max-w-4xl w-full bg-white rounded-xl overflow-hidden border border-slate-200"
+              className="max-w-4xl w-full bg-white rounded-lg overflow-hidden border border-sky-200"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-200">
@@ -619,7 +616,7 @@ export function ServiceDetailPage({
                   type="button"
                   onClick={() => setLightboxOpen(false)}
                   aria-label="Close image preview"
-                  className="w-9 h-9 inline-flex items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100 cursor-pointer"
+                  className="w-9 h-9 inline-flex items-center justify-center rounded-md text-slate-600 hover:bg-sky-50 cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -632,7 +629,7 @@ export function ServiceDetailPage({
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="px-5 py-3.5 bg-slate-50 border-t border-slate-200 text-sm text-slate-600">
+              <div className="px-5 py-3.5 bg-sky-50 border-t border-sky-200 text-sm text-slate-700">
                 {activeVisual.caption}
               </div>
             </motion.div>
