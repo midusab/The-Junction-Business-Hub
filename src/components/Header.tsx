@@ -14,6 +14,7 @@ const NAV_ITEMS: Array<{id: PageId; label: string}> = [
   {id: 'barber', label: 'Barber'},
   {id: 'hotel', label: 'Highway Hotel'},
   {id: 'carwash', label: 'Car Wash'},
+  {id: 'team', label: 'Our Team'},
 ];
 
 export function Header({activePage, onNavigate}: HeaderProps) {
@@ -26,7 +27,7 @@ export function Header({activePage, onNavigate}: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-40 liquid-glass border-x-0 border-t-0 border-b border-sky-200/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-6">
         {/* Zone 1: Single-element Brand Wordmark */}
         <button
           type="button"
@@ -36,10 +37,10 @@ export function Header({activePage, onNavigate}: HeaderProps) {
           {BUSINESS_INFO.shortName}
         </button>
 
-        {/* Zone 2: Concise single-line nav links for Home + 5 Service Pages */}
+        {/* Zone 2: Concise single-line nav links */}
         <nav
           aria-label="Service Pages Navigation"
-          className="hidden lg:flex items-center gap-5 text-sm font-medium"
+          className="hidden lg:flex items-center gap-4 xl:gap-5 text-sm font-medium"
         >
           {NAV_ITEMS.map((item) => {
             const isActive = activePage === item.id;

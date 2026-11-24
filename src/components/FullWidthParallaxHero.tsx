@@ -20,7 +20,12 @@ import {
   Shirt,
   UtensilsCrossed,
 } from 'lucide-react';
-import {BUSINESS_INFO, HERO_SLIDES, type PageId} from '../data/hubData';
+import {
+  BUSINESS_INFO,
+  HERO_SLIDES,
+  type PageId,
+  type ServicePageId,
+} from '../data/hubData';
 import {ResilientImage} from './ResilientImage';
 
 interface FullWidthParallaxHeroProps {
@@ -28,7 +33,7 @@ interface FullWidthParallaxHeroProps {
 }
 
 const DEPARTMENT_QUICK_CARDS: Array<{
-  id: Exclude<PageId, 'home'>;
+  id: ServicePageId;
   title: string;
   summary: string;
   iconBg: string;

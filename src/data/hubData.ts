@@ -1,4 +1,13 @@
-export type PageId = 'home' | 'laundry' | 'cyber' | 'barber' | 'hotel' | 'carwash';
+export type PageId =
+  | 'home'
+  | 'laundry'
+  | 'cyber'
+  | 'barber'
+  | 'hotel'
+  | 'carwash'
+  | 'team';
+
+export type ServicePageId = Exclude<PageId, 'home' | 'team'>;
 
 export interface ServiceItem {
   id: string;
@@ -26,7 +35,7 @@ export interface ServiceVisual {
 }
 
 export interface ServicePageConfig {
-  id: Exclude<PageId, 'home'>;
+  id: ServicePageId;
   navLabel: string;
   departmentNumber: string;
   title: string;
@@ -79,8 +88,24 @@ export interface TestimonialItem {
   name: string;
   role: string;
   serviceUsed: string;
+  targetPage: ServicePageId;
   quote: string;
   surfaceTint: string;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: string;
+  department: string;
+  targetPage: ServicePageId;
+  image: string;
+  alt: string;
+  whatTheyDo: string;
+  duties: string[];
+  whyBestTitle: string;
+  whyBestPoints: string[];
+  serviceHighlight: string;
 }
 
 export const BUSINESS_INFO = {
@@ -155,7 +180,7 @@ export const EXTERIOR_IMAGE = {
   alt: 'Roadside storefront of The Junction Hub in Junction-Kodoyo, Homa Bay County, Kenya',
 };
 
-export const SERVICE_PAGES: Record<Exclude<PageId, 'home'>, ServicePageConfig> = {
+export const SERVICE_PAGES: Record<ServicePageId, ServicePageConfig> = {
   laundry: {
     id: 'laundry',
     navLabel: 'Laundry',
@@ -1181,6 +1206,124 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
   },
 ];
 
+export const HUB_TEAM: TeamMember[] = [
+  {
+    id: 'team-laundry',
+    name: 'Wanjiku M.',
+    role: 'Laundry & Garment Care Lead',
+    department: 'Laundry Services',
+    targetPage: 'laundry',
+    image: '/src/assets/images/team_laundry_specialist_1795529644190.jpg',
+    alt: 'Laundry specialist smiling while holding pressed shirts and folded colourful fabrics beside washing machines',
+    whatTheyDo:
+      'Oversees colour-sorted garment washing, heavy duvet deep cleaning, steam ironing, and protective folding.',
+    duties: [
+      'Inspects stains, collars, and delicate kitenge before sorting loads',
+      'Runs high-capacity wash & spin cycles and crisp steam pressing',
+      'Packages folded clothes and duvets with quick WhatsApp pickup alerts',
+    ],
+    serviceHighlight: 'Zero colour bleeding & crisp steam pressing',
+    whyBestTitle: 'Why our laundry team leads along the Homa Bay–Rongo Road',
+    whyBestPoints: [
+      'Every basket is hand-sorted into whites, darks, and delicate East African kitenge before touching a drum',
+      'Stubborn collar, cuff, and travel-dust stains receive targeted pre-treatment rather than harsh bleach',
+      'Heavy family duvets are thoroughly dried and sealed in dust-free wraps so they arrive home fresh',
+    ],
+  },
+  {
+    id: 'team-cyber',
+    name: 'Kevin O.',
+    role: 'Cyber & Digital Support Lead',
+    department: 'Cyber Services',
+    targetPage: 'cyber',
+    image: '/src/assets/images/team_cyber_attendant_1795529645617.jpg',
+    alt: 'Cyber café attendant standing beside desktop workstations and laser printer with printed documents',
+    whatTheyDo:
+      'Assists students, businesses, and travellers with fast printing, PDF scanning, typing, and online government portals.',
+    duties: [
+      'Handles crisp monochrome and full-colour A4 document printing',
+      'Formats CVs, academic reports, and scans multi-page PDF files',
+      'Guides walk-ins step-by-step on eCitizen, KRA, HELB, and NTSA portals',
+    ],
+    serviceHighlight: 'Patient portal help & sharp colour laser print',
+    whyBestTitle: 'Why customers rely on our cyber & digital desk',
+    whyBestPoints: [
+      'Hands-on, unhurried guidance for eCitizen, KRA iTax, HELB, and college admissions—even for first-time applicants',
+      'Send documents ahead on WhatsApp so academic projects and forms are printed and ready on arrival',
+      'Accurate PDF sizing and document merging that passes strict government portal upload limits on the first try',
+    ],
+  },
+  {
+    id: 'team-barber',
+    name: 'Samuel K.',
+    role: 'Master Barber & Grooming Stylist',
+    department: 'Barber Services',
+    targetPage: 'barber',
+    image: '/src/assets/images/team_barber_stylist_1795529644725.jpg',
+    alt: 'Master barber smiling beside a leather barber chair and mirror holding cordless clippers',
+    whatTheyDo:
+      'Delivers clean fades, executive scissor cuts, sharp beard line-ups, and soothing hot towel shaves.',
+    duties: [
+      'Performs skin fades, tapers, classic trims, and school haircuts',
+      'Sculpts beards with crisp razor detailing and soothing aftershave',
+      'Sanitizes all clippers, guards, and chairs thoroughly between guests',
+    ],
+    serviceHighlight: 'Sanitized tools & razor-sharp fade transitions',
+    whyBestTitle: 'Why our barber studio earns repeat weekly clients',
+    whyBestPoints: [
+      'Strict hygiene protocol with thoroughly sanitized clippers, disinfected guards, and fresh blades for every chair session',
+      'Consistent, smooth fade blending and razor-sharp hairlines tailored for executives, students, and school boys',
+      'Relaxing steamed hot-towel facial refresh that leaves highway travellers looking sharp and rested',
+    ],
+  },
+  {
+    id: 'team-carwash',
+    name: 'Dennis O.',
+    role: 'Car Wash & Detailing Lead',
+    department: 'Car Wash Services',
+    targetPage: 'carwash',
+    image: '/src/assets/images/team_carwash_specialist_1795529646249.jpg',
+    alt: 'Car wash attendant smiling beside a gleaming washed SUV at the sunny roadside bay',
+    whatTheyDo:
+      'Leads high-pressure snow foam washes, wheel-arch mud rinsing, interior vacuuming, and motorcycle care.',
+    duties: [
+      'Pressure-rinses road dust and washes vehicles with gentle snow foam',
+      'Vacuums carpets, boots, and leather seats plus washes floor mats',
+      'Co-ordinates vehicle keys smoothly while drivers dine or shop inside',
+    ],
+    serviceHighlight: 'Paint-safe snow foam & red-dust underbody care',
+    whyBestTitle: 'Why motorists & riders trust our car wash bay',
+    whyBestPoints: [
+      'Pre-rinse and rich snow foam lift abrasive Homa Bay–Rongo road grit before microfiber mitts touch your paintwork',
+      'Targeted under-arch and undercarriage rinsing removes stubborn mud buildup without risking sensitive wiring',
+      'Seamless wait-and-dine coordination—hand over your keys, enjoy hot tea at the hotel, and drive off gleaming',
+    ],
+  },
+  {
+    id: 'team-hotel',
+    name: 'Joseph A.',
+    role: 'Hospitality & Kitchen Lead',
+    department: 'Junction Highway Hotel',
+    targetPage: 'hotel',
+    image: '/src/assets/images/team_hotel_chef_host_1795529646020.jpg',
+    alt: 'Highway hotel host holding a woven tray of steaming Kenyan tea and freshly cooked meals',
+    whatTheyDo:
+      'Prepares fresh Kenyan breakfast, hot chai, wholesome meals, and readies clean guest rooms for travellers.',
+    duties: [
+      'Serves hot spiced Kenyan chai, chapati, ugali, stews, and fresh fish',
+      'Maintains crisp dining tables and fast takeaway service for commuters',
+      'Prepares quiet guest rooms stocked with hub-laundered white linens',
+    ],
+    serviceHighlight: 'Fresh daily Kenyan kitchen & hub-laundered rooms',
+    whyBestTitle: 'Why travellers stop at Junction Highway Hotel',
+    whyBestPoints: [
+      'Meals cooked fresh from 7:00 AM daily—rich spiced chai, soft chapatis, ugali, stews, and Lake Victoria fish',
+      'Fast, welcoming roadside table service built around bus schedules, work lunches, and family stopovers',
+      'Every guest room features crisp sheets and towels laundered and pressed directly at our own on-site laundry',
+    ],
+  },
+];
+
 // Illustrative placeholder feedback per MVP guideline §10 until verified customer reviews are published.
 export const SAMPLE_TESTIMONIALS: TestimonialItem[] = [
   {
@@ -1188,6 +1331,7 @@ export const SAMPLE_TESTIMONIALS: TestimonialItem[] = [
     name: 'Grace Achieng',
     role: 'Local Resident, Junction-Kodoyo (Sample Profile)',
     serviceUsed: 'Duvet Cleaning & Document Scanning',
+    targetPage: 'laundry',
     quote:
       'Dropped off two family duvets on Monday morning and scanned school admission papers at the cyber counter during the same visit—saving an extra trip into town.',
     surfaceTint: 'bg-teal-50/50 border-teal-200',
@@ -1197,6 +1341,7 @@ export const SAMPLE_TESTIMONIALS: TestimonialItem[] = [
     name: 'Brian Odhiambo',
     role: 'College Student, Homa Bay County (Sample Profile)',
     serviceUsed: 'Cyber Printing & Barber Grooming',
+    targetPage: 'cyber',
     quote:
       'Getting my project printed, grabbing a fresh fade at the barber shop, and having lunch at Junction Highway Hotel in one stop makes campus weekends effortless.',
     surfaceTint: 'bg-sky-50/50 border-sky-200',
@@ -1206,8 +1351,19 @@ export const SAMPLE_TESTIMONIALS: TestimonialItem[] = [
     name: 'Millicent Anyango',
     role: 'Traveller & Small Business Owner (Sample Profile)',
     serviceUsed: 'Junction Highway Hotel & Express Laundry',
+    targetPage: 'hotel',
     quote:
       'Stopped along the Homa Bay–Rongo Road for hot chai and a clean meal while my work shirts were pressed—everything under one roof.',
     surfaceTint: 'bg-emerald-50/50 border-emerald-200',
+  },
+  {
+    id: 't4',
+    name: 'Peter Onyango',
+    role: 'Daily Commuter, Homa Bay–Rongo Road (Sample Profile)',
+    serviceUsed: 'Car Wash Bay & Barber Studio',
+    targetPage: 'carwash',
+    quote:
+      'Pulled in with red highway dust all over my SUV—by the time I finished a haircut and a cup of chai, the exterior foam wash and cabin vacuum were spotless.',
+    surfaceTint: 'bg-sky-50/50 border-sky-200',
   },
 ];

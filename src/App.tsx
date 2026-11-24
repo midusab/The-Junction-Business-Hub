@@ -6,22 +6,25 @@ import {
   useScroll,
   useTransform,
 } from 'motion/react';
-import {ArrowRight, Sparkles} from 'lucide-react';
+import {ArrowRight} from 'lucide-react';
 import {ContactSection} from './components/ContactSection';
 import {FullWidthParallaxHero} from './components/FullWidthParallaxHero';
 import {GallerySection} from './components/GallerySection';
 import {Header} from './components/Header';
 import {ResilientImage} from './components/ResilientImage';
 import {ServiceDetailPage} from './components/ServiceDetailPage';
+import {TeamPage} from './components/TeamPage';
+import {TeamSection} from './components/TeamSection';
+import {TestimonialsSection} from './components/TestimonialsSection';
 import {VideoTourSection} from './components/VideoTourSection';
 import {
   BUSINESS_INFO,
   EXTERIOR_IMAGE,
-  SAMPLE_TESTIMONIALS,
   SERVICE_PAGES,
   TARGET_GROUPS,
   type PageId,
   type ServicePageConfig,
+  type ServicePageId,
 } from './data/hubData';
 
 function getInitialPageFromHash(): PageId {
@@ -31,7 +34,8 @@ function getInitialPageFromHash(): PageId {
     hash === 'cyber' ||
     hash === 'barber' ||
     hash === 'hotel' ||
-    hash === 'carwash'
+    hash === 'carwash' ||
+    hash === 'team'
   ) {
     return hash;
   }
@@ -39,7 +43,7 @@ function getInitialPageFromHash(): PageId {
 }
 
 const CHAPTER_NARRATIVES: Record<
-  Exclude<PageId, 'home'>,
+  ServicePageId,
   {kicker: string; storyLead: string}
 > = {
   laundry: {
@@ -297,6 +301,9 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
         </div>
       </section>
 
+      {/* Meet Our Specialists (Employee Section) */}
+      <TeamSection onNavigate={onNavigate} />
+
       {/* About The Hub & Who We Serve */}
       <section
         id="about"
@@ -387,48 +394,8 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
             ))}
           </div>
 
-          {/* Sample Community Stories */}
-          <div className="mt-16 pt-12 border-t border-sky-200/80">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-              <div>
-                <h3 className="text-xl font-semibold text-slate-900">
-                  Community Use Cases &amp; Sample Stories
-                </h3>
-                <p className="mt-1 text-sm text-slate-600">
-                  Illustrative local scenarios showing how residents, students,
-                  and travellers combine our hub services.
-                </p>
-              </div>
-              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-sky-800 whitespace-nowrap">
-                <Sparkles className="w-3.5 h-3.5 text-sky-600" />
-                <span>Illustrative sample profiles</span>
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {SAMPLE_TESTIMONIALS.map((item) => (
-                <blockquote
-                  key={item.id}
-                  className="liquid-glass rounded-lg p-6 flex flex-col justify-between transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-400"
-                >
-                  <div>
-                    <div className="text-xs text-sky-700 font-semibold mb-3">
-                      {item.serviceUsed}
-                    </div>
-                    <p className="text-sm text-slate-700 leading-relaxed">
-                      &ldquo;{item.quote}&rdquo;
-                    </p>
-                  </div>
-                  <footer className="mt-5 pt-4 border-t border-sky-200/70">
-                    <p className="text-sm font-semibold text-slate-900">
-                      {item.name}
-                    </p>
-                    <p className="text-xs text-slate-600">{item.role}</p>
-                  </footer>
-                </blockquote>
-              ))}
-            </div>
-          </div>
+          {/* Animated Community Testimonials */}
+          <TestimonialsSection onNavigate={onNavigate} />
         </div>
       </section>
 
@@ -499,6 +466,16 @@ export default function App() {
               transition={{duration: 0.22}}
             >
               <HomePageContent onNavigate={navigateToPage} />
+            </motion.div>
+          ) : activePage === 'team' ? (
+            <motion.div
+              key="page-team"
+              initial={prefersReducedMotion ? false : {opacity: 0, y: 8}}
+              animate={{opacity: 1, y: 0}}
+              exit={{opacity: 0}}
+              transition={{duration: 0.25, ease: [0.16, 1, 0.3, 1]}}
+            >
+              <TeamPage onNavigate={navigateToPage} />
             </motion.div>
           ) : (
             <motion.div
@@ -588,6 +565,13 @@ export default function App() {
                 className="block text-slate-600 hover:text-sky-700 cursor-pointer transition-colors"
               >
                 Hub Overview
+              </button>
+              <button
+                type="button"
+                onClick={() => navigateToPage('team')}
+                className="block text-slate-600 hover:text-sky-700 cursor-pointer transition-colors"
+              >
+                Our Team
               </button>
               <a
                 href="#video-tour"
