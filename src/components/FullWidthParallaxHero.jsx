@@ -12,7 +12,6 @@ import {
   ChevronLeft,
   ChevronRight,
   MessageCircle,
-  Pause,
   Phone,
   Play,
 } from 'lucide-react';
@@ -21,7 +20,6 @@ import {ResilientImage} from './ResilientImage';
 
 export function FullWidthParallaxHero({onNavigate}) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
   const prefersReducedMotion = useReducedMotion();
 
   const heroRef = useRef(null);
@@ -68,16 +66,6 @@ export function FullWidthParallaxHero({onNavigate}) {
     [0, 0.9],
     prefersReducedMotion ? [1, 1] : [1, 0.35]
   );
-
-  useEffect(() => {
-    if (!isAutoPlay || prefersReducedMotion) return;
-
-    const timer = window.setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 4800);
-
-    return () => window.clearInterval(timer);
-  }, [isAutoPlay, prefersReducedMotion]);
 
   const currentSlide = HERO_SLIDES[currentIndex];
 
@@ -257,26 +245,6 @@ export function FullWidthParallaxHero({onNavigate}) {
               <ChevronLeft className="w-4 h-4" />
             </motion.button>
 
-            <motion.button
-              type="button"
-              onClick={() => setIsAutoPlay((prev) => !prev)}
-              whileTap={prefersReducedMotion ? undefined : {scale: 0.94}}
-              aria-pressed={isAutoPlay}
-              aria-label={isAutoPlay ? 'Pause automatic carousel' : 'Resume automatic carousel'}
-              className={`h-8 px-2.5 rounded-sm text-xs font-medium inline-flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
-                isAutoPlay
-                  ? 'bg-sky-600 text-white hover:bg-sky-500'
-                  : 'bg-slate-800 text-slate-200 hover:bg-slate-700'
-              }`}
-            >
-              {isAutoPlay ? (
-                <Pause className="w-3.5 h-3.5" />
-              ) : (
-                <Play className="w-3.5 h-3.5" />
-              )}
-              <span>{isAutoPlay ? 'Auto' : 'Paused'}</span>
-            </motion.button>
-
             <div
               role="tablist"
               aria-label="Select background scene"
@@ -314,19 +282,6 @@ export function FullWidthParallaxHero({onNavigate}) {
           </div>
         </div>
       </motion.div>
-
-      {/* Auto-Slide Live Progress Track */}
-      {isAutoPlay && !prefersReducedMotion && (
-        <motion.div
-          key={`hero-progress-${currentSlide.id}`}
-          initial={{scaleX: 0}}
-          animate={{scaleX: 1}}
-          transition={{duration: 4.8, ease: 'linear'}}
-          style={{transformOrigin: 'left'}}
-          aria-hidden="true"
-          className="absolute bottom-0 left-0 right-0 h-[3px] bg-sky-400/90 z-20 pointer-events-none"
-        />
-      )}
     </section>
   );
 }
