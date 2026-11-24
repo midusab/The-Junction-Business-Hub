@@ -118,14 +118,34 @@ function StoryChapter({
           >
             <motion.div
               style={{y: imageY}}
-              className="w-full h-[112%] -mt-[6%] will-change-transform"
+              className="w-full h-[112%] -mt-[6%] will-change-transform relative"
             >
-              <ResilientImage
-                src={activeVisual.src}
-                alt={activeVisual.alt}
-                fallbackTitle={servicePage.title}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-              />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={activeVisual.id}
+                  initial={
+                    prefersReducedMotion ? {opacity: 1} : {opacity: 0, scale: 1.04}
+                  }
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    transition: {duration: 0.4, ease: [0.16, 1, 0.3, 1]},
+                  }}
+                  exit={
+                    prefersReducedMotion
+                      ? {opacity: 0}
+                      : {opacity: 0, transition: {duration: 0.2}}
+                  }
+                  className="w-full h-full"
+                >
+                  <ResilientImage
+                    src={activeVisual.src}
+                    alt={activeVisual.alt}
+                    fallbackTitle={servicePage.title}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                </motion.div>
+              </AnimatePresence>
             </motion.div>
 
             <div className="absolute bottom-3 left-3 right-3 sm:right-auto sm:max-w-md bg-slate-900/90 border border-white/15 px-4 py-2 rounded-md shadow-md flex items-center justify-between gap-4">
@@ -142,14 +162,15 @@ function StoryChapter({
               {visuals.slice(0, 4).map((vis, vIdx) => {
                 const isSelected = vIdx === activeVisualIdx;
                 return (
-                  <button
+                  <motion.button
                     key={vis.id}
                     type="button"
                     onClick={() => setActiveVisualIdx(vIdx)}
+                    whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
                     className={`relative aspect-[16/9] overflow-hidden border-r last:border-r-0 border-sky-200/70 cursor-pointer transition-opacity ${
                       isSelected
-                        ? 'ring-2 ring-inset ring-sky-600 opacity-100'
-                        : 'opacity-70 hover:opacity-100'
+                        ? 'opacity-100'
+                        : 'opacity-65 hover:opacity-100'
                     }`}
                     aria-label={`Preview ${vis.label}`}
                     aria-pressed={isSelected}
@@ -160,7 +181,14 @@ function StoryChapter({
                       fallbackTitle={vis.label}
                       className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                     />
-                  </button>
+                    {isSelected && (
+                      <motion.span
+                        layoutId={`chapter-thumb-${servicePage.id}`}
+                        aria-hidden="true"
+                        className="absolute inset-0 ring-2 ring-inset ring-sky-500 pointer-events-none"
+                      />
+                    )}
+                  </motion.button>
                 );
               })}
             </div>
@@ -176,7 +204,11 @@ function StoryChapter({
         transition={{duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1]}}
         className={`lg:col-span-4 ${isReversed ? 'lg:order-1' : 'lg:order-2'}`}
       >
-        <div className="bg-white border border-slate-200 p-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 hover:border-sky-300">
+        <motion.div
+          whileHover={prefersReducedMotion ? undefined : {y: -3}}
+          transition={{duration: 0.22}}
+          className="bg-white border border-slate-200 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 hover:border-sky-300"
+        >
           <p className="text-xs font-semibold tracking-wide text-sky-700 mb-1.5">
             {narrative.kicker}
           </p>
@@ -189,35 +221,43 @@ function StoryChapter({
 
           <div className="mt-4 pt-4 border-t border-sky-200/80 grid grid-cols-1 gap-1.5 text-xs sm:text-sm text-slate-800">
             {servicePage.services.slice(0, 4).map((item) => (
-              <div
+              <motion.button
                 key={item.id}
-                className="bg-white/85 border border-sky-200/70 px-3 py-1.5 rounded-md font-medium truncate"
+                type="button"
+                onClick={() => onNavigate(servicePage.id)}
+                whileHover={prefersReducedMotion ? undefined : {x: 4}}
+                whileTap={prefersReducedMotion ? undefined : {scale: 0.99}}
+                className="w-full text-left bg-white hover:bg-sky-50 border border-sky-200/70 hover:border-sky-300 px-3 py-1.5 rounded-md font-medium truncate transition-colors cursor-pointer"
               >
                 {item.title}
-              </div>
+              </motion.button>
             ))}
           </div>
 
           <div className="mt-5 flex flex-wrap items-center gap-2.5">
-            <button
+            <motion.button
               type="button"
               onClick={() => onNavigate(servicePage.id)}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-all duration-150 whitespace-nowrap shrink-0 cursor-pointer"
+              whileHover={prefersReducedMotion ? undefined : {y: -1.5, scale: 1.02}}
+              whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+              className="group/btn inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer"
             >
               <span>Explore {servicePage.navLabel}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
+            </motion.button>
 
-            <a
+            <motion.a
               href={`${BUSINESS_INFO.whatsappHref}?text=${encodeURIComponent(servicePage.whatsappPrefill)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3.5 py-2.5 text-sm font-medium text-sky-900 bg-white hover:bg-sky-50 border border-sky-200 rounded-md shadow-xs hover:shadow-sm transition-all whitespace-nowrap shrink-0"
+              whileHover={prefersReducedMotion ? undefined : {y: -1.5}}
+              whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+              className="px-3.5 py-2.5 text-sm font-medium text-sky-900 bg-white hover:bg-sky-50 border border-sky-200 rounded-md shadow-xs hover:shadow-sm transition-colors whitespace-nowrap shrink-0"
             >
               WhatsApp
-            </a>
+            </motion.a>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </article>
   );
@@ -349,12 +389,13 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
                 initial={prefersReducedMotion ? false : {opacity: 0, y: 12}}
                 whileInView={{opacity: 1, y: 0}}
                 viewport={{once: true, amount: 0.2}}
+                whileHover={prefersReducedMotion ? undefined : {y: -5, scale: 1.01}}
                 transition={{
-                  duration: 0.35,
-                  delay: prefersReducedMotion ? 0 : idx * 0.06,
+                  duration: 0.3,
+                  delay: prefersReducedMotion ? 0 : idx * 0.05,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300"
+                className="bg-white border border-slate-200 rounded-lg p-5 shadow-sm hover:shadow-lg transition-colors duration-200 hover:border-sky-300"
               >
                 <h3 className="text-base font-semibold text-slate-900">
                   {group.title}

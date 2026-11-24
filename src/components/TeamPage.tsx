@@ -176,10 +176,14 @@ function TeamDepartmentShowcase({
             </h3>
             <ul className="space-y-2 text-sm text-slate-800">
               {member.duties.map((duty, dIdx) => (
-                <li key={dIdx} className="flex items-start gap-2.5">
+                <motion.li
+                  key={dIdx}
+                  whileHover={prefersReducedMotion ? undefined : {x: 4}}
+                  className="flex items-start gap-2.5"
+                >
                   <Check className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
                   <span>{duty}</span>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </div>
@@ -358,13 +362,21 @@ export function TeamPage({onNavigate}: TeamPageProps) {
                     key={filter.id}
                     type="button"
                     onClick={() => setActiveFilter(filter.id)}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                    className={`relative px-3 py-1.5 text-xs font-medium rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                       isActive
-                        ? 'bg-sky-600 text-white shadow-xs'
+                        ? 'text-white'
                         : 'text-slate-700 hover:text-sky-800 hover:bg-sky-50'
                     }`}
                   >
-                    {filter.label}
+                    {isActive && (
+                      <motion.span
+                        layoutId="team-filter-pill"
+                        transition={{type: 'spring', stiffness: 420, damping: 32}}
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-sky-600 rounded-md shadow-xs"
+                      />
+                    )}
+                    <span className="relative z-10">{filter.label}</span>
                   </button>
                 );
               })}

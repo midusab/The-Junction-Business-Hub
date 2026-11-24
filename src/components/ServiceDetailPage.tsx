@@ -255,16 +255,23 @@ export function ServiceDetailPage({
                       key={img.id}
                       type="button"
                       whileHover={prefersReducedMotion ? undefined : {y: -2}}
-                      whileTap={prefersReducedMotion ? undefined : {scale: 0.97}}
+                      whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
                       onClick={() => setSelectedVisualIdx(idx)}
-                      className={`group text-left overflow-hidden border transition-all cursor-pointer rounded-md ${
+                      className={`relative group text-left overflow-hidden border transition-all cursor-pointer rounded-md ${
                         isSelected
-                          ? 'ring-2 ring-sky-600 border-sky-600'
+                          ? 'border-sky-600 opacity-100'
                           : isDarkSection
                             ? 'border-slate-700 opacity-80 hover:opacity-100'
                             : 'border-sky-200 opacity-85 hover:opacity-100 hover:border-sky-400'
                       }`}
                     >
+                      {isSelected && (
+                        <motion.span
+                          layoutId={`service-thumb-${config.id}`}
+                          aria-hidden="true"
+                          className="absolute inset-0 ring-2 ring-inset ring-sky-500 rounded-md pointer-events-none z-10"
+                        />
+                      )}
                       <div className="aspect-[16/10] w-full bg-slate-200 overflow-hidden">
                         <ResilientImage
                           src={img.src}
@@ -325,6 +332,7 @@ export function ServiceDetailPage({
                     initial={prefersReducedMotion ? false : {opacity: 0, x: 12}}
                     whileInView={{opacity: 1, x: 0}}
                     viewport={{once: true, amount: 0.2}}
+                    whileHover={prefersReducedMotion ? undefined : {x: 4}}
                     transition={{
                       duration: 0.35,
                       delay: prefersReducedMotion ? 0 : idx * 0.06,
@@ -468,18 +476,19 @@ export function ServiceDetailPage({
                         initial={
                           prefersReducedMotion
                             ? {opacity: 1}
-                            : {opacity: 0, y: -6}
+                            : {opacity: 0, height: 0}
                         }
                         animate={{
                           opacity: 1,
-                          y: 0,
-                          transition: {duration: 0.22, ease: [0.16, 1, 0.3, 1]},
+                          height: 'auto',
+                          transition: {duration: 0.25, ease: [0.16, 1, 0.3, 1]},
                         }}
-                        exit={{
-                          opacity: 0,
-                          transition: {duration: 0.15},
-                        }}
-                        className={`px-6 pb-6 pt-3 border-t ${
+                        exit={
+                          prefersReducedMotion
+                            ? {opacity: 0}
+                            : {opacity: 0, height: 0, transition: {duration: 0.18}}
+                        }
+                        className={`overflow-hidden px-6 pb-6 pt-3 border-t ${
                           isDarkSection
                             ? 'border-slate-800 text-slate-300'
                             : 'border-sky-200/80 text-slate-700'

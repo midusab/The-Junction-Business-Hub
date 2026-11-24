@@ -129,14 +129,16 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
               </div>
             </div>
 
-            <button
+            <motion.button
               type="button"
               onClick={() => onNavigate(activeItem.targetPage)}
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer self-start lg:self-center"
+              whileHover={prefersReducedMotion ? undefined : {y: -1.5, scale: 1.02}}
+              whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+              className="group inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-colors whitespace-nowrap shrink-0 cursor-pointer self-start lg:self-center"
             >
               <span>Visit Service Page</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </motion.button>
           </motion.div>
         </AnimatePresence>
 
@@ -169,6 +171,7 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
                 ease: [0.16, 1, 0.3, 1],
               }}
               whileHover={prefersReducedMotion ? undefined : {y: -5}}
+              whileTap={prefersReducedMotion ? undefined : {scale: 0.97}}
               onClick={() => setActiveIndex(idx)}
               className={`group rounded-lg border p-5 flex flex-col justify-between transition-all duration-200 cursor-pointer bg-white ${
                 isActive

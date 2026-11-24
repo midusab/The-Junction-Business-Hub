@@ -11,7 +11,13 @@ import {
   UtensilsCrossed,
   X,
 } from 'lucide-react';
-import {AnimatePresence, motion, useReducedMotion} from 'motion/react';
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+} from 'motion/react';
 import {
   BUSINESS_INFO,
   type PageId,
@@ -67,6 +73,12 @@ export function Header({activePage, onNavigate}: HeaderProps) {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const prefersReducedMotion = useReducedMotion();
+  const {scrollYProgress} = useScroll();
+  const scrollScaleX = useSpring(scrollYProgress, {
+    stiffness: 260,
+    damping: 32,
+    restDelta: 0.001,
+  });
 
   const isServicePage =
     activePage === 'laundry' ||
@@ -257,33 +269,39 @@ export function Header({activePage, onNavigate}: HeaderProps) {
 
         {/* Zone 3: Call & WhatsApp Icons + Primary Contact CTA */}
         <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
-          <a
+          <motion.a
             href={BUSINESS_INFO.phoneHref}
             aria-label={`Call ${BUSINESS_INFO.phoneDisplay}`}
             title={`Call ${BUSINESS_INFO.phoneDisplay}`}
-            className="inline-flex items-center justify-center w-9 h-9 rounded-md border border-sky-200 bg-white hover:bg-sky-50 text-sky-700 shadow-xs hover:shadow-sm transition-all shrink-0"
+            whileHover={prefersReducedMotion ? undefined : {y: -1.5, scale: 1.05}}
+            whileTap={prefersReducedMotion ? undefined : {scale: 0.94}}
+            className="inline-flex items-center justify-center w-9 h-9 rounded-md border border-sky-200 bg-white hover:bg-sky-50 text-sky-700 shadow-xs hover:shadow-sm transition-colors shrink-0"
           >
             <Phone className="w-4 h-4" />
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
             href={BUSINESS_INFO.whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="WhatsApp The Junction Hub"
             title="Message on WhatsApp"
-            className="inline-flex items-center justify-center w-9 h-9 rounded-md border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 shadow-xs hover:shadow-sm transition-all shrink-0"
+            whileHover={prefersReducedMotion ? undefined : {y: -1.5, scale: 1.05}}
+            whileTap={prefersReducedMotion ? undefined : {scale: 0.94}}
+            className="inline-flex items-center justify-center w-9 h-9 rounded-md border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 shadow-xs hover:shadow-sm transition-colors shrink-0"
           >
             <MessageCircle className="w-4 h-4" />
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
             href="#contact"
             onClick={() => setMobileOpen(false)}
-            className="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-all duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+            whileHover={prefersReducedMotion ? undefined : {y: -1.5}}
+            whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+            className="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-colors duration-150 whitespace-nowrap shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
           >
             Contact &amp; Map
-          </a>
+          </motion.a>
 
           <button
             type="button"
@@ -384,6 +402,14 @@ export function Header({activePage, onNavigate}: HeaderProps) {
             </a>
           </div>
         </nav>
+      )}
+      {/* Live Reading Scroll Progress Bar */}
+      {!prefersReducedMotion && (
+        <motion.div
+          aria-hidden="true"
+          style={{scaleX: scrollScaleX, transformOrigin: 'left'}}
+          className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-sky-600 pointer-events-none"
+        />
       )}
     </header>
   );

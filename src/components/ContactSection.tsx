@@ -1,4 +1,5 @@
 import {useState, type FormEvent} from 'react';
+import {AnimatePresence, motion, useReducedMotion} from 'motion/react';
 import {
   CheckCircle2,
   Clock,
@@ -34,6 +35,7 @@ const DEPARTMENTS: ServiceDepartment[] = [
 ];
 
 export function ContactSection() {
+  const prefersReducedMotion = useReducedMotion();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [department, setDepartment] = useState<ServiceDepartment>('Laundry Services');
@@ -131,22 +133,26 @@ export function ContactSection() {
               </div>
 
               <div className="pt-4 border-t border-sky-200/70 flex flex-wrap gap-3">
-                <a
+                <motion.a
                   href={BUSINESS_INFO.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md transition-colors duration-150 whitespace-nowrap shrink-0"
+                  whileHover={prefersReducedMotion ? undefined : {y: -1.5, scale: 1.02}}
+                  whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-colors duration-150 whitespace-nowrap shrink-0"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Message on WhatsApp</span>
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href={BUSINESS_INFO.phoneHref}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-800 bg-white border border-sky-300 hover:bg-sky-50 rounded-md transition-colors duration-150 whitespace-nowrap shrink-0"
+                  whileHover={prefersReducedMotion ? undefined : {y: -1.5, scale: 1.02}}
+                  whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-slate-800 bg-white border border-sky-300 hover:bg-sky-50 rounded-md shadow-xs hover:shadow-sm transition-colors duration-150 whitespace-nowrap shrink-0"
                 >
                   <Phone className="w-4 h-4 text-sky-700" />
                   <span>Call {BUSINESS_INFO.phoneDisplay}</span>
-                </a>
+                </motion.a>
               </div>
             </div>
 
@@ -159,46 +165,66 @@ export function ContactSection() {
                 Choose a department below and share what you need.
               </p>
 
-              {submitted ? (
-                <div className="rounded-md border border-sky-200 bg-sky-50/70 p-5 space-y-4">
-                  <div className="flex items-start gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-sky-700 shrink-0 mt-0.5" />
-                    <div>
-                      <h4 className="text-sm font-semibold text-slate-900">
-                        Enquiry prepared for {department}
-                      </h4>
-                      <p className="mt-1 text-sm text-slate-600 leading-relaxed">
-                        Thank you, {name}. Send your message directly to our
-                        WhatsApp desk for the fastest response, or call us on{' '}
-                        <span className="font-mono tabular-nums font-medium text-slate-900">
-                          {BUSINESS_INFO.phoneDisplay}
-                        </span>
-                        .
-                      </p>
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  <motion.div
+                    key="submitted-card"
+                    initial={
+                      prefersReducedMotion ? {opacity: 1} : {opacity: 0, y: 10, scale: 0.98}
+                    }
+                    animate={{opacity: 1, y: 0, scale: 1}}
+                    exit={prefersReducedMotion ? {opacity: 0} : {opacity: 0, y: -8}}
+                    transition={{duration: 0.28, ease: [0.16, 1, 0.3, 1]}}
+                    className="rounded-md border border-sky-200 bg-sky-50/70 p-5 space-y-4"
+                  >
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2 className="w-5 h-5 text-sky-700 shrink-0 mt-0.5" />
+                      <div>
+                        <h4 className="text-sm font-semibold text-slate-900">
+                          Enquiry prepared for {department}
+                        </h4>
+                        <p className="mt-1 text-sm text-slate-600 leading-relaxed">
+                          Thank you, {name}. Send your message directly to our
+                          WhatsApp desk for the fastest response, or call us on{' '}
+                          <span className="font-mono tabular-nums font-medium text-slate-900">
+                            {BUSINESS_INFO.phoneDisplay}
+                          </span>
+                          .
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <a
-                      href={buildWhatsAppSummaryUrl()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md transition-colors whitespace-nowrap shrink-0"
-                    >
-                      <MessageCircle className="w-4 h-4" />
-                      <span>Send via WhatsApp</span>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-                    <button
-                      type="button"
-                      onClick={handleReset}
-                      className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer"
-                    >
-                      New Enquiry
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} noValidate className="space-y-4">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <motion.a
+                        href={buildWhatsAppSummaryUrl()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={prefersReducedMotion ? undefined : {y: -1.5, scale: 1.02}}
+                        whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+                        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm transition-colors whitespace-nowrap shrink-0"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        <span>Send via WhatsApp</span>
+                        <ExternalLink className="w-3.5 h-3.5" />
+                      </motion.a>
+                      <button
+                        type="button"
+                        onClick={handleReset}
+                        className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+                      >
+                        New Enquiry
+                      </button>
+                    </div>
+                  </motion.div>
+                ) : (
+                  <motion.form
+                    key="enquiry-form"
+                    initial={prefersReducedMotion ? false : {opacity: 0}}
+                    animate={{opacity: 1}}
+                    exit={{opacity: 0}}
+                    onSubmit={handleSubmit}
+                    noValidate
+                    className="space-y-4"
+                  >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label
@@ -256,20 +282,31 @@ export function ContactSection() {
                       aria-label="Choose service department"
                       className="flex flex-wrap gap-1.5 p-1.5 bg-slate-50 border border-sky-200/80 rounded-md"
                     >
-                      {DEPARTMENTS.map((option) => (
-                        <button
-                          key={option}
-                          type="button"
-                          onClick={() => setDepartment(option)}
-                          className={`px-3 py-1.5 text-xs font-medium rounded-sm transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                            department === option
-                              ? 'bg-sky-600 text-white'
-                              : 'text-slate-700 hover:text-sky-800 hover:bg-sky-100/70'
-                          }`}
-                        >
-                          {option}
-                        </button>
-                      ))}
+                      {DEPARTMENTS.map((option) => {
+                        const isSelected = department === option;
+                        return (
+                          <button
+                            key={option}
+                            type="button"
+                            onClick={() => setDepartment(option)}
+                            className={`relative px-3 py-1.5 text-xs font-medium rounded-sm transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                              isSelected
+                                ? 'text-white'
+                                : 'text-slate-700 hover:text-sky-800 hover:bg-sky-100/70'
+                            }`}
+                          >
+                            {isSelected && (
+                              <motion.span
+                                layoutId="contact-dept-pill"
+                                transition={{type: 'spring', stiffness: 420, damping: 32}}
+                                aria-hidden="true"
+                                className="absolute inset-0 bg-sky-600 rounded-sm shadow-xs"
+                              />
+                            )}
+                            <span className="relative z-10">{option}</span>
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
 
@@ -296,14 +333,17 @@ export function ContactSection() {
                     )}
                   </div>
 
-                  <button
+                  <motion.button
                     type="submit"
-                    className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                    whileHover={prefersReducedMotion ? undefined : {y: -1.5, scale: 1.02}}
+                    whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+                    className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
                   >
                     Prepare Enquiry
-                  </button>
-                </form>
+                  </motion.button>
+                </motion.form>
               )}
+              </AnimatePresence>
             </div>
           </div>
 

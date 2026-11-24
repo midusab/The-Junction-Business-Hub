@@ -56,6 +56,7 @@ function TeamMemberCard({
         ease: [0.16, 1, 0.3, 1],
       }}
       whileHover={prefersReducedMotion ? undefined : {y: -6}}
+      whileTap={prefersReducedMotion ? undefined : {scale: 0.985}}
       onClick={onSelect}
       className={`group rounded-lg border overflow-hidden flex flex-col justify-between transition-all duration-200 cursor-pointer bg-white ${
         isSelected
@@ -183,23 +184,27 @@ export function TeamSection({onNavigate}: TeamSectionProps) {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0 self-start lg:self-auto">
-            <button
+            <motion.button
               type="button"
               onClick={() => onNavigate('team')}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-all whitespace-nowrap shrink-0 cursor-pointer"
+              whileHover={prefersReducedMotion ? undefined : {y: -1.5, scale: 1.02}}
+              whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <span>View Full Team Page</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <a
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </motion.button>
+            <motion.a
               href={BUSINESS_INFO.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-sky-900 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-md shadow-xs hover:shadow-sm transition-all whitespace-nowrap shrink-0"
+              whileHover={prefersReducedMotion ? undefined : {y: -1.5}}
+              whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-sky-900 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-md shadow-xs hover:shadow-sm transition-colors whitespace-nowrap shrink-0"
             >
               <MessageCircle className="w-4 h-4 text-sky-700" />
               <span>WhatsApp Desk</span>
-            </a>
+            </motion.a>
           </div>
         </motion.div>
 

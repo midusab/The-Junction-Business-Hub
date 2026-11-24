@@ -46,22 +46,26 @@ export function VideoTourSection() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <a
+            <motion.a
               href={BUSINESS_INFO.whatsappHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-all duration-150 whitespace-nowrap shrink-0"
+              whileHover={prefersReducedMotion ? undefined : {y: -2, scale: 1.02}}
+              whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium text-white bg-sky-600 hover:bg-sky-700 rounded-md shadow-sm hover:shadow-md transition-colors duration-150 whitespace-nowrap shrink-0"
             >
               <MessageCircle className="w-4 h-4" />
               <span>WhatsApp</span>
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="#services"
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium text-sky-900 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-md shadow-xs hover:shadow-sm transition-all duration-150 whitespace-nowrap shrink-0"
+              whileHover={prefersReducedMotion ? undefined : {y: -2, scale: 1.02}}
+              whileTap={prefersReducedMotion ? undefined : {scale: 0.96}}
+              className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium text-sky-900 bg-sky-50 hover:bg-sky-100 border border-sky-200 rounded-md shadow-xs hover:shadow-sm transition-colors duration-150 whitespace-nowrap shrink-0"
             >
               <span>Explore Services</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
+              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </motion.a>
           </div>
         </motion.div>
 

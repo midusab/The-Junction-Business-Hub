@@ -94,13 +94,21 @@ export function GallerySection() {
                   key={filter.id}
                   type="button"
                   onClick={() => handleFilterChange(filter.id)}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-600 ${
+                  className={`relative px-3 py-1.5 text-xs font-medium rounded-md transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-2 focus-visible:outline-sky-600 ${
                     isActive
-                      ? 'bg-sky-600 text-white shadow-sm'
+                      ? 'text-white'
                       : 'text-slate-700 hover:text-sky-800 hover:bg-sky-100/70'
                   }`}
                 >
-                  {filter.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="gallery-filter-pill"
+                      transition={{type: 'spring', stiffness: 420, damping: 32}}
+                      aria-hidden="true"
+                      className="absolute inset-0 bg-sky-600 rounded-md shadow-sm"
+                    />
+                  )}
+                  <span className="relative z-10">{filter.label}</span>
                 </button>
               );
             })}
@@ -227,17 +235,34 @@ export function GallerySection() {
                 </button>
               </div>
 
-              <div className="relative bg-slate-950 aspect-[16/10] w-full">
-                <ResilientImage
-                  src={activePhoto.src}
-                  alt={activePhoto.alt}
-                  fallbackTitle={activePhoto.title}
-                  className="w-full h-full object-contain"
-                />
+              <div className="relative bg-slate-950 aspect-[16/10] w-full overflow-hidden">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={activePhoto.id}
+                    initial={
+                      prefersReducedMotion ? {opacity: 1} : {opacity: 0, scale: 0.98}
+                    }
+                    animate={{opacity: 1, scale: 1}}
+                    exit={
+                      prefersReducedMotion ? {opacity: 0} : {opacity: 0, scale: 1.01}
+                    }
+                    transition={{duration: 0.22, ease: [0.16, 1, 0.3, 1]}}
+                    className="w-full h-full"
+                  >
+                    <ResilientImage
+                      src={activePhoto.src}
+                      alt={activePhoto.alt}
+                      fallbackTitle={activePhoto.title}
+                      className="w-full h-full object-contain"
+                    />
+                  </motion.div>
+                </AnimatePresence>
                 {visiblePhotos.length > 1 && (
                   <>
-                    <button
+                    <motion.button
                       type="button"
+                      whileHover={prefersReducedMotion ? undefined : {scale: 1.08}}
+                      whileTap={prefersReducedMotion ? undefined : {scale: 0.92}}
                       onClick={() =>
                         setSelectedIndex(
                           (selectedIndex - 1 + visiblePhotos.length) %
@@ -248,9 +273,11 @@ export function GallerySection() {
                       className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-md bg-white/95 border border-slate-200 text-slate-900 hover:bg-white inline-flex items-center justify-center shadow-sm cursor-pointer"
                     >
                       <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
                       type="button"
+                      whileHover={prefersReducedMotion ? undefined : {scale: 1.08}}
+                      whileTap={prefersReducedMotion ? undefined : {scale: 0.92}}
                       onClick={() =>
                         setSelectedIndex(
                           (selectedIndex + 1) % visiblePhotos.length
@@ -260,7 +287,7 @@ export function GallerySection() {
                       className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-md bg-white/95 border border-slate-200 text-slate-900 hover:bg-white inline-flex items-center justify-center shadow-sm cursor-pointer"
                     >
                       <ChevronRight className="w-5 h-5" />
-                    </button>
+                    </motion.button>
                   </>
                 )}
               </div>
