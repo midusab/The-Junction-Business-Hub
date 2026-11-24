@@ -13,22 +13,9 @@ import {
   useScroll,
   useSpring,
 } from 'motion/react';
-import {
-  BUSINESS_INFO,
-  type PageId,
-  type ServicePageId,
-} from '../data/hubData';
+import {BUSINESS_INFO} from '../data/hubData';
 
-interface HeaderProps {
-  activePage: PageId;
-  onNavigate: (page: PageId) => void;
-}
-
-const SERVICE_DROPDOWN_ITEMS: Array<{
-  id: ServicePageId;
-  label: string;
-  caption: string;
-}> = [
+const SERVICE_DROPDOWN_ITEMS = [
   {
     id: 'laundry',
     label: 'Laundry Services',
@@ -56,11 +43,11 @@ const SERVICE_DROPDOWN_ITEMS: Array<{
   },
 ];
 
-export function Header({activePage, onNavigate}: HeaderProps) {
+export function Header({activePage, onNavigate}) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRef = useRef(null);
   const prefersReducedMotion = useReducedMotion();
   const {scrollYProgress} = useScroll();
   const scrollScaleX = useSpring(scrollYProgress, {
@@ -77,15 +64,15 @@ export function Header({activePage, onNavigate}: HeaderProps) {
     activePage === 'carwash';
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (event) => {
       if (
         dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        !dropdownRef.current.contains(event.target)
       ) {
         setServicesOpen(false);
       }
     };
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
         setServicesOpen(false);
       }
@@ -99,13 +86,13 @@ export function Header({activePage, onNavigate}: HeaderProps) {
     };
   }, []);
 
-  const handleNavClick = (page: PageId) => {
+  const handleNavClick = (page) => {
     setMobileOpen(false);
     setServicesOpen(false);
     onNavigate(page);
   };
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = (sectionId) => {
     setMobileOpen(false);
     setServicesOpen(false);
     if (activePage !== 'home') {

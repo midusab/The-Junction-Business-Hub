@@ -1,12 +1,10 @@
 import {useEffect, useState} from 'react';
 import {AnimatePresence, motion, useReducedMotion} from 'motion/react';
-import {ChevronLeft, ChevronRight, Expand, X} from 'lucide-react';
-import {GALLERY_PHOTOS, type GalleryPhoto} from '../data/hubData';
+import {ChevronLeft, ChevronRight, X} from 'lucide-react';
+import {GALLERY_PHOTOS} from '../data/hubData';
 import {ResilientImage} from './ResilientImage';
 
-type FilterCategory = 'all' | 'hub' | 'laundry' | 'cyber' | 'barber' | 'hotel' | 'carwash';
-
-const FILTERS: Array<{id: FilterCategory; label: string}> = [
+const FILTERS = [
   {id: 'all', label: 'All Spaces'},
   {id: 'hub', label: 'Hub Exterior'},
   {id: 'laundry', label: 'Laundry'},
@@ -16,7 +14,7 @@ const FILTERS: Array<{id: FilterCategory; label: string}> = [
   {id: 'carwash', label: 'Car Wash'},
 ];
 
-const CATEGORY_TINTS: Record<GalleryPhoto['category'], string> = {
+const CATEGORY_TINTS = {
   hub: 'text-sky-700',
   laundry: 'text-sky-700',
   cyber: 'text-blue-700',
@@ -26,8 +24,8 @@ const CATEGORY_TINTS: Record<GalleryPhoto['category'], string> = {
 };
 
 export function GallerySection() {
-  const [activeFilter, setActiveFilter] = useState<FilterCategory>('all');
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [selectedIndex, setSelectedIndex] = useState(null);
   const prefersReducedMotion = useReducedMotion();
 
   const visiblePhotos =
@@ -35,13 +33,13 @@ export function GallerySection() {
       ? GALLERY_PHOTOS
       : GALLERY_PHOTOS.filter((photo) => photo.category === activeFilter);
 
-  const activePhoto: GalleryPhoto | null =
+  const activePhoto =
     selectedIndex !== null ? visiblePhotos[selectedIndex] ?? null : null;
 
   useEffect(() => {
     if (selectedIndex === null) return;
 
-    function handleKeyDown(e: KeyboardEvent) {
+    function handleKeyDown(e) {
       if (e.key === 'Escape') {
         setSelectedIndex(null);
       } else if (e.key === 'ArrowRight') {
@@ -61,7 +59,7 @@ export function GallerySection() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedIndex, visiblePhotos.length]);
 
-  const handleFilterChange = (category: FilterCategory) => {
+  const handleFilterChange = (category) => {
     setActiveFilter(category);
     setSelectedIndex(null);
   };
@@ -166,9 +164,6 @@ export function GallerySection() {
                       fallbackTitle={photo.title}
                       className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.06]"
                     />
-                    <span className="absolute bottom-3 right-3 inline-flex items-center justify-center w-9 h-9 rounded-md bg-slate-900/90 border border-white/15 text-white opacity-85 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-150">
-                      <Expand className="w-4 h-4" />
-                    </span>
                   </button>
                   <figcaption className="p-4 flex-1 flex flex-col justify-between bg-white">
                     <div>

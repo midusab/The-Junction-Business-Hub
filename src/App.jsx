@@ -23,12 +23,9 @@ import {
   EXTERIOR_IMAGE,
   SERVICE_PAGES,
   TARGET_GROUPS,
-  type PageId,
-  type ServicePageConfig,
-  type ServicePageId,
 } from './data/hubData';
 
-function getInitialPageFromHash(): PageId {
+function getInitialPageFromHash() {
   const hash = window.location.hash.replace('#', '').replace(/^\//, '');
   if (
     hash === 'laundry' ||
@@ -43,10 +40,7 @@ function getInitialPageFromHash(): PageId {
   return 'home';
 }
 
-const CHAPTER_NARRATIVES: Record<
-  ServicePageId,
-  {kicker: string; storyLead: string}
-> = {
+const CHAPTER_NARRATIVES = {
   laundry: {
     kicker: 'Fresh Garments',
     storyLead: 'Drop off in the morning, collect clean & pressed.',
@@ -73,13 +67,9 @@ function StoryChapter({
   servicePage,
   index,
   onNavigate,
-}: {
-  servicePage: ServicePageConfig;
-  index: number;
-  onNavigate: (page: PageId) => void;
 }) {
   const prefersReducedMotion = useReducedMotion();
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef(null);
   const {scrollYProgress} = useScroll({
     target: containerRef,
     offset: ['start end', 'end start'],
@@ -205,7 +195,7 @@ function StoryChapter({
           <p className="text-xs font-semibold uppercase tracking-[0.08em] text-sky-700 mb-1.5">
             {narrative.kicker}
           </p>
-          <h3 className="text-2xl font-bold tracking-[-0.02em] text-slate-900">
+          <h3 className="text-2xl font-bold tracking-[-0.025em] text-slate-900">
             {servicePage.title}
           </h3>
           <p className="mt-2 text-sm font-normal text-slate-600 leading-relaxed">
@@ -256,10 +246,10 @@ function StoryChapter({
   );
 }
 
-function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
+function HomePageContent({onNavigate}) {
   const prefersReducedMotion = useReducedMotion();
 
-  const aboutVisualRef = useRef<HTMLDivElement | null>(null);
+  const aboutVisualRef = useRef(null);
   const {scrollYProgress: aboutScroll} = useScroll({
     target: aboutVisualRef,
     offset: ['start end', 'end start'],
@@ -415,7 +405,7 @@ function HomePageContent({onNavigate}: {onNavigate: (page: PageId) => void}) {
 
 export default function App() {
   const [mapsQuotaExceeded, setMapsQuotaExceeded] = useState(false);
-  const [activePage, setActivePage] = useState<PageId>(getInitialPageFromHash);
+  const [activePage, setActivePage] = useState(getInitialPageFromHash);
   const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -434,7 +424,7 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const navigateToPage = useCallback((page: PageId) => {
+  const navigateToPage = useCallback((page) => {
     setActivePage(page);
     const targetHash = page === 'home' ? '#/' : `#/${page}`;
     if (window.location.hash !== targetHash) {

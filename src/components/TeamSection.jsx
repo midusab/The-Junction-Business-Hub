@@ -9,26 +9,16 @@ import {ArrowRight, MessageCircle} from 'lucide-react';
 import {
   BUSINESS_INFO,
   HUB_TEAM,
-  type PageId,
-  type TeamMember,
 } from '../data/hubData';
 import {ResilientImage} from './ResilientImage';
-
-interface TeamSectionProps {
-  onNavigate: (page: PageId) => void;
-}
 
 function TeamMemberCard({
   member,
   index,
   onNavigate,
-}: {
-  member: TeamMember;
-  index: number;
-  onNavigate: (page: PageId) => void;
 }) {
   const prefersReducedMotion = useReducedMotion();
-  const cardRef = useRef<HTMLDivElement | null>(null);
+  const cardRef = useRef(null);
   const {scrollYProgress} = useScroll({
     target: cardRef,
     offset: ['start end', 'end start'],
@@ -114,7 +104,7 @@ function TeamMemberCard({
   );
 }
 
-export function TeamSection({onNavigate}: TeamSectionProps) {
+export function TeamSection({onNavigate}) {
   const prefersReducedMotion = useReducedMotion();
 
   return (

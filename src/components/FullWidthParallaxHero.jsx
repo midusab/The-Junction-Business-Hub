@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState, type MouseEvent} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
   AnimatePresence,
   motion,
@@ -16,21 +16,15 @@ import {
   Phone,
   Play,
 } from 'lucide-react';
-import {BUSINESS_INFO, HERO_SLIDES, type PageId} from '../data/hubData';
+import {BUSINESS_INFO, HERO_SLIDES} from '../data/hubData';
 import {ResilientImage} from './ResilientImage';
 
-interface FullWidthParallaxHeroProps {
-  onNavigate: (page: PageId) => void;
-}
-
-export function FullWidthParallaxHero({
-  onNavigate,
-}: FullWidthParallaxHeroProps) {
+export function FullWidthParallaxHero({onNavigate}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const prefersReducedMotion = useReducedMotion();
 
-  const heroRef = useRef<HTMLElement | null>(null);
+  const heroRef = useRef(null);
   const {scrollYProgress} = useScroll({
     target: heroRef,
     offset: ['start start', 'end start'],
@@ -87,7 +81,7 @@ export function FullWidthParallaxHero({
 
   const currentSlide = HERO_SLIDES[currentIndex];
 
-  const handleMouseMove = (event: MouseEvent<HTMLElement>) => {
+  const handleMouseMove = (event) => {
     if (prefersReducedMotion || !heroRef.current) return;
     const rect = heroRef.current.getBoundingClientRect();
     mouseX.set((event.clientX - rect.left) / rect.width - 0.5);

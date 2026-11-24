@@ -89,7 +89,7 @@ export function FloatingActions() {
                 height="40"
                 rx="6"
                 fill="none"
-                stroke="rgba(2, 132, 199, 0.16)"
+                stroke="rgba(30, 144, 255, 0.2)"
                 strokeWidth="2"
               />
               <motion.rect
@@ -99,7 +99,7 @@ export function FloatingActions() {
                 height="40"
                 rx="6"
                 fill="none"
-                stroke="#0284c7"
+                stroke="#1e90ff"
                 strokeWidth="2.25"
                 style={{pathLength: smoothProgress}}
               />

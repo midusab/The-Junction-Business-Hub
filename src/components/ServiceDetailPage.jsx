@@ -10,7 +10,6 @@ import {
   ArrowLeft,
   ArrowRight,
   ChevronDown,
-  Expand,
   MessageCircle,
   Phone,
   X,
@@ -18,18 +17,10 @@ import {
 import {
   BUSINESS_INFO,
   SERVICE_PAGES,
-  type PageId,
-  type ServiceItem,
-  type ServicePageConfig,
 } from '../data/hubData';
 import {ResilientImage} from './ResilientImage';
 
-interface ServiceDetailPageProps {
-  config: ServicePageConfig;
-  onNavigate: (page: PageId) => void;
-}
-
-const LIGHT_TONE_CLASSES: Record<ServiceItem['accentTone'], string> = {
+const LIGHT_TONE_CLASSES = {
   teal: 'text-teal-700',
   sky: 'text-sky-700',
   amber: 'text-amber-700',
@@ -38,7 +29,7 @@ const LIGHT_TONE_CLASSES: Record<ServiceItem['accentTone'], string> = {
   indigo: 'text-indigo-700',
 };
 
-const DARK_TONE_CLASSES: Record<ServiceItem['accentTone'], string> = {
+const DARK_TONE_CLASSES = {
   teal: 'text-teal-300',
   sky: 'text-sky-300',
   amber: 'text-amber-300',
@@ -50,12 +41,12 @@ const DARK_TONE_CLASSES: Record<ServiceItem['accentTone'], string> = {
 export function ServiceDetailPage({
   config,
   onNavigate,
-}: ServiceDetailPageProps) {
+}) {
   const prefersReducedMotion = useReducedMotion();
   const isDarkSection = config.id === 'cyber';
 
   // Parallax Hero Scroll Tracking
-  const heroRef = useRef<HTMLDivElement | null>(null);
+  const heroRef = useRef(null);
   const {scrollYProgress: heroProgress} = useScroll({
     target: heroRef,
     offset: ['start start', 'end start'],
@@ -72,7 +63,7 @@ export function ServiceDetailPage({
   );
 
   // Mid-page Parallax Showcase Tracking
-  const visualRef = useRef<HTMLDivElement | null>(null);
+  const visualRef = useRef(null);
   const {scrollYProgress: visualProgress} = useScroll({
     target: visualRef,
     offset: ['start end', 'end start'],
@@ -85,7 +76,7 @@ export function ServiceDetailPage({
 
   // Interactive On-Click State
   const [selectedVisualIdx, setSelectedVisualIdx] = useState(0);
-  const [expandedServiceId, setExpandedServiceId] = useState<string | null>(
+  const [expandedServiceId, setExpandedServiceId] = useState(
     config.services[0]?.id ?? null
   );
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -93,11 +84,11 @@ export function ServiceDetailPage({
   const activeVisual =
     config.galleryImages[selectedVisualIdx] ?? config.heroImage;
 
-  const otherServices = (
-    Object.values(SERVICE_PAGES) as ServicePageConfig[]
-  ).filter((page) => page.id !== config.id);
+  const otherServices = Object.values(SERVICE_PAGES).filter(
+    (page) => page.id !== config.id
+  );
 
-  const toggleServiceCard = (id: string) => {
+  const toggleServiceCard = (id) => {
     setExpandedServiceId((prev) => (prev === id ? null : id));
   };
 
@@ -222,15 +213,6 @@ export function ServiceDetailPage({
                     </motion.div>
                   </AnimatePresence>
                 </motion.div>
-
-                <button
-                  type="button"
-                  onClick={() => setLightboxOpen(true)}
-                  aria-label={`Inspect ${activeVisual.label} full screen`}
-                  className="absolute bottom-3 right-3 w-10 h-10 rounded-md bg-slate-900/90 border border-white/15 hover:bg-sky-600 text-white inline-flex items-center justify-center shrink-0 cursor-pointer transition-all opacity-90 hover:opacity-100 active:scale-95 z-10"
-                >
-                  <Expand className="w-4 h-4" />
-                </button>
               </div>
 
               {/* Interactive Thumbnail Strip (On-Click Switcher) */}

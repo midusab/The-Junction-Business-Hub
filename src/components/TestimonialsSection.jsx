@@ -15,16 +15,12 @@ import {
   Quote,
   Sparkles,
 } from 'lucide-react';
-import {SAMPLE_TESTIMONIALS, type PageId} from '../data/hubData';
-
-interface TestimonialsSectionProps {
-  onNavigate: (page: PageId) => void;
-}
+import {SAMPLE_TESTIMONIALS} from '../data/hubData';
 
 const MARQUEE_ITEMS = [...SAMPLE_TESTIMONIALS, ...SAMPLE_TESTIMONIALS];
 
 const spotlightVariants = {
-  enter: (dir: number) => ({
+  enter: (dir) => ({
     x: dir >= 0 ? 110 : -110,
     opacity: 0,
   }),
@@ -32,20 +28,20 @@ const spotlightVariants = {
     x: 0,
     opacity: 1,
   },
-  exit: (dir: number) => ({
+  exit: (dir) => ({
     x: dir >= 0 ? -110 : 110,
     opacity: 0,
   }),
 };
 
-export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
+export function TestimonialsSection({onNavigate}) {
   const prefersReducedMotion = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
   const [isTrackHovered, setIsTrackHovered] = useState(false);
 
-  const trackRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef(null);
   const marqueeX = useMotionValue(0);
 
   // Auto-advance spotlight horizontally
@@ -97,7 +93,7 @@ export function TestimonialsSection({onNavigate}: TestimonialsSectionProps) {
     setActiveIndex((prev) => (prev + 1) % SAMPLE_TESTIMONIALS.length);
   };
 
-  const handleSelectCard = (idx: number) => {
+  const handleSelectCard = (idx) => {
     setDirection(idx >= activeIndex ? 1 : -1);
     setActiveIndex(idx);
   };

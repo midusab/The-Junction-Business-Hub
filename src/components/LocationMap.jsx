@@ -13,21 +13,13 @@ import {
 import {ExternalLink, MapPin} from 'lucide-react';
 import {BUSINESS_INFO} from '../data/hubData';
 
-interface ResolvedPlace {
-  lat: number;
-  lng: number;
-  displayName: string;
-  formattedAddress: string;
-  attributions?: Array<{provider: string; providerURI: string | null}>;
-}
-
 const SEARCH_QUERIES = [
   'The Junction Laundry And Services Hub, Junction-Kodoyo, Homa Bay, Kenya',
   'Junction Kodoyo, Homa Bay, Kenya',
   'Homa Bay Rongo Road, Homa Bay, Kenya',
 ];
 
-function getMapsApiKey(): string {
+function getMapsApiKey() {
   if (import.meta.env.VITE_GOOGLE_MAPS_API_KEY) {
     return import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   }
@@ -37,7 +29,7 @@ function getMapsApiKey(): string {
   return '';
 }
 
-function isQuotaError(err: unknown): boolean {
+function isQuotaError(err) {
   const msg = err instanceof Error ? err.message : String(err);
   return (
     msg.includes('OVER_QUERY_LIMIT') ||
@@ -48,7 +40,7 @@ function isQuotaError(err: unknown): boolean {
   );
 }
 
-function MapFallbackCard({message}: {message: string}) {
+function MapFallbackCard({message}) {
   return (
     <div className="h-[300px] sm:h-[420px] w-full rounded-lg border border-sky-200 bg-sky-50/70 flex flex-col items-center justify-center p-6 sm:p-8 text-center">
       <div className="w-12 h-12 rounded-md bg-white border border-sky-200 flex items-center justify-center mb-4 text-sky-700">
@@ -76,8 +68,8 @@ function MapFallbackCard({message}: {message: string}) {
 function HubMapCanvas() {
   const placesLib = useMapsLibrary('places');
   const apiStatus = useApiLoadingStatus();
-  const [resolvedPlace, setResolvedPlace] = useState<ResolvedPlace | null>(null);
-  const [lookupError, setLookupError] = useState<string | null>(null);
+  const [resolvedPlace, setResolvedPlace] = useState(null);
+  const [lookupError, setLookupError] = useState(null);
   const [isSearching, setIsSearching] = useState(true);
   const [markerRef, marker] = useAdvancedMarkerRef();
   const [infoOpen, setInfoOpen] = useState(true);
@@ -109,7 +101,7 @@ function HubMapCanvas() {
 
       try {
         for (const query of SEARCH_QUERIES) {
-          const {places} = await placesLib!.Place.searchByText({
+          const {places} = await placesLib.Place.searchByText({
             textQuery: query,
             fields: ['displayName', 'location', 'formattedAddress'],
             region: 'ke',
@@ -128,7 +120,7 @@ function HubMapCanvas() {
                   match.formattedAddress ||
                   `${BUSINESS_INFO.locationShort}, ${BUSINESS_INFO.locationReference}`,
                 attributions: match.attributions?.map(
-                  (a: {provider?: string | null; providerURI?: string | null}) => ({
+                  (a) => ({
                     provider: a.provider || '',
                     providerURI: a.providerURI || null,
                   })
@@ -201,8 +193,8 @@ function HubMapCanvas() {
             onClick={() => setInfoOpen((prev) => !prev)}
           >
             <Pin
-              background="#0284c7"
-              borderColor="#0369a1"
+              background="#1e90ff"
+              borderColor="#0f72d8"
               glyphColor="#ffffff"
               scale={1.15}
             />

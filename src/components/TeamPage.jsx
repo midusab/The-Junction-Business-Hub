@@ -12,26 +12,16 @@ import {
   Award,
   Check,
   MessageCircle,
-  Phone,
 } from 'lucide-react';
 import {
   BUSINESS_INFO,
   EXTERIOR_IMAGE,
   HUB_TEAM,
   SERVICE_PAGES,
-  type PageId,
-  type ServicePageId,
-  type TeamMember,
 } from '../data/hubData';
 import {ResilientImage} from './ResilientImage';
 
-interface TeamPageProps {
-  onNavigate: (page: PageId) => void;
-}
-
-type TeamFilter = 'all' | ServicePageId;
-
-const DEPARTMENT_FILTERS: Array<{id: TeamFilter; label: string}> = [
+const DEPARTMENT_FILTERS = [
   {id: 'all', label: 'All Departments'},
   {id: 'laundry', label: 'Laundry'},
   {id: 'cyber', label: 'Cyber Café'},
@@ -44,13 +34,9 @@ function TeamDepartmentShowcase({
   member,
   index,
   onNavigate,
-}: {
-  member: TeamMember;
-  index: number;
-  onNavigate: (page: PageId) => void;
 }) {
   const prefersReducedMotion = useReducedMotion();
-  const blockRef = useRef<HTMLElement | null>(null);
+  const blockRef = useRef(null);
   const {scrollYProgress} = useScroll({
     target: blockRef,
     offset: ['start end', 'end start'],
@@ -214,11 +200,11 @@ function TeamDepartmentShowcase({
   );
 }
 
-export function TeamPage({onNavigate}: TeamPageProps) {
+export function TeamPage({onNavigate}) {
   const prefersReducedMotion = useReducedMotion();
-  const [activeFilter, setActiveFilter] = useState<TeamFilter>('all');
+  const [activeFilter, setActiveFilter] = useState('all');
 
-  const heroRef = useRef<HTMLElement | null>(null);
+  const heroRef = useRef(null);
   const {scrollYProgress: heroScroll} = useScroll({
     target: heroRef,
     offset: ['start start', 'end start'],

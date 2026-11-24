@@ -1,4 +1,4 @@
-import {useState, type FormEvent} from 'react';
+import {useState} from 'react';
 import {AnimatePresence, motion, useReducedMotion} from 'motion/react';
 import {
   CheckCircle2,
@@ -12,21 +12,7 @@ import {BUSINESS_INFO, OPERATING_HOURS} from '../data/hubData';
 import {LocationMap} from './LocationMap';
 import {CircularSocialLinks} from './SocialIcons';
 
-type ServiceDepartment =
-  | 'Laundry Services'
-  | 'Cyber Services'
-  | 'Barber Services'
-  | 'Car Wash Services'
-  | 'Junction Highway Hotel'
-  | 'Multiple Services';
-
-interface FormErrors {
-  name?: string;
-  phone?: string;
-  message?: string;
-}
-
-const DEPARTMENTS: ServiceDepartment[] = [
+const DEPARTMENTS = [
   'Laundry Services',
   'Cyber Services',
   'Barber Services',
@@ -39,13 +25,13 @@ export function ContactSection() {
   const prefersReducedMotion = useReducedMotion();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const [department, setDepartment] = useState<ServiceDepartment>('Laundry Services');
+  const [department, setDepartment] = useState('Laundry Services');
   const [message, setMessage] = useState('');
-  const [errors, setErrors] = useState<FormErrors>({});
+  const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
-  const validate = (): FormErrors => {
-    const nextErrors: FormErrors = {};
+  const validate = () => {
+    const nextErrors = {};
     if (name.trim().length < 2) {
       nextErrors.name = 'Please enter your name.';
     }
@@ -59,7 +45,7 @@ export function ContactSection() {
     return nextErrors;
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
